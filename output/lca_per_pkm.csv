@@ -1,0 +1,451 @@
+mode,impact_category,unit,result_per_pkm
+auto_benzin,Acidification,mol H+ eq,0.0005366076011294802
+auto_benzin,Climate change,kg CO2 eq,0.2705877133723606
+auto_benzin,Climate change (biogenic),kg CO2 eq,0.00041557909122945234
+auto_benzin,Climate change (fossil),kg CO2 eq,0.2701072406459124
+auto_benzin,Climate change (land use),kg CO2 eq,6.489363521878453e-05
+auto_benzin,Ecotoxicity freshwater,CTUe,0.8260428932834736
+auto_benzin,Ecotoxicity freshwater (inorganics),CTUe,0.7618768057829716
+auto_benzin,Ecotoxicity freshwater (organics),CTUe,0.06416608750050191
+auto_benzin,Eutrophication freshwater,kg P eq,3.425317634345383e-05
+auto_benzin,Eutrophication marine,kg N eq,0.00010308879279887772
+auto_benzin,Eutrophication terrestrial,mol N eq,0.0013230474376315767
+auto_benzin,Human toxicity cancer,CTUh,6.019811040825067e-11
+auto_benzin,Human toxicity cancer (inorganics),CTUh,2.028792962426008e-11
+auto_benzin,Human toxicity cancer (organics),CTUh,3.9910180783990593e-11
+auto_benzin,Human toxicity non-cancer,CTUh,1.9429509655099017e-09
+auto_benzin,Human toxicity non-cancer (inorganics),CTUh,1.7568866146755473e-09
+auto_benzin,Human toxicity non-cancer (organics),CTUh,1.860643508305046e-10
+auto_benzin,Ionising radiation (human health),kBq U235 eq,0.06254185493695881
+auto_benzin,Land use,dimensionless (pt),1.8169240554478585
+auto_benzin,Ozone depletion,kg CFC11 eq,5.501277240800439e-08
+auto_benzin,Particulate matter,disease incidence,7.2528861568732585e-09
+auto_benzin,Photochemical ozone formation (human health),kg NMVOC eq,0.0007926434755928737
+auto_benzin,Resource use fossils,MJ (net calorific),3.8459163266465444
+auto_benzin,Resource use minerals and metals,kg Sb eq,2.3311251929931587e-06
+auto_benzin,Water use,m3 world eq,0.012665908090887967
+auto_diesel,Acidification,mol H+ eq,0.0007871814210552737
+auto_diesel,Climate change,kg CO2 eq,0.23355525424487725
+auto_diesel,Climate change (biogenic),kg CO2 eq,0.00036035291291351256
+auto_diesel,Climate change (fossil),kg CO2 eq,0.23235094679401325
+auto_diesel,Climate change (land use),kg CO2 eq,0.0008439545379504927
+auto_diesel,Ecotoxicity freshwater,CTUe,0.8583948884742935
+auto_diesel,Ecotoxicity freshwater (inorganics),CTUe,0.765294692995788
+auto_diesel,Ecotoxicity freshwater (organics),CTUe,0.09310019547850565
+auto_diesel,Eutrophication freshwater,kg P eq,3.4775867160889405e-05
+auto_diesel,Eutrophication marine,kg N eq,0.000296820898254993
+auto_diesel,Eutrophication terrestrial,mol N eq,0.0030459794695383265
+auto_diesel,Human toxicity cancer,CTUh,4.686848131753162e-11
+auto_diesel,Human toxicity cancer (inorganics),CTUh,2.0051040912981496e-11
+auto_diesel,Human toxicity cancer (organics),CTUh,2.6817440404550123e-11
+auto_diesel,Human toxicity non-cancer,CTUh,1.8187056672432663e-09
+auto_diesel,Human toxicity non-cancer (inorganics),CTUh,1.660140839422763e-09
+auto_diesel,Human toxicity non-cancer (organics),CTUh,1.5856482781658807e-10
+auto_diesel,Ionising radiation (human health),kBq U235 eq,0.06031896813205765
+auto_diesel,Land use,dimensionless (pt),0.9861473731692928
+auto_diesel,Ozone depletion,kg CFC11 eq,5.210742293601239e-08
+auto_diesel,Particulate matter,disease incidence,7.165918101715217e-09
+auto_diesel,Photochemical ozone formation (human health),kg NMVOC eq,0.0011354937598291937
+auto_diesel,Resource use fossils,MJ (net calorific),3.3438078389412706
+auto_diesel,Resource use minerals and metals,kg Sb eq,2.3713281406124307e-06
+auto_diesel,Water use,m3 world eq,0.012637582814676307
+auto_hybrid_conv,Acidification,mol H+ eq,0.0008092818352058973
+auto_hybrid_conv,Climate change,kg CO2 eq,0.31522102008066494
+auto_hybrid_conv,Climate change (biogenic),kg CO2 eq,0.0011536750024019353
+auto_hybrid_conv,Climate change (fossil),kg CO2 eq,0.3139781754934829
+auto_hybrid_conv,Climate change (land use),kg CO2 eq,8.916958478011225e-05
+auto_hybrid_conv,Ecotoxicity freshwater,CTUe,1.0773279480660514
+auto_hybrid_conv,Ecotoxicity freshwater (inorganics),CTUe,0.9989640264686174
+auto_hybrid_conv,Ecotoxicity freshwater (organics),CTUe,0.07836392159743438
+auto_hybrid_conv,Eutrophication freshwater,kg P eq,0.00013494224009204828
+auto_hybrid_conv,Eutrophication marine,kg N eq,0.00015287556182116917
+auto_hybrid_conv,Eutrophication terrestrial,mol N eq,0.0014138611476996943
+auto_hybrid_conv,Human toxicity cancer,CTUh,1.3218517671378435e-10
+auto_hybrid_conv,Human toxicity cancer (inorganics),CTUh,3.881864110240472e-11
+auto_hybrid_conv,Human toxicity cancer (organics),CTUh,9.336653561137964e-11
+auto_hybrid_conv,Human toxicity non-cancer,CTUh,3.42087923571272e-09
+auto_hybrid_conv,Human toxicity non-cancer (inorganics),CTUh,3.1387303068278466e-09
+auto_hybrid_conv,Human toxicity non-cancer (organics),CTUh,2.8214892887950305e-10
+auto_hybrid_conv,Ionising radiation (human health),kBq U235 eq,0.07613923256272181
+auto_hybrid_conv,Land use,dimensionless (pt),2.1882459179859213
+auto_hybrid_conv,Ozone depletion,kg CFC11 eq,7.412396382256949e-09
+auto_hybrid_conv,Particulate matter,disease incidence,8.555409888306243e-09
+auto_hybrid_conv,Photochemical ozone formation (human health),kg NMVOC eq,0.0008939486803922249
+auto_hybrid_conv,Resource use fossils,MJ (net calorific),4.460346801166846
+auto_hybrid_conv,Resource use minerals and metals,kg Sb eq,5.2796082607634165e-06
+auto_hybrid_conv,Water use,m3 world eq,0.02738212657021677
+auto_hybrid_green,Acidification,mol H+ eq,0.0007393072799857001
+auto_hybrid_green,Climate change,kg CO2 eq,0.26641397933403815
+auto_hybrid_green,Climate change (biogenic),kg CO2 eq,0.0005606680569030367
+auto_hybrid_green,Climate change (fossil),kg CO2 eq,0.26569096143370347
+auto_hybrid_green,Climate change (land use),kg CO2 eq,0.00016234984343166907
+auto_hybrid_green,Ecotoxicity freshwater,CTUe,1.0162887486810133
+auto_hybrid_green,Ecotoxicity freshwater (inorganics),CTUe,0.938934700277102
+auto_hybrid_green,Ecotoxicity freshwater (organics),CTUe,0.07735404840391175
+auto_hybrid_green,Eutrophication freshwater,kg P eq,8.056264971951019e-05
+auto_hybrid_green,Eutrophication marine,kg N eq,0.00012435135302982567
+auto_hybrid_green,Eutrophication terrestrial,mol N eq,0.0012088503100342253
+auto_hybrid_green,Human toxicity cancer,CTUh,8.191998937690302e-11
+auto_hybrid_green,Human toxicity cancer (inorganics),CTUh,3.589657905456538e-11
+auto_hybrid_green,Human toxicity cancer (organics),CTUh,4.6023410322337625e-11
+auto_hybrid_green,Human toxicity non-cancer,CTUh,3.215509631066271e-09
+auto_hybrid_green,Human toxicity non-cancer (inorganics),CTUh,2.942029016277435e-09
+auto_hybrid_green,Human toxicity non-cancer (organics),CTUh,2.73480614783482e-10
+auto_hybrid_green,Ionising radiation (human health),kBq U235 eq,0.06818406848683686
+auto_hybrid_green,Land use,dimensionless (pt),2.0102534217875982
+auto_hybrid_green,Ozone depletion,kg CFC11 eq,6.679909420021139e-09
+auto_hybrid_green,Particulate matter,disease incidence,8.21469045546767e-09
+auto_hybrid_green,Photochemical ozone formation (human health),kg NMVOC eq,0.0008214456850466485
+auto_hybrid_green,Resource use fossils,MJ (net calorific),3.895130413129162
+auto_hybrid_green,Resource use minerals and metals,kg Sb eq,5.249128279303367e-06
+auto_hybrid_green,Water use,m3 world eq,0.02186327734278848
+auto_strom_conv,Acidification,mol H+ eq,0.0005707266108325559
+auto_strom_conv,Climate change,kg CO2 eq,0.1711298066242925
+auto_strom_conv,Climate change (biogenic),kg CO2 eq,0.0016507311752102449
+auto_strom_conv,Climate change (fossil),kg CO2 eq,0.16939472800558314
+auto_strom_conv,Climate change (land use),kg CO2 eq,8.434744349913349e-05
+auto_strom_conv,Ecotoxicity freshwater,CTUe,0.715703624640884
+auto_strom_conv,Ecotoxicity freshwater (inorganics),CTUe,0.6906165368397155
+auto_strom_conv,Ecotoxicity freshwater (organics),CTUe,0.025087087801168487
+auto_strom_conv,Eutrophication freshwater,kg P eq,0.0002028092479069257
+auto_strom_conv,Eutrophication marine,kg N eq,0.00013614317574301611
+auto_strom_conv,Eutrophication terrestrial,mol N eq,0.0010402292713177336
+auto_strom_conv,Human toxicity cancer,CTUh,1.564554864041401e-10
+auto_strom_conv,Human toxicity cancer (inorganics),CTUh,4.133666773276503e-11
+auto_strom_conv,Human toxicity cancer (organics),CTUh,1.1511881867137505e-10
+auto_strom_conv,Human toxicity non-cancer,CTUh,3.769284408494194e-09
+auto_strom_conv,Human toxicity non-cancer (inorganics),CTUh,3.5623327112701635e-09
+auto_strom_conv,Human toxicity non-cancer (organics),CTUh,2.0695169722039683e-10
+auto_strom_conv,Ionising radiation (human health),kBq U235 eq,0.07468477800028897
+auto_strom_conv,Land use,dimensionless (pt),2.119130626877167
+auto_strom_conv,Ozone depletion,kg CFC11 eq,4.050224842243435e-09
+auto_strom_conv,Particulate matter,disease incidence,6.55351949371947e-09
+auto_strom_conv,Photochemical ozone formation (human health),kg NMVOC eq,0.00046762374855523875
+auto_strom_conv,Resource use fossils,MJ (net calorific),2.5409116255923996
+auto_strom_conv,Resource use minerals and metals,kg Sb eq,4.767792044737005e-06
+auto_strom_conv,Water use,m3 world eq,0.02322049624459055
+auto_strom_green,Acidification,mol H+ eq,0.00043866372038880476
+auto_strom_green,Climate change,kg CO2 eq,0.07901633974083982
+auto_strom_green,Climate change (biogenic),kg CO2 eq,0.0005315499095544078
+auto_strom_green,Climate change (fossil),kg CO2 eq,0.07826232937727245
+auto_strom_green,Climate change (land use),kg CO2 eq,0.00022246045401295395
+auto_strom_green,Ecotoxicity freshwater,CTUe,0.6005044200767898
+auto_strom_green,Ecotoxicity freshwater (inorganics),CTUe,0.5773232646891965
+auto_strom_green,Ecotoxicity freshwater (organics),CTUe,0.023181155387593144
+auto_strom_green,Eutrophication freshwater,kg P eq,0.00010017871509300897
+auto_strom_green,Eutrophication marine,kg N eq,8.230947220990186e-05
+auto_strom_green,Eutrophication terrestrial,mol N eq,0.0006533125741072587
+auto_strom_green,Human toxicity cancer,CTUh,6.15900612870626e-11
+auto_strom_green,Human toxicity cancer (inorganics),CTUh,3.5821863688978315e-11
+auto_strom_green,Human toxicity cancer (organics),CTUh,2.5768197598084303e-11
+auto_strom_green,Human toxicity non-cancer,CTUh,3.3816906108165192e-09
+auto_strom_green,Human toxicity non-cancer (inorganics),CTUh,3.1910986119309775e-09
+auto_strom_green,Human toxicity non-cancer (organics),CTUh,1.9059199888194197e-10
+auto_strom_green,Ionising radiation (human health),kBq U235 eq,0.05967100680152366
+auto_strom_green,Land use,dimensionless (pt),1.7832056116937085
+auto_strom_green,Ozone depletion,kg CFC11 eq,2.667803115653989e-09
+auto_strom_green,Particulate matter,disease incidence,5.910480134773347e-09
+auto_strom_green,Photochemical ozone formation (human health),kg NMVOC eq,0.0003307889362293976
+auto_strom_green,Resource use fossils,MJ (net calorific),1.4741794442297023
+auto_strom_green,Resource use minerals and metals,kg Sb eq,4.710267213898009e-06
+auto_strom_green,Water use,m3 world eq,0.012804779008831702
+bike,Acidification,mol H+ eq,2.920075856527396e-05
+bike,Climate change,kg CO2 eq,0.005954578475655317
+bike,Climate change (biogenic),kg CO2 eq,1.18648398536047e-05
+bike,Climate change (fossil),kg CO2 eq,0.005937537217129341
+bike,Climate change (land use),kg CO2 eq,5.1764186723713605e-06
+bike,Ecotoxicity freshwater,CTUe,0.02475221686797701
+bike,Ecotoxicity freshwater (inorganics),CTUe,0.023907012700831995
+bike,Ecotoxicity freshwater (organics),CTUe,0.000845204167145016
+bike,Eutrophication freshwater,kg P eq,1.3165395220197818e-06
+bike,Eutrophication marine,kg N eq,6.862022898947024e-06
+bike,Eutrophication terrestrial,mol N eq,6.926508638944288e-05
+bike,Human toxicity cancer,CTUh,3.3002762493872506e-12
+bike,Human toxicity cancer (inorganics),CTUh,2.100538175939517e-12
+bike,Human toxicity cancer (organics),CTUh,1.1997380734477322e-12
+bike,Human toxicity non-cancer,CTUh,1.5708645834045455e-10
+bike,Human toxicity non-cancer (inorganics),CTUh,1.5395323182294176e-10
+bike,Human toxicity non-cancer (organics),CTUh,3.1332265169240006e-12
+bike,Ionising radiation (human health),kBq U235 eq,0.0016902528081771215
+bike,Land use,dimensionless (pt),0.013460920433697598
+bike,Ozone depletion,kg CFC11 eq,1.925339890823633e-10
+bike,Particulate matter,disease incidence,1.0300579984080142e-09
+bike,Photochemical ozone formation (human health),kg NMVOC eq,2.673294406866727e-05
+bike,Resource use fossils,MJ (net calorific),0.0929975895238537
+bike,Resource use minerals and metals,kg Sb eq,2.382797642507162e-08
+bike,Water use,m3 world eq,0.0005623520751552036
+bike_strom_conv,Acidification,mol H+ eq,8.689106615483453e-05
+bike_strom_conv,Climate change,kg CO2 eq,0.014042447344962891
+bike_strom_conv,Climate change (biogenic),kg CO2 eq,7.405154350811113e-05
+bike_strom_conv,Climate change (fossil),kg CO2 eq,0.013959995074645543
+bike_strom_conv,Climate change (land use),kg CO2 eq,8.400726809237724e-06
+bike_strom_conv,Ecotoxicity freshwater,CTUe,0.07966000161152031
+bike_strom_conv,Ecotoxicity freshwater (inorganics),CTUe,0.0780589469484192
+bike_strom_conv,Ecotoxicity freshwater (organics),CTUe,0.001601054663101144
+bike_strom_conv,Eutrophication freshwater,kg P eq,1.924559319913953e-05
+bike_strom_conv,Eutrophication marine,kg N eq,1.762446079089822e-05
+bike_strom_conv,Eutrophication terrestrial,mol N eq,0.0001327347530157704
+bike_strom_conv,Human toxicity cancer,CTUh,1.2887737693383049e-11
+bike_strom_conv,Human toxicity cancer (inorganics),CTUh,6.402370034730593e-12
+bike_strom_conv,Human toxicity cancer (organics),CTUh,6.4853676586524535e-12
+bike_strom_conv,Human toxicity non-cancer,CTUh,6.26422778589264e-10
+bike_strom_conv,Human toxicity non-cancer (inorganics),CTUh,5.947335473114479e-10
+bike_strom_conv,Human toxicity non-cancer (organics),CTUh,3.168923127712644e-11
+bike_strom_conv,Ionising radiation (human health),kBq U235 eq,0.003469610631120943
+bike_strom_conv,Land use,dimensionless (pt),0.050479121899261244
+bike_strom_conv,Ozone depletion,kg CFC11 eq,3.724250360665595e-10
+bike_strom_conv,Particulate matter,disease incidence,1.3602797565737796e-09
+bike_strom_conv,Photochemical ozone formation (human health),kg NMVOC eq,5.094278227400418e-05
+bike_strom_conv,Resource use fossils,MJ (net calorific),0.19770963656033871
+bike_strom_conv,Resource use minerals and metals,kg Sb eq,3.3362751038033555e-07
+bike_strom_conv,Water use,m3 world eq,0.001749133619960208
+bike_strom_green,Acidification,mol H+ eq,8.217185196550827e-05
+bike_strom_green,Climate change,kg CO2 eq,0.010750809713204693
+bike_strom_green,Climate change (biogenic),kg CO2 eq,3.4058051834912805e-05
+bike_strom_green,Climate change (fossil),kg CO2 eq,0.010703415521767776
+bike_strom_green,Climate change (land use),kg CO2 eq,1.3336139602005422e-05
+bike_strom_green,Ecotoxicity freshwater,CTUe,0.0755434044436891
+bike_strom_green,Ecotoxicity freshwater (inorganics),CTUe,0.07401045750759423
+bike_strom_green,Ecotoxicity freshwater (organics),CTUe,0.0015329469360948731
+bike_strom_green,Eutrophication freshwater,kg P eq,1.5578132453087885e-05
+bike_strom_green,Eutrophication marine,kg N eq,1.5700735081705916e-05
+bike_strom_green,Eutrophication terrestrial,mol N eq,0.00011890844070783238
+bike_strom_green,Human toxicity cancer,CTUh,9.497759942754297e-12
+bike_strom_green,Human toxicity cancer (inorganics),CTUh,6.205300733829711e-12
+bike_strom_green,Human toxicity cancer (organics),CTUh,3.292459208924586e-12
+bike_strom_green,Human toxicity non-cancer,CTUh,6.125722703689314e-10
+bike_strom_green,Human toxicity non-cancer (inorganics),CTUh,5.814676463208412e-10
+bike_strom_green,Human toxicity non-cancer (organics),CTUh,3.1104624047401974e-11
+bike_strom_green,Ionising radiation (human health),kBq U235 eq,0.002933099565535015
+bike_strom_green,Land use,dimensionless (pt),0.0384749768068086
+bike_strom_green,Ozone depletion,kg CFC11 eq,3.2302475256666043e-10
+bike_strom_green,Particulate matter,disease incidence,1.3373010041260539e-09
+bike_strom_green,Photochemical ozone formation (human health),kg NMVOC eq,4.605304537857291e-05
+bike_strom_green,Resource use fossils,MJ (net calorific),0.1595903917855943
+bike_strom_green,Resource use minerals and metals,kg Sb eq,3.3157188372376837e-07
+bike_strom_green,Water use,m3 world eq,0.001376932160439992
+bus_diesel,Acidification,mol H+ eq,0.00028125619742289955
+bus_diesel,Climate change,kg CO2 eq,0.10583896660216247
+bus_diesel,Climate change (biogenic),kg CO2 eq,8.573899866999583e-05
+bus_diesel,Climate change (fossil),kg CO2 eq,0.10573561416520502
+bus_diesel,Climate change (land use),kg CO2 eq,1.7613438287457524e-05
+bus_diesel,Ecotoxicity freshwater,CTUe,0.23938980091045675
+bus_diesel,Ecotoxicity freshwater (inorganics),CTUe,0.22428305961685746
+bus_diesel,Ecotoxicity freshwater (organics),CTUe,0.015106741293599284
+bus_diesel,Eutrophication freshwater,kg P eq,6.313196124609259e-06
+bus_diesel,Eutrophication marine,kg N eq,0.00011346905896774386
+bus_diesel,Eutrophication terrestrial,mol N eq,0.0012084337038070047
+bus_diesel,Human toxicity cancer,CTUh,1.2843392927293359e-11
+bus_diesel,Human toxicity cancer (inorganics),CTUh,4.6718735953404165e-12
+bus_diesel,Human toxicity cancer (organics),CTUh,8.171519331952946e-12
+bus_diesel,Human toxicity non-cancer,CTUh,4.828048291575882e-10
+bus_diesel,Human toxicity non-cancer (inorganics),CTUh,4.032415809357071e-10
+bus_diesel,Human toxicity non-cancer (organics),CTUh,7.956324822181932e-11
+bus_diesel,Ionising radiation (human health),kBq U235 eq,0.013214264950831937
+bus_diesel,Land use,dimensionless (pt),0.3202743214553754
+bus_diesel,Ozone depletion,kg CFC11 eq,1.1313966080872655e-08
+bus_diesel,Particulate matter,disease incidence,2.483290133606574e-09
+bus_diesel,Photochemical ozone formation (human health),kg NMVOC eq,0.000502226128910443
+bus_diesel,Resource use fossils,MJ (net calorific),1.4799133713619264
+bus_diesel,Resource use minerals and metals,kg Sb eq,9.399763263541988e-08
+bus_diesel,Water use,m3 world eq,0.0037626717748846386
+bus_strom_conv,Acidification,mol H+ eq,0.0002556388938015255
+bus_strom_conv,Climate change,kg CO2 eq,0.09682575130429445
+bus_strom_conv,Climate change (biogenic),kg CO2 eq,0.0010983727198372922
+bus_strom_conv,Climate change (fossil),kg CO2 eq,0.09568745890232984
+bus_strom_conv,Climate change (land use),kg CO2 eq,3.991968212730307e-05
+bus_strom_conv,Ecotoxicity freshwater,CTUe,0.23611823281100663
+bus_strom_conv,Ecotoxicity freshwater (inorganics),CTUe,0.22879924216194752
+bus_strom_conv,Ecotoxicity freshwater (organics),CTUe,0.007318990649059017
+bus_strom_conv,Eutrophication freshwater,kg P eq,0.00011474407039998875
+bus_strom_conv,Eutrophication marine,kg N eq,7.367082573582479e-05
+bus_strom_conv,Eutrophication terrestrial,mol N eq,0.0005451452063272984
+bus_strom_conv,Human toxicity cancer,CTUh,9.599141063623597e-11
+bus_strom_conv,Human toxicity cancer (inorganics),CTUh,1.714504190863849e-11
+bus_strom_conv,Human toxicity cancer (organics),CTUh,7.884636872759746e-11
+bus_strom_conv,Human toxicity non-cancer,CTUh,1.536742927117179e-09
+bus_strom_conv,Human toxicity non-cancer (inorganics),CTUh,1.442134891440477e-09
+bus_strom_conv,Human toxicity non-cancer (organics),CTUh,9.46080356764069e-11
+bus_strom_conv,Ionising radiation (human health),kBq U235 eq,0.02545174241790979
+bus_strom_conv,Land use,dimensionless (pt),0.5789134609454585
+bus_strom_conv,Ozone depletion,kg CFC11 eq,1.931747373903416e-09
+bus_strom_conv,Particulate matter,disease incidence,2.5602268525882913e-09
+bus_strom_conv,Photochemical ozone formation (human health),kg NMVOC eq,0.0002344314308471556
+bus_strom_conv,Resource use fossils,MJ (net calorific),1.3005837970982883
+bus_strom_conv,Resource use minerals and metals,kg Sb eq,9.874382226545428e-07
+bus_strom_conv,Water use,m3 world eq,0.012408349043609875
+bus_strom_green,Acidification,mol H+ eq,0.00015258602692187943
+bus_strom_green,Climate change,kg CO2 eq,0.024946688165172388
+bus_strom_green,Climate change (biogenic),kg CO2 eq,0.00022504004026276852
+bus_strom_green,Climate change (fossil),kg CO2 eq,0.024573954475099358
+bus_strom_green,Climate change (land use),kg CO2 eq,0.0001476936498102596
+bus_strom_green,Ecotoxicity freshwater,CTUe,0.1462246355055166
+bus_strom_green,Ecotoxicity freshwater (inorganics),CTUe,0.1403929044388954
+bus_strom_green,Ecotoxicity freshwater (organics),CTUe,0.005831731066621167
+bus_strom_green,Eutrophication freshwater,kg P eq,3.4658206761076324e-05
+bus_strom_green,Eutrophication marine,kg N eq,3.1662677457510204e-05
+bus_strom_green,Eutrophication terrestrial,mol N eq,0.00024322182151273269
+bus_strom_green,Human toxicity cancer,CTUh,2.1964907102945396e-11
+bus_strom_green,Human toxicity cancer (inorganics),CTUh,1.2841665198647966e-11
+bus_strom_green,Human toxicity cancer (organics),CTUh,9.12324190429743e-12
+bus_strom_green,Human toxicity non-cancer,CTUh,1.2342911793084747e-09
+bus_strom_green,Human toxicity non-cancer (inorganics),CTUh,1.1524491357238588e-09
+bus_strom_green,Human toxicity non-cancer (organics),CTUh,8.184204358434657e-11
+bus_strom_green,Ionising radiation (human health),kBq U235 eq,0.01373602001091779
+bus_strom_green,Land use,dimensionless (pt),0.31678050478209796
+bus_strom_green,Ozone depletion,kg CFC11 eq,8.529998038426457e-10
+bus_strom_green,Particulate matter,disease incidence,2.0584428220156174e-09
+bus_strom_green,Photochemical ozone formation (human health),kg NMVOC eq,0.0001276548817977277
+bus_strom_green,Resource use fossils,MJ (net calorific),0.46817880344291296
+bus_strom_green,Resource use minerals and metals,kg Sb eq,9.425497705320391e-07
+bus_strom_green,Water use,m3 world eq,0.004280634148471733
+sbahn_conv,Acidification,mol H+ eq,1.840441037417596e-05
+sbahn_conv,Climate change,kg CO2 eq,0.011203069284735833
+sbahn_conv,Climate change (biogenic),kg CO2 eq,0.00014441646366393634
+sbahn_conv,Climate change (fossil),kg CO2 eq,0.011054764262015303
+sbahn_conv,Climate change (land use),kg CO2 eq,3.888559056593307e-06
+sbahn_conv,Ecotoxicity freshwater,CTUe,0.015130452484574149
+sbahn_conv,Ecotoxicity freshwater (inorganics),CTUe,0.014836003037789782
+sbahn_conv,Ecotoxicity freshwater (organics),CTUe,0.0002944494467843715
+sbahn_conv,Eutrophication freshwater,kg P eq,1.2103241820223645e-05
+sbahn_conv,Eutrophication marine,kg N eq,6.62608862261165e-06
+sbahn_conv,Eutrophication terrestrial,mol N eq,4.991868379746369e-05
+sbahn_conv,Human toxicity cancer,CTUh,1.1215193864087243e-11
+sbahn_conv,Human toxicity cancer (inorganics),CTUh,1.0106236526910878e-12
+sbahn_conv,Human toxicity cancer (organics),CTUh,1.0204570211396157e-11
+sbahn_conv,Human toxicity non-cancer,CTUh,6.845481506215376e-11
+sbahn_conv,Human toxicity non-cancer (inorganics),CTUh,6.445318586885948e-11
+sbahn_conv,Human toxicity non-cancer (organics),CTUh,4.001629193270932e-12
+sbahn_conv,Ionising radiation (human health),kBq U235 eq,0.002107613119444437
+sbahn_conv,Land use,dimensionless (pt),0.04691406282319837
+sbahn_conv,Ozone depletion,kg CFC11 eq,2.0352279355621447e-09
+sbahn_conv,Particulate matter,disease incidence,1.9007924648493098e-10
+sbahn_conv,Photochemical ozone formation (human health),kg NMVOC eq,1.823131848626282e-05
+sbahn_conv,Resource use fossils,MJ (net calorific),0.12893474332303423
+sbahn_conv,Resource use minerals and metals,kg Sb eq,2.4308389583144633e-08
+sbahn_conv,Water use,m3 world eq,0.0012549580764504853
+sbahn_green,Acidification,mol H+ eq,3.853195029092602e-06
+sbahn_green,Climate change,kg CO2 eq,0.0010624777089603373
+sbahn_green,Climate change (biogenic),kg CO2 eq,2.0972143345397298e-05
+sbahn_green,Climate change (fossil),kg CO2 eq,0.0010226780337056851
+sbahn_green,Climate change (land use),kg CO2 eq,1.88275319092548e-05
+sbahn_green,Ecotoxicity freshwater,CTUe,0.0024426227017461917
+sbahn_green,Ecotoxicity freshwater (inorganics),CTUe,0.002358176919493902
+sbahn_green,Ecotoxicity freshwater (organics),CTUe,8.444578225228913e-05
+sbahn_green,Eutrophication freshwater,kg P eq,8.049723465753483e-07
+sbahn_green,Eutrophication marine,kg N eq,6.978112083500532e-07
+sbahn_green,Eutrophication terrestrial,mol N eq,7.2909359862673344e-06
+sbahn_green,Human toxicity cancer,CTUh,7.682508443665446e-13
+sbahn_green,Human toxicity cancer (inorganics),CTUh,4.010158935724907e-13
+sbahn_green,Human toxicity cancer (organics),CTUh,3.672349507940536e-13
+sbahn_green,Human toxicity non-cancer,CTUh,2.5716108022115903e-11
+sbahn_green,Human toxicity non-cancer (inorganics),CTUh,2.3521477679903075e-11
+sbahn_green,Human toxicity non-cancer (organics),CTUh,2.194630342193207e-12
+sbahn_green,Ionising radiation (human health),kBq U235 eq,0.000454436160050776
+sbahn_green,Land use,dimensionless (pt),0.00982647340976432
+sbahn_green,Ozone depletion,kg CFC11 eq,1.883030995234189e-09
+sbahn_green,Particulate matter,disease incidence,1.190852370657701e-10
+sbahn_green,Photochemical ozone formation (human health),kg NMVOC eq,3.1603001238489686e-06
+sbahn_green,Resource use fossils,MJ (net calorific),0.011499831931627772
+sbahn_green,Resource use minerals and metals,kg Sb eq,1.790651975591326e-08
+sbahn_green,Water use,m3 world eq,0.00010822699833923366
+tram_conv,Acidification,mol H+ eq,7.341604358661143e-05
+tram_conv,Climate change,kg CO2 eq,0.04435551064297591
+tram_conv,Climate change (biogenic),kg CO2 eq,0.000581717681638359
+tram_conv,Climate change (fossil),kg CO2 eq,0.04375791011899497
+tram_conv,Climate change (land use),kg CO2 eq,1.58828423425799e-05
+tram_conv,Ecotoxicity freshwater,CTUe,0.06112665737112882
+tram_conv,Ecotoxicity freshwater (inorganics),CTUe,0.05992773349895876
+tram_conv,Ecotoxicity freshwater (organics),CTUe,0.0011989238721700655
+tram_conv,Eutrophication freshwater,kg P eq,4.850526682674016e-05
+tram_conv,Eutrophication marine,kg N eq,2.6686863609451755e-05
+tram_conv,Eutrophication terrestrial,mol N eq,0.00020019627616421615
+tram_conv,Human toxicity cancer,CTUh,4.498016749104886e-11
+tram_conv,Human toxicity cancer (inorganics),CTUh,4.01251662321553e-12
+tram_conv,Human toxicity cancer (organics),CTUh,4.0967650867833337e-11
+tram_conv,Human toxicity non-cancer,CTUh,2.699896920545726e-10
+tram_conv,Human toxicity non-cancer (inorganics),CTUh,2.5427612691330534e-10
+tram_conv,Human toxicity non-cancer (organics),CTUh,1.5713565141178505e-11
+tram_conv,Ionising radiation (human health),kBq U235 eq,0.008909808363667608
+tram_conv,Land use,dimensionless (pt),0.18908412007122533
+tram_conv,Ozone depletion,kg CFC11 eq,2.558137846219282e-09
+tram_conv,Particulate matter,disease incidence,5.108204505489875e-10
+tram_conv,Photochemical ozone formation (human health),kg NMVOC eq,7.43311019663735e-05
+tram_conv,Resource use fossils,MJ (net calorific),0.52329897017336
+tram_conv,Resource use minerals and metals,kg Sb eq,9.403313727763665e-08
+tram_conv,Water use,m3 world eq,0.005128054476449151
+tram_green,Acidification,mol H+ eq,2.214136264467329e-05
+tram_green,Climate change,kg CO2 eq,0.003901141762640497
+tram_green,Climate change (biogenic),kg CO2 eq,9.046461206747429e-05
+tram_green,Climate change (fossil),kg CO2 eq,0.0037304996835101313
+tram_green,Climate change (land use),kg CO2 eq,8.017746706289181e-05
+tram_green,Ecotoxicity freshwater,CTUe,0.013460065893304795
+tram_green,Ecotoxicity freshwater (inorganics),CTUe,0.013079407141946947
+tram_green,Ecotoxicity freshwater (organics),CTUe,0.0003806587513578445
+tram_green,Eutrophication freshwater,kg P eq,5.257939807237704e-06
+tram_green,Eutrophication marine,kg N eq,3.4532685629583485e-06
+tram_green,Eutrophication terrestrial,mol N eq,3.57804823229971e-05
+tram_green,Human toxicity cancer,CTUh,3.6613297239308436e-12
+tram_green,Human toxicity cancer (inorganics),CTUh,2.1177367716792115e-12
+tram_green,Human toxicity cancer (organics),CTUh,1.5435929522516323e-12
+tram_green,Human toxicity non-cancer,CTUh,1.6662990165252348e-10
+tram_green,Human toxicity non-cancer (inorganics),CTUh,1.5169318210196568e-10
+tram_green,Human toxicity non-cancer (organics),CTUh,1.4936719550459848e-11
+tram_green,Ionising radiation (human health),kBq U235 eq,0.002323533445861069
+tram_green,Land use,dimensionless (pt),0.04390750299779342
+tram_green,Ozone depletion,kg CFC11 eq,1.359031542592688e-09
+tram_green,Particulate matter,disease incidence,2.4863634199398857e-10
+tram_green,Photochemical ozone formation (human health),kg NMVOC eq,1.5674359861121932e-05
+tram_green,Resource use fossils,MJ (net calorific),0.054202615692370684
+tram_green,Resource use minerals and metals,kg Sb eq,1.450080281003633e-07
+tram_green,Water use,m3 world eq,0.000586107617465359
+ubahn_conv,Acidification,mol H+ eq,5.7317810407784804e-05
+ubahn_conv,Climate change,kg CO2 eq,0.03807542324553821
+ubahn_conv,Climate change (biogenic),kg CO2 eq,0.0005142991965665876
+ubahn_conv,Climate change (fossil),kg CO2 eq,0.03754824233736426
+ubahn_conv,Climate change (land use),kg CO2 eq,1.2881711607372931e-05
+ubahn_conv,Ecotoxicity freshwater,CTUe,0.04846616234461303
+ubahn_conv,Ecotoxicity freshwater (inorganics),CTUe,0.0476338814603757
+ubahn_conv,Ecotoxicity freshwater (organics),CTUe,0.0008322808842373337
+ubahn_conv,Eutrophication freshwater,kg P eq,4.16314596414227e-05
+ubahn_conv,Eutrophication marine,kg N eq,2.2360247687418748e-05
+ubahn_conv,Eutrophication terrestrial,mol N eq,0.00016606363185395852
+ubahn_conv,Human toxicity cancer,CTUh,3.934391812442038e-11
+ubahn_conv,Human toxicity cancer (inorganics),CTUh,2.9234471140592524e-12
+ubahn_conv,Human toxicity cancer (organics),CTUh,3.642047101036112e-11
+ubahn_conv,Human toxicity non-cancer,CTUh,1.791020947093849e-10
+ubahn_conv,Human toxicity non-cancer (inorganics),CTUh,1.7056248692845792e-10
+ubahn_conv,Human toxicity non-cancer (organics),CTUh,8.539607780902582e-12
+ubahn_conv,Ionising radiation (human health),kBq U235 eq,0.006222331969801862
+ubahn_conv,Land use,dimensionless (pt),0.16374964775578796
+ubahn_conv,Ozone depletion,kg CFC11 eq,9.317268743251154e-10
+ubahn_conv,Particulate matter,disease incidence,4.003045782704037e-10
+ubahn_conv,Photochemical ozone formation (human health),kg NMVOC eq,5.768649911666472e-05
+ubahn_conv,Resource use fossils,MJ (net calorific),0.43350396389528256
+ubahn_conv,Resource use minerals and metals,kg Sb eq,4.3851871649486576e-08
+ubahn_conv,Water use,m3 world eq,0.004249152776084841
+ubahn_green,Acidification,mol H+ eq,4.6230413201742715e-06
+ubahn_green,Climate change,kg CO2 eq,0.0013529833101130976
+ubahn_green,Climate change (biogenic),kg CO2 eq,6.726643675245101e-05
+ubahn_green,Climate change (fossil),kg CO2 eq,0.0012187361943331299
+ubahn_green,Climate change (land use),kg CO2 eq,6.698067902751655e-05
+ubahn_green,Ecotoxicity freshwater,CTUe,0.002519329398117483
+ubahn_green,Ecotoxicity freshwater (inorganics),CTUe,0.002447541321363006
+ubahn_green,Ecotoxicity freshwater (organics),CTUe,7.17880767544772e-05
+ubahn_green,Eutrophication freshwater,kg P eq,7.16684697578474e-07
+ubahn_green,Eutrophication marine,kg N eq,8.919921483813967e-07
+ubahn_green,Eutrophication terrestrial,mol N eq,1.1694441764633294e-05
+ubahn_green,Human toxicity cancer,CTUh,1.5120781687555363e-12
+ubahn_green,Human toxicity cancer (inorganics),CTUh,7.158555597479691e-13
+ubahn_green,Human toxicity cancer (organics),CTUh,7.962226090075678e-13
+ubahn_green,Human toxicity non-cancer,CTUh,2.4331084510651874e-11
+ubahn_green,Human toxicity non-cancer (inorganics),CTUh,2.2335217918428007e-11
+ubahn_green,Human toxicity non-cancer (organics),CTUh,1.9958665922127227e-12
+ubahn_green,Ionising radiation (human health),kBq U235 eq,0.00023563078572226396
+ubahn_green,Land use,dimensionless (pt),0.02944320572946363
+ubahn_green,Ozone depletion,kg CFC11 eq,3.8057135664305987e-10
+ubahn_green,Particulate matter,disease incidence,1.4321176201911908e-10
+ubahn_green,Photochemical ozone formation (human health),kg NMVOC eq,3.1093511816731846e-06
+ubahn_green,Resource use fossils,MJ (net calorific),0.008233263693248805
+ubahn_green,Resource use minerals and metals,kg Sb eq,2.0668581163108933e-08
+ubahn_green,Water use,m3 world eq,9.645982685668741e-05

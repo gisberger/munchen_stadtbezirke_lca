@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)http://localhost:8000/ -->
+<html lang="de"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobilitäts-LCA München</title>
+  <script src="./1_Mobilitäts-LCA München_files/maplibre-gl.js.Download"></script>
+  <link rel="stylesheet" href="./1_Mobilitäts-LCA München_files/maplibre-gl.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      display: flex;
+      height: 100vh;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      overflow: hidden;
+    }
+
+    /* ── Sidebar ── */
+    #sidebar {
+      width: 300px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 14px;
+      overflow-y: auto;
+      background: #0f172a;
+      border-right: 1px solid #1e293b;
+      z-index: 10;
+    }
+
+    .sb-header h1 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #7dd3fc;
+      line-height: 1.3;
+    }
+    .sb-header p {
+      font-size: 0.7rem;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .card {
+      background: #1e293b;
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .card-title {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #64748b;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .form-row { margin-bottom: 10px; }
+    .form-row:last-child { margin-bottom: 0; }
+
+    label.row-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: #cbd5e1;
+      margin-bottom: 4px;
+    }
+    label.row-label .val {
+      color: #38bdf8;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      min-width: 48px;
+      text-align: right;
+    }
+
+    select {
+      width: 100%;
+      background: #0f172a;
+      color: #e2e8f0;
+      border: 1px solid #334155;
+      border-radius: 5px;
+      padding: 6px 8px;
+      font-size: 0.78rem;
+      cursor: pointer;
+    }
+    select:focus { outline: 2px solid #38bdf8; outline-offset: 1px; }
+
+    input[type=range] {
+      width: 100%;
+      accent-color: #38bdf8;
+      cursor: pointer;
+      height: 4px;
+      margin-top: 2px;
+    }
+    input[type=range]:disabled { opacity: 0.3; cursor: default; }
+
+    /* metric toggle (per trip / per day) */
+    .metric-toggle {
+      display: flex;
+      border: 1px solid #334155;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+    .metric-btn {
+      flex: 1;
+      padding: 5px 4px;
+      font-size: 0.72rem;
+      text-align: center;
+      cursor: pointer;
+      color: #94a3b8;
+      background: transparent;
+      border: none;
+      transition: background 0.15s, color 0.15s;
+    }
+    .metric-btn.active {
+      background: #1d4ed8;
+      color: #fff;
+    }
+
+    /* toggle switch */
+    .toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.78rem;
+      color: #cbd5e1;
+    }
+    .toggle-row .hint { font-size: 0.65rem; color: #475569; margin-top: 1px; }
+    .switch { position: relative; width: 34px; height: 18px; flex-shrink: 0; }
+    .switch input { display: none; }
+    .switch-track {
+      position: absolute; inset: 0;
+      background: #334155;
+      border-radius: 9px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .switch-track::before {
+      content: '';
+      position: absolute;
+      width: 12px; height: 12px;
+      background: #fff;
+      border-radius: 50%;
+      top: 3px; left: 3px;
+      transition: transform 0.2s;
+    }
+    .switch input:checked + .switch-track { background: #22c55e; }
+    .switch input:checked + .switch-track::before { transform: translateX(16px); }
+
+    /* BEV override section */
+    .bev-override { margin-top: 6px; }
+
+    /* ── District info panel ── */
+    #info-panel {
+      flex: 1;
+      min-height: 0;
+    }
+    #info-panel .placeholder {
+      font-size: 0.72rem;
+      color: #475569;
+      text-align: center;
+      padding: 8px 0;
+    }
+    #info-panel h3 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #7dd3fc;
+      margin-bottom: 8px;
+    }
+    .info-kv {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.74rem;
+      padding: 3px 0;
+      border-bottom: 1px solid #1e3a5f22;
+    }
+    .info-kv .k { color: #94a3b8; }
+    .info-kv .v { font-weight: 600; color: #e2e8f0; font-variant-numeric: tabular-nums; }
+    .info-kv .v.highlight { color: #38bdf8; }
+
+    /* modal split bar */
+    .split-label { font-size: 0.65rem; color: #64748b; margin-top: 8px; margin-bottom: 4px; }
+    .split-bar {
+      display: flex;
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .seg-fuss  { background: #4ade80; }
+    .seg-rad   { background: #a3e635; }
+    .seg-opnv  { background: #38bdf8; }
+    .seg-auto  { background: #fb923c; }
+    .split-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 5px;
+      font-size: 0.65rem;
+      color: #94a3b8;
+    }
+    .split-legend span { display: flex; align-items: center; gap: 3px; }
+    .dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+
+    /* ── Map container ── */
+    #map-wrap {
+      flex: 1;
+      position: relative;
+      min-width: 0;
+    }
+    #map { width: 100%; height: 100%; }
+
+    /* ── Legend ── */
+    #legend {
+      position: absolute;
+      bottom: 28px;
+      left: 14px;
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid #1e293b;
+      border-radius: 8px;
+      padding: 10px 14px;
+      min-width: 200px;
+      z-index: 5;
+      backdrop-filter: blur(4px);
+    }
+    #legend-title {
+      font-size: 0.68rem;
+      color: #94a3b8;
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+    .grad-bar {
+      height: 10px;
+      border-radius: 3px;
+      background: linear-gradient(to right, #ffffb2, #fed976, #feb24c, #f03b20, #bd0026);
+    }
+    .grad-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.65rem;
+      color: #94a3b8;
+      margin-top: 3px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ── Loading overlay ── */
+    #loading {
+      position: absolute;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+      backdrop-filter: blur(2px);
+    }
+    #loading.show { display: flex; }
+    .spinner {
+      width: 36px; height: 36px;
+      border: 3px solid #1e293b;
+      border-top-color: #38bdf8;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* MapLibre popup override */
+    .maplibregl-popup-content {
+      background: #1e293b !important;
+      color: #e2e8f0 !important;
+      border-radius: 6px !important;
+      padding: 8px 12px !important;
+      font-size: 0.75rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5) !important;
+    }
+    .maplibregl-popup-close-button { color: #64748b !important; }
+    .maplibregl-popup-tip { border-top-color: #1e293b !important; }
+  </style>
+</head>
+<body>
+
+<!-- ── Sidebar ─────────────────────────────────────────────────────────── -->
+<div id="sidebar">
+  <div class="sb-header">
+    <h1>Mobilitäts-LCA München</h1>
+    <p>Ökobilanz nach Stadtbezirk · Szenarienanalyse</p>
+  </div>
+
+  <!-- Category & metric -->
+  <div class="card">
+    <div class="card-title">Wirkungskategorie</div>
+    <div class="form-row">
+      <select id="cat-select"><option value="Climate change">Climate change [kg CO2 eq]</option><option value="Particulate matter">Particulate matter [disease incidence]</option><option value="Acidification">Acidification [mol H+ eq]</option><option value="Eutrophication freshwater">Eutrophication freshwater [kg P eq]</option><option value="Eutrophication marine">Eutrophication marine [kg N eq]</option><option value="Resource use fossils">Resource use fossils [MJ (net calorific)]</option><option value="Climate change (biogenic)">Climate change (biogenic) [kg CO2 eq]</option><option value="Climate change (fossil)">Climate change (fossil) [kg CO2 eq]</option><option value="Climate change (land use)">Climate change (land use) [kg CO2 eq]</option><option value="Ecotoxicity freshwater">Ecotoxicity freshwater [CTUe]</option><option value="Ecotoxicity freshwater (inorganics)">Ecotoxicity freshwater (inorganics) [CTUe]</option><option value="Ecotoxicity freshwater (organics)">Ecotoxicity freshwater (organics) [CTUe]</option><option value="Eutrophication terrestrial">Eutrophication terrestrial [mol N eq]</option><option value="Human toxicity cancer">Human toxicity cancer [CTUh]</option><option value="Human toxicity cancer (inorganics)">Human toxicity cancer (inorganics) [CTUh]</option><option value="Human toxicity cancer (organics)">Human toxicity cancer (organics) [CTUh]</option><option value="Human toxicity non-cancer">Human toxicity non-cancer [CTUh]</option><option value="Human toxicity non-cancer (inorganics)">Human toxicity non-cancer (inorganics) [CTUh]</option><option value="Human toxicity non-cancer (organics)">Human toxicity non-cancer (organics) [CTUh]</option><option value="Ionising radiation (human health)">Ionising radiation (human health) [kBq U235 eq]</option><option value="Land use">Land use [dimensionless (pt)]</option><option value="Ozone depletion">Ozone depletion [kg CFC11 eq]</option><option value="Photochemical ozone formation (human health)">Photochemical ozone formation (human health) [kg NMVOC eq]</option><option value="Resource use minerals and metals">Resource use minerals and metals [kg Sb eq]</option><option value="Water use">Water use [m3 world eq]</option></select>
+    </div>
+    <div class="form-row">
+      <div class="metric-toggle">
+        <button class="metric-btn active" data-m="per_trip">Pro Fahrt</button>
+        <button class="metric-btn" data-m="per_day">Pro Tag</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scenarios -->
+  <div class="card">
+    <div class="card-title">Szenarien</div>
+
+    <div class="form-row">
+      <label class="row-label">
+        <span>Homeoffice-Anteil</span>
+        <span class="val" id="wfh-lbl">+0%</span>
+      </label>
+      <input type="range" id="wfh" min="0" max="50" value="0" step="1">
+    </div>
+
+    <!-- BEV with override toggle -->
+    <div class="form-row">
+      <div class="toggle-row">
+        <div>
+          <div>E-PKW Anteil überschreiben</div>
+          <div class="hint">Aus = Bezirksdaten verwenden</div>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="bev-enable">
+          <span class="switch-track"></span>
+        </label>
+      </div>
+      <div class="bev-override">
+        <label class="row-label" style="margin-top:8px">
+          <span style="color: rgb(203, 213, 225);" id="bev-row-label">E-PKW Anteil</span>
+          <span class="val" id="bev-lbl">0%</span>
+        </label>
+        <input type="range" id="bev" min="0" max="100" value="20" step="1">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label class="row-label">
+        <span>E-Bus Anteil</span>
+        <span class="val" id="ebus-lbl">0%</span>
+      </label>
+      <input type="range" id="ebus" min="0" max="100" value="0" step="1">
+    </div>
+
+    <div class="form-row" style="margin-bottom:0">
+      <div class="toggle-row">
+        <div>
+          <div>Ökostrom (Elektrofahrzeuge)</div>
+          <div class="hint">Wechselt _green LCA-Varianten</div>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="green-elec">
+          <span class="switch-track"></span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- District info -->
+  <div class="card" id="info-panel">
+    <div class="card-title">Bezirksdetails</div>
+    <div class="placeholder">Bezirk auf der Karte anklicken</div>
+  </div>
+</div>
+
+<!-- ── Map ─────────────────────────────────────────────────────────────── -->
+<div id="map-wrap">
+  <div id="map" class="maplibregl-map"><div class="maplibregl-canvas-container maplibregl-interactive maplibregl-touch-drag-pan maplibregl-touch-zoom-rotate"><canvas class="maplibregl-canvas" tabindex="0" aria-label="Map" role="region" width="1072" height="734" style="width: 720px; height: 493px;"></canvas></div><div class="maplibregl-control-container"><div class="maplibregl-ctrl-top-left "></div><div class="maplibregl-ctrl-top-right "><div class="maplibregl-ctrl maplibregl-ctrl-group"><button class="maplibregl-ctrl-zoom-in" type="button" title="Zoom in" aria-label="Zoom in" aria-disabled="false"><span class="maplibregl-ctrl-icon" aria-hidden="true"></span></button><button class="maplibregl-ctrl-zoom-out" type="button" title="Zoom out" aria-label="Zoom out" aria-disabled="false"><span class="maplibregl-ctrl-icon" aria-hidden="true"></span></button><button class="maplibregl-ctrl-compass" type="button" title="Reset bearing to north" aria-label="Reset bearing to north"><span class="maplibregl-ctrl-icon" aria-hidden="true" style="transform: rotate(0deg);"></span></button></div></div><div class="maplibregl-ctrl-bottom-left "></div><div class="maplibregl-ctrl-bottom-right "><div class="maplibregl-ctrl maplibregl-ctrl-scale" style="width: 102.555px;">5&nbsp;km</div><details class="maplibregl-ctrl maplibregl-ctrl-attrib maplibregl-compact" open=""><summary class="maplibregl-ctrl-attrib-button" title="Toggle attribution" aria-label="Toggle attribution"></summary><div class="maplibregl-ctrl-attrib-inner"><a href="https://maplibre.org/" target="_blank">MapLibre</a> | © <a href="https://carto.com/about-carto/" target="_blank" rel="noopener">CARTO</a>, © <a href="http://www.openstreetmap.org/about/" target="_blank">OpenStreetMap</a> contributors</div></details></div></div></div>
+
+  <div id="legend">
+    <div id="legend-title">Climate change  [kg CO2 eq]  —  pro Fahrt</div>
+    <div class="grad-bar"></div>
+    <div class="grad-labels">
+      <span id="leg-min">0.186</span>
+      <span id="leg-mid">0.451</span>
+      <span id="leg-max">0.715</span>
+    </div>
+  </div>
+
+  <div id="loading" class="">
+    <div class="spinner"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   State
+   ============================================================ */
+let map, mapReady = false;
+let geojson = null;       // last scenario GeoJSON
+let categories = [];      // [{impact_category, unit}]
+let selCat  = null;       // selected impact_category string
+let selMetric = 'per_trip';
+let debTimer  = null;
+
+/* ============================================================
+   Startup
+   ============================================================ */
+async function init() {
+  try {
+    categories = await fetch('/api/categories').then(r => r.json());
+  } catch {
+    categories = [{ impact_category: 'Climate change', unit: 'kg CO2 eq' }];
+  }
+  buildCategorySelect();
+  initMap();
+  await loadScenario();
+}
+
+function buildCategorySelect() {
+  const sel = document.getElementById('cat-select');
+  // preferred order: common ones first
+  const PRIORITY = ['Climate change', 'Particulate matter', 'Acidification',
+    'Eutrophication freshwater', 'Eutrophication marine', 'Resource use fossils'];
+  const sorted = [...categories].sort((a, b) => {
+    const ai = PRIORITY.indexOf(a.impact_category);
+    const bi = PRIORITY.indexOf(b.impact_category);
+    if (ai >= 0 && bi >= 0) return ai - bi;
+    if (ai >= 0) return -1;
+    if (bi >= 0) return  1;
+    return a.impact_category.localeCompare(b.impact_category);
+  });
+  sel.innerHTML = sorted.map(c =>
+    `<option value="${esc(c.impact_category)}">${esc(c.impact_category)} [${esc(c.unit)}]</option>`
+  ).join('');
+  selCat = sorted[0]?.impact_category ?? null;
+}
+
+/* ============================================================
+   MapLibre
+   ============================================================ */
+function initMap() {
+  map = new maplibregl.Map({
+    container: 'map',
+    style: 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json',
+    center: [11.576, 48.137],
+    zoom: 10.5,
+  });
+
+  map.addControl(new maplibregl.NavigationControl({ visualizePitch: false }), 'top-right');
+  map.addControl(new maplibregl.ScaleControl({ maxWidth: 120 }), 'bottom-right');
+
+  map.on('load', () => {
+    mapReady = true;
+
+    map.addSource('districts', {
+      type: 'geojson',
+      data: { type: 'FeatureCollection', features: [] },
+    });
+
+    map.addLayer({
+      id: 'districts-fill',
+      type: 'fill',
+      source: 'districts',
+      paint: { 'fill-color': '#94a3b8', 'fill-opacity': 0.72 },
+    });
+
+    map.addLayer({
+      id: 'districts-border',
+      type: 'line',
+      source: 'districts',
+      paint: { 'line-color': '#ffffff', 'line-width': 0.8, 'line-opacity': 0.7 },
+    });
+
+    map.addLayer({
+      id: 'districts-hover',
+      type: 'line',
+      source: 'districts',
+      filter: ['==', ['get', 'district_id'], -1],
+      paint: { 'line-color': '#7dd3fc', 'line-width': 2.5 },
+    });
+
+    if (geojson) applyToMap();
+
+    // hover highlight
+    map.on('mousemove', 'districts-fill', e => {
+      map.getCanvas().style.cursor = 'pointer';
+      const id = e.features[0].properties.district_id;
+      map.setFilter('districts-hover', ['==', ['get', 'district_id'], id]);
+    });
+    map.on('mouseleave', 'districts-fill', () => {
+      map.getCanvas().style.cursor = '';
+      map.setFilter('districts-hover', ['==', ['get', 'district_id'], -1]);
+    });
+
+    // click → show district info
+    map.on('click', 'districts-fill', e => {
+      showInfo(e.features[0].properties);
+    });
+  });
+}
+
+/* ============================================================
+   Scenario API
+   ============================================================ */
+function params() {
+  const wfh       = parseInt(document.getElementById('wfh').value) / 100;
+  const bevEnable = document.getElementById('bev-enable').checked;
+  const bev       = bevEnable ? parseInt(document.getElementById('bev').value) / 100 : null;
+  const ebus      = parseInt(document.getElementById('ebus').value) / 100;
+  const green     = document.getElementById('green-elec').checked;
+  return { wfh_rate: wfh, bev_share: bev, ebus_share: ebus, green_elec: green };
+}
+
+async function loadScenario() {
+  setLoading(true);
+  try {
+    const res = await fetch('/api/scenario', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(params()),
+    });
+    if (!res.ok) throw new Error(await res.text());
+    geojson = await res.json();
+    applyToMap();
+  } catch (err) {
+    console.error('Scenario error:', err);
+  } finally {
+    setLoading(false);
+  }
+}
+
+function scheduleReload() {
+  clearTimeout(debTimer);
+  debTimer = setTimeout(loadScenario, 320);
+}
+
+/* ============================================================
+   Map rendering
+   ============================================================ */
+function applyToMap() {
+  if (!mapReady || !geojson || !selCat) return;
+  map.getSource('districts').setData(geojson);
+  updateColors();
+}
+
+function updateColors() {
+  if (!mapReady || !geojson || !selCat) return;
+
+  const field = `${selMetric}_${selCat}`;
+  const vals = geojson.features
+    .map(f => f.properties[field])
+    .filter(v => v != null && isFinite(v) && v >= 0);
+
+  if (!vals.length) return;
+
+  const mn = Math.min(...vals);
+  const mx = Math.max(...vals);
+  const range = mx - mn || 1e-12;
+
+  // YlOrRd 5-stop (low=yellow, high=dark red)
+  const STOPS = [
+    [mn,                    '#ffffb2'],
+    [mn + range * 0.25,     '#fed976'],
+    [mn + range * 0.5,      '#feb24c'],
+    [mn + range * 0.75,     '#f03b20'],
+    [mx,                    '#bd0026'],
+  ];
+
+  const expr = ['interpolate', ['linear'], ['get', field]];
+  STOPS.forEach(([v, c]) => expr.push(v, c));
+
+  map.setPaintProperty('districts-fill', 'fill-color', expr);
+  updateLegend(mn, mx);
+}
+
+function updateLegend(mn, mx) {
+  const cat = categories.find(c => c.impact_category === selCat);
+  const unit = cat?.unit ?? '';
+  const metric = selMetric === 'per_trip' ? 'pro Fahrt' : 'pro Tag';
+  document.getElementById('legend-title').textContent =
+    `${selCat}  [${unit}]  —  ${metric}`;
+  document.getElementById('leg-min').textContent = fmt(mn);
+  document.getElementById('leg-mid').textContent = fmt((mn + mx) / 2);
+  document.getElementById('leg-max').textContent = fmt(mx);
+}
+
+/* ============================================================
+   District info panel
+   ============================================================ */
+function showInfo(p) {
+  const cat = categories.find(c => c.impact_category === selCat);
+  const unit = cat?.unit ?? '';
+  const field = `${selMetric}_${selCat}`;
+  const val   = p[field];
+  const metricLabel = selMetric === 'per_trip' ? '/ Fahrt' : '/ Tag';
+
+  const sf = parseFloat(p.split_fuss)  || 0;
+  const sr = parseFloat(p.split_rad)   || 0;
+  const so = parseFloat(p.split_opnv)  || 0;
+  const sa = parseFloat(p.split_auto)  || 0;
+  const total = sf + sr + so + sa || 100;
+
+  const fp = (sf/total*100).toFixed(1);
+  const rp = (sr/total*100).toFixed(1);
+  const op = (so/total*100).toFixed(1);
+  const ap = (sa/total*100).toFixed(1);
+
+  const hoBase = (parseFloat(p.homeoffice_pct) || 0).toFixed(0);
+
+  document.getElementById('info-panel').innerHTML = `
+    <div class="card-title">Bezirksdetails</div>
+    <h3>${esc(p.district_name || p.sb_name)}</h3>
+
+    <div class="info-kv">
+      <span class="k">${esc(selCat)} ${esc(metricLabel)}</span>
+      <span class="v highlight">${fmt(val)} ${esc(unitShort(unit))}</span>
+    </div>
+    <div class="info-kv">
+      <span class="k">Fahrten/Tag (effektiv)</span>
+      <span class="v">${fmt(p.effective_trips, 1)}</span>
+    </div>
+    <div class="info-kv">
+      <span class="k">Distanz / Fahrt</span>
+      <span class="v">${parseFloat(p.km_per_trip).toFixed(1)} km</span>
+    </div>
+    <div class="info-kv">
+      <span class="k">Homeoffice-Basis</span>
+      <span class="v">${hoBase}%</span>
+    </div>
+    <div class="info-kv">
+      <span class="k">Pkw-Besetzung</span>
+      <span class="v">${parseFloat(p.auto_besetzung||0).toFixed(1)}</span>
+    </div>
+
+    <div class="split-label">Modal Split</div>
+    <div class="split-bar">
+      <div class="seg-fuss" style="width:${fp}%" title="Fuß ${fp}%"></div>
+      <div class="seg-rad"  style="width:${rp}%" title="Rad ${rp}%"></div>
+      <div class="seg-opnv" style="width:${op}%" title="ÖPNV ${op}%"></div>
+      <div class="seg-auto" style="width:${ap}%" title="Auto ${ap}%"></div>
+    </div>
+    <div class="split-legend">
+      <span><span class="dot" style="background:#4ade80"></span>Fuß ${fp}%</span>
+      <span><span class="dot" style="background:#a3e635"></span>Rad ${rp}%</span>
+      <span><span class="dot" style="background:#38bdf8"></span>ÖPNV ${op}%</span>
+      <span><span class="dot" style="background:#fb923c"></span>Auto ${ap}%</span>
+    </div>
+  `;
+}
+
+/* ============================================================
+   Event listeners
+   ============================================================ */
+document.getElementById('cat-select').addEventListener('change', e => {
+  selCat = e.target.value;
+  updateColors();
+});
+
+document.querySelectorAll('.metric-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.metric-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    selMetric = btn.dataset.m;
+    updateColors();
+  });
+});
+
+document.getElementById('wfh').addEventListener('input', e => {
+  document.getElementById('wfh-lbl').textContent = `+${e.target.value}%`;
+  scheduleReload();
+});
+
+const bevSlider = document.getElementById('bev');
+const bevEnable = document.getElementById('bev-enable');
+const bevRowLbl = document.getElementById('bev-row-label');
+
+bevEnable.addEventListener('change', () => {
+  const on = bevEnable.checked;
+  bevSlider.disabled = !on;
+  bevRowLbl.style.color = on ? '#cbd5e1' : '#475569';
+  document.getElementById('bev-lbl').textContent =
+    on ? `${bevSlider.value}%` : 'Basis';
+  scheduleReload();
+});
+
+bevSlider.addEventListener('input', e => {
+  document.getElementById('bev-lbl').textContent = `${e.target.value}%`;
+  scheduleReload();
+});
+
+document.getElementById('ebus').addEventListener('input', e => {
+  document.getElementById('ebus-lbl').textContent = `${e.target.value}%`;
+  scheduleReload();
+});
+
+document.getElementById('green-elec').addEventListener('change', scheduleReload);
+
+/* ============================================================
+   Utilities
+   ============================================================ */
+function setLoading(show) {
+  document.getElementById('loading').classList.toggle('show', show);
+}
+
+function fmt(v, digits) {
+  if (v == null || !isFinite(v)) return '–';
+  if (digits != null) return parseFloat(v).toFixed(digits);
+  const a = Math.abs(v);
+  if (a === 0)     return '0';
+  if (a < 0.0001)  return v.toExponential(2);
+  if (a < 0.001)   return v.toFixed(6);
+  if (a < 0.1)     return v.toFixed(4);
+  if (a < 10)      return v.toFixed(3);
+  return v.toFixed(2);
+}
+
+function unitShort(unit) {
+  // strip the trailing /pkm or /p·km if present
+  return unit.replace(/\s*\/\s*p(km|·km)$/i, '');
+}
+
+function esc(s) {
+  return String(s ?? '')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ============================================================
+   Go
+   ============================================================ */
+init();
+</script>
+
+
+</body></html>

@@ -1,0 +1,625 @@
+mode,impact_category,unit,result_per_pkm,source_file
+auto_benzin,Impact category UUID,Impact category,,auto_benzin.xlsx
+auto_benzin,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,auto_benzin.xlsx
+auto_benzin,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,auto_benzin.xlsx
+auto_benzin,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,auto_benzin.xlsx
+auto_benzin,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,auto_benzin.xlsx
+auto_benzin,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,auto_benzin.xlsx
+auto_benzin,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,auto_benzin.xlsx
+auto_benzin,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,auto_benzin.xlsx
+auto_benzin,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,auto_benzin.xlsx
+auto_benzin,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,auto_benzin.xlsx
+auto_benzin,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,auto_benzin.xlsx
+auto_benzin,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,auto_benzin.xlsx
+auto_benzin,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,auto_benzin.xlsx
+auto_benzin,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,auto_benzin.xlsx
+auto_benzin,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,auto_benzin.xlsx
+auto_benzin,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,auto_benzin.xlsx
+auto_benzin,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,auto_benzin.xlsx
+auto_benzin,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,auto_benzin.xlsx
+auto_benzin,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,auto_benzin.xlsx
+auto_benzin,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,auto_benzin.xlsx
+auto_benzin,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,auto_benzin.xlsx
+auto_benzin,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,auto_benzin.xlsx
+auto_benzin,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,auto_benzin.xlsx
+auto_benzin,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,auto_benzin.xlsx
+auto_benzin,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,auto_benzin.xlsx
+auto_benzin,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,auto_benzin.xlsx
+auto_benzin_hybrid,Impact category UUID,Impact category,,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,auto_benzin_hybrid_conv.xlsx
+auto_benzin_hybrid_green,Impact category UUID,Impact category,,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,auto_benzin_hybrid_green.xlsx
+auto_benzin_hybrid_green,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,auto_benzin_hybrid_green.xlsx
+auto_diesel,Impact category UUID,Impact category,,auto_diesel.xlsx
+auto_diesel,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,auto_diesel.xlsx
+auto_diesel,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,auto_diesel.xlsx
+auto_diesel,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,auto_diesel.xlsx
+auto_diesel,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,auto_diesel.xlsx
+auto_diesel,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,auto_diesel.xlsx
+auto_diesel,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,auto_diesel.xlsx
+auto_diesel,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,auto_diesel.xlsx
+auto_diesel,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,auto_diesel.xlsx
+auto_diesel,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,auto_diesel.xlsx
+auto_diesel,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,auto_diesel.xlsx
+auto_diesel,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,auto_diesel.xlsx
+auto_diesel,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,auto_diesel.xlsx
+auto_diesel,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,auto_diesel.xlsx
+auto_diesel,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,auto_diesel.xlsx
+auto_diesel,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,auto_diesel.xlsx
+auto_diesel,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,auto_diesel.xlsx
+auto_diesel,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,auto_diesel.xlsx
+auto_diesel,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,auto_diesel.xlsx
+auto_diesel,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,auto_diesel.xlsx
+auto_diesel,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,auto_diesel.xlsx
+auto_diesel,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,auto_diesel.xlsx
+auto_diesel,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,auto_diesel.xlsx
+auto_diesel,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,auto_diesel.xlsx
+auto_diesel,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,auto_diesel.xlsx
+auto_diesel,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,auto_diesel.xlsx
+auto_mild_benzin,Impact category UUID,Impact category,,auto_benzin_mild.xlsx
+auto_mild_benzin,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,auto_benzin_mild.xlsx
+auto_mild_benzin,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,auto_benzin_mild.xlsx
+auto_mild_benzin,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,auto_benzin_mild.xlsx
+auto_mild_benzin,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,auto_benzin_mild.xlsx
+auto_mild_benzin,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,auto_benzin_mild.xlsx
+auto_mild_benzin,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,auto_benzin_mild.xlsx
+auto_mild_benzin,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,auto_benzin_mild.xlsx
+auto_mild_benzin,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,auto_benzin_mild.xlsx
+auto_mild_benzin,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,auto_benzin_mild.xlsx
+auto_mild_benzin,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,auto_benzin_mild.xlsx
+auto_mild_benzin,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,auto_benzin_mild.xlsx
+auto_mild_benzin,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,auto_benzin_mild.xlsx
+auto_mild_benzin,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,auto_benzin_mild.xlsx
+auto_mild_benzin,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,auto_benzin_mild.xlsx
+auto_mild_benzin,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,auto_benzin_mild.xlsx
+auto_mild_benzin,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,auto_benzin_mild.xlsx
+auto_mild_benzin,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,auto_benzin_mild.xlsx
+auto_mild_benzin,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,auto_benzin_mild.xlsx
+auto_mild_benzin,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,auto_benzin_mild.xlsx
+auto_mild_benzin,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,auto_benzin_mild.xlsx
+auto_mild_benzin,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,auto_benzin_mild.xlsx
+auto_mild_benzin,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,auto_benzin_mild.xlsx
+auto_mild_benzin,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,auto_benzin_mild.xlsx
+auto_mild_benzin,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,auto_benzin_mild.xlsx
+auto_mild_benzin,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,auto_benzin_mild.xlsx
+auto_strom,Impact category UUID,Impact category,,auto_strom_conv.xlsx
+auto_strom,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,auto_strom_conv.xlsx
+auto_strom,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,auto_strom_conv.xlsx
+auto_strom,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,auto_strom_conv.xlsx
+auto_strom,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,auto_strom_conv.xlsx
+auto_strom,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,auto_strom_conv.xlsx
+auto_strom,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,auto_strom_conv.xlsx
+auto_strom,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,auto_strom_conv.xlsx
+auto_strom,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,auto_strom_conv.xlsx
+auto_strom,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,auto_strom_conv.xlsx
+auto_strom,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,auto_strom_conv.xlsx
+auto_strom,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,auto_strom_conv.xlsx
+auto_strom,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,auto_strom_conv.xlsx
+auto_strom,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,auto_strom_conv.xlsx
+auto_strom,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,auto_strom_conv.xlsx
+auto_strom,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,auto_strom_conv.xlsx
+auto_strom,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,auto_strom_conv.xlsx
+auto_strom,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,auto_strom_conv.xlsx
+auto_strom,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,auto_strom_conv.xlsx
+auto_strom,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,auto_strom_conv.xlsx
+auto_strom,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,auto_strom_conv.xlsx
+auto_strom,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,auto_strom_conv.xlsx
+auto_strom,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,auto_strom_conv.xlsx
+auto_strom,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,auto_strom_conv.xlsx
+auto_strom,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,auto_strom_conv.xlsx
+auto_strom,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,auto_strom_conv.xlsx
+auto_strom_green,Impact category UUID,Impact category,,auto_strom_green.xlsx
+auto_strom_green,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,auto_strom_green.xlsx
+auto_strom_green,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,auto_strom_green.xlsx
+auto_strom_green,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,auto_strom_green.xlsx
+auto_strom_green,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,auto_strom_green.xlsx
+auto_strom_green,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,auto_strom_green.xlsx
+auto_strom_green,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,auto_strom_green.xlsx
+auto_strom_green,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,auto_strom_green.xlsx
+auto_strom_green,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,auto_strom_green.xlsx
+auto_strom_green,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,auto_strom_green.xlsx
+auto_strom_green,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,auto_strom_green.xlsx
+auto_strom_green,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,auto_strom_green.xlsx
+auto_strom_green,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,auto_strom_green.xlsx
+auto_strom_green,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,auto_strom_green.xlsx
+auto_strom_green,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,auto_strom_green.xlsx
+auto_strom_green,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,auto_strom_green.xlsx
+auto_strom_green,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,auto_strom_green.xlsx
+auto_strom_green,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,auto_strom_green.xlsx
+auto_strom_green,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,auto_strom_green.xlsx
+auto_strom_green,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,auto_strom_green.xlsx
+auto_strom_green,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,auto_strom_green.xlsx
+auto_strom_green,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,auto_strom_green.xlsx
+auto_strom_green,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,auto_strom_green.xlsx
+auto_strom_green,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,auto_strom_green.xlsx
+auto_strom_green,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,auto_strom_green.xlsx
+auto_strom_green,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,auto_strom_green.xlsx
+bicycle,Impact category UUID,Impact category,,bicycle.xlsx
+bicycle,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,bicycle.xlsx
+bicycle,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,bicycle.xlsx
+bicycle,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,bicycle.xlsx
+bicycle,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,bicycle.xlsx
+bicycle,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,bicycle.xlsx
+bicycle,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,bicycle.xlsx
+bicycle,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,bicycle.xlsx
+bicycle,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,bicycle.xlsx
+bicycle,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,bicycle.xlsx
+bicycle,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,bicycle.xlsx
+bicycle,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,bicycle.xlsx
+bicycle,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,bicycle.xlsx
+bicycle,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,bicycle.xlsx
+bicycle,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,bicycle.xlsx
+bicycle,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,bicycle.xlsx
+bicycle,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,bicycle.xlsx
+bicycle,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,bicycle.xlsx
+bicycle,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,bicycle.xlsx
+bicycle,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,bicycle.xlsx
+bicycle,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,bicycle.xlsx
+bicycle,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,bicycle.xlsx
+bicycle,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,bicycle.xlsx
+bicycle,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,bicycle.xlsx
+bicycle,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,bicycle.xlsx
+bicycle,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,bicycle.xlsx
+bicycle_strom,Impact category UUID,Impact category,,bicycle_strom_conv.xlsx
+bicycle_strom,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,bicycle_strom_conv.xlsx
+bicycle_strom,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,bicycle_strom_conv.xlsx
+bicycle_strom,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,bicycle_strom_conv.xlsx
+bicycle_strom,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,bicycle_strom_conv.xlsx
+bicycle_strom,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,bicycle_strom_conv.xlsx
+bicycle_strom,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,bicycle_strom_conv.xlsx
+bicycle_strom,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,bicycle_strom_conv.xlsx
+bicycle_strom,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,bicycle_strom_conv.xlsx
+bicycle_strom,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,bicycle_strom_conv.xlsx
+bicycle_strom,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,bicycle_strom_conv.xlsx
+bicycle_strom,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,bicycle_strom_conv.xlsx
+bicycle_strom,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,bicycle_strom_conv.xlsx
+bicycle_strom,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,bicycle_strom_conv.xlsx
+bicycle_strom,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,bicycle_strom_conv.xlsx
+bicycle_strom,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,bicycle_strom_conv.xlsx
+bicycle_strom,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,bicycle_strom_conv.xlsx
+bicycle_strom,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,bicycle_strom_conv.xlsx
+bicycle_strom,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,bicycle_strom_conv.xlsx
+bicycle_strom,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,bicycle_strom_conv.xlsx
+bicycle_strom,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,bicycle_strom_conv.xlsx
+bicycle_strom,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,bicycle_strom_conv.xlsx
+bicycle_strom,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,bicycle_strom_conv.xlsx
+bicycle_strom,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,bicycle_strom_conv.xlsx
+bicycle_strom,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,bicycle_strom_conv.xlsx
+bicycle_strom,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,bicycle_strom_conv.xlsx
+bicycle_strom_green,Impact category UUID,Impact category,,bicycle_strom_green.xlsx
+bicycle_strom_green,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,bicycle_strom_green.xlsx
+bicycle_strom_green,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,bicycle_strom_green.xlsx
+bicycle_strom_green,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,bicycle_strom_green.xlsx
+bicycle_strom_green,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,bicycle_strom_green.xlsx
+bicycle_strom_green,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,bicycle_strom_green.xlsx
+bicycle_strom_green,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,bicycle_strom_green.xlsx
+bicycle_strom_green,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,bicycle_strom_green.xlsx
+bicycle_strom_green,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,bicycle_strom_green.xlsx
+bicycle_strom_green,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,bicycle_strom_green.xlsx
+bicycle_strom_green,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,bicycle_strom_green.xlsx
+bicycle_strom_green,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,bicycle_strom_green.xlsx
+bicycle_strom_green,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,bicycle_strom_green.xlsx
+bicycle_strom_green,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,bicycle_strom_green.xlsx
+bicycle_strom_green,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,bicycle_strom_green.xlsx
+bicycle_strom_green,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,bicycle_strom_green.xlsx
+bicycle_strom_green,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,bicycle_strom_green.xlsx
+bicycle_strom_green,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,bicycle_strom_green.xlsx
+bicycle_strom_green,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,bicycle_strom_green.xlsx
+bicycle_strom_green,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,bicycle_strom_green.xlsx
+bicycle_strom_green,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,bicycle_strom_green.xlsx
+bicycle_strom_green,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,bicycle_strom_green.xlsx
+bicycle_strom_green,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,bicycle_strom_green.xlsx
+bicycle_strom_green,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,bicycle_strom_green.xlsx
+bicycle_strom_green,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,bicycle_strom_green.xlsx
+bicycle_strom_green,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,bicycle_strom_green.xlsx
+bus_diesel_2010,Impact category UUID,Impact category,,bus_diesel_2010.xlsx
+bus_diesel_2010,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,bus_diesel_2010.xlsx
+bus_diesel_2010,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,bus_diesel_2010.xlsx
+bus_diesel_2010,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,bus_diesel_2010.xlsx
+bus_diesel_2010,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,bus_diesel_2010.xlsx
+bus_diesel_2010,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,bus_diesel_2010.xlsx
+bus_diesel_2010,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,bus_diesel_2010.xlsx
+bus_diesel_2010,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,bus_diesel_2010.xlsx
+bus_diesel_2010,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,bus_diesel_2010.xlsx
+bus_diesel_2010,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,bus_diesel_2010.xlsx
+bus_diesel_2010,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,bus_diesel_2010.xlsx
+bus_diesel_2010,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,bus_diesel_2010.xlsx
+bus_diesel_2010,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,bus_diesel_2010.xlsx
+bus_diesel_2010,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,bus_diesel_2010.xlsx
+bus_diesel_2010,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,bus_diesel_2010.xlsx
+bus_diesel_2010,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,bus_diesel_2010.xlsx
+bus_diesel_2010,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,bus_diesel_2010.xlsx
+bus_diesel_2010,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,bus_diesel_2010.xlsx
+bus_diesel_2010,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,bus_diesel_2010.xlsx
+bus_diesel_2010,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,bus_diesel_2010.xlsx
+bus_diesel_2010,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,bus_diesel_2010.xlsx
+bus_diesel_2010,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,bus_diesel_2010.xlsx
+bus_diesel_2010,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,bus_diesel_2010.xlsx
+bus_diesel_2010,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,bus_diesel_2010.xlsx
+bus_diesel_2010,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,bus_diesel_2010.xlsx
+bus_diesel_2010,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,bus_diesel_2010.xlsx
+bus_diesel_2020,Impact category UUID,Impact category,,bus_diesel_2020.xlsx
+bus_diesel_2020,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,bus_diesel_2020.xlsx
+bus_diesel_2020,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,bus_diesel_2020.xlsx
+bus_diesel_2020,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,bus_diesel_2020.xlsx
+bus_diesel_2020,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,bus_diesel_2020.xlsx
+bus_diesel_2020,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,bus_diesel_2020.xlsx
+bus_diesel_2020,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,bus_diesel_2020.xlsx
+bus_diesel_2020,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,bus_diesel_2020.xlsx
+bus_diesel_2020,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,bus_diesel_2020.xlsx
+bus_diesel_2020,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,bus_diesel_2020.xlsx
+bus_diesel_2020,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,bus_diesel_2020.xlsx
+bus_diesel_2020,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,bus_diesel_2020.xlsx
+bus_diesel_2020,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,bus_diesel_2020.xlsx
+bus_diesel_2020,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,bus_diesel_2020.xlsx
+bus_diesel_2020,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,bus_diesel_2020.xlsx
+bus_diesel_2020,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,bus_diesel_2020.xlsx
+bus_diesel_2020,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,bus_diesel_2020.xlsx
+bus_diesel_2020,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,bus_diesel_2020.xlsx
+bus_diesel_2020,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,bus_diesel_2020.xlsx
+bus_diesel_2020,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,bus_diesel_2020.xlsx
+bus_diesel_2020,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,bus_diesel_2020.xlsx
+bus_diesel_2020,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,bus_diesel_2020.xlsx
+bus_diesel_2020,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,bus_diesel_2020.xlsx
+bus_diesel_2020,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,bus_diesel_2020.xlsx
+bus_diesel_2020,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,bus_diesel_2020.xlsx
+bus_diesel_2020,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,bus_diesel_2020.xlsx
+bus_strom_2020,Impact category UUID,Impact category,,bus_strom_conv_2020.xlsx
+bus_strom_2020,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,bus_strom_conv_2020.xlsx
+bus_strom_2020,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,bus_strom_conv_2020.xlsx
+bus_strom_2020,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,bus_strom_conv_2020.xlsx
+bus_strom_2020,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,bus_strom_conv_2020.xlsx
+bus_strom_2020,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,bus_strom_conv_2020.xlsx
+bus_strom_2020,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,bus_strom_conv_2020.xlsx
+bus_strom_2020,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,bus_strom_conv_2020.xlsx
+bus_strom_2020,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,bus_strom_conv_2020.xlsx
+bus_strom_2020,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,bus_strom_conv_2020.xlsx
+bus_strom_2020,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,bus_strom_conv_2020.xlsx
+bus_strom_2020,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,bus_strom_conv_2020.xlsx
+bus_strom_2020,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,bus_strom_conv_2020.xlsx
+bus_strom_2020,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,bus_strom_conv_2020.xlsx
+bus_strom_2020,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,bus_strom_conv_2020.xlsx
+bus_strom_2020,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,bus_strom_conv_2020.xlsx
+bus_strom_2020,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,bus_strom_conv_2020.xlsx
+bus_strom_2020,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,bus_strom_conv_2020.xlsx
+bus_strom_2020,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,bus_strom_conv_2020.xlsx
+bus_strom_2020,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,bus_strom_conv_2020.xlsx
+bus_strom_2020,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,bus_strom_conv_2020.xlsx
+bus_strom_2020,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,bus_strom_conv_2020.xlsx
+bus_strom_2020,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,bus_strom_conv_2020.xlsx
+bus_strom_2020,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,bus_strom_conv_2020.xlsx
+bus_strom_2020,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,bus_strom_conv_2020.xlsx
+bus_strom_2020,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,bus_strom_conv_2020.xlsx
+bus_strom_green_2020,Impact category UUID,Impact category,,bus_strom_green_2020.xlsx
+bus_strom_green_2020,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,bus_strom_green_2020.xlsx
+bus_strom_green_2020,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,bus_strom_green_2020.xlsx
+bus_strom_green_2020,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,bus_strom_green_2020.xlsx
+bus_strom_green_2020,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,bus_strom_green_2020.xlsx
+bus_strom_green_2020,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,bus_strom_green_2020.xlsx
+bus_strom_green_2020,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,bus_strom_green_2020.xlsx
+bus_strom_green_2020,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,bus_strom_green_2020.xlsx
+bus_strom_green_2020,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,bus_strom_green_2020.xlsx
+bus_strom_green_2020,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,bus_strom_green_2020.xlsx
+bus_strom_green_2020,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,bus_strom_green_2020.xlsx
+bus_strom_green_2020,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,bus_strom_green_2020.xlsx
+bus_strom_green_2020,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,bus_strom_green_2020.xlsx
+bus_strom_green_2020,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,bus_strom_green_2020.xlsx
+bus_strom_green_2020,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,bus_strom_green_2020.xlsx
+bus_strom_green_2020,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,bus_strom_green_2020.xlsx
+bus_strom_green_2020,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,bus_strom_green_2020.xlsx
+bus_strom_green_2020,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,bus_strom_green_2020.xlsx
+bus_strom_green_2020,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,bus_strom_green_2020.xlsx
+bus_strom_green_2020,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,bus_strom_green_2020.xlsx
+bus_strom_green_2020,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,bus_strom_green_2020.xlsx
+bus_strom_green_2020,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,bus_strom_green_2020.xlsx
+bus_strom_green_2020,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,bus_strom_green_2020.xlsx
+bus_strom_green_2020,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,bus_strom_green_2020.xlsx
+bus_strom_green_2020,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,bus_strom_green_2020.xlsx
+bus_strom_green_2020,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,bus_strom_green_2020.xlsx
+longbus_diesel_2010,Impact category UUID,Impact category,,longbus_diesel_2010.xlsx
+longbus_diesel_2010,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,longbus_diesel_2010.xlsx
+longbus_diesel_2010,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,longbus_diesel_2010.xlsx
+longbus_diesel_2010,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,longbus_diesel_2010.xlsx
+longbus_diesel_2010,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,longbus_diesel_2010.xlsx
+longbus_diesel_2010,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,longbus_diesel_2010.xlsx
+longbus_diesel_2010,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,longbus_diesel_2010.xlsx
+longbus_diesel_2010,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,longbus_diesel_2010.xlsx
+longbus_diesel_2010,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,longbus_diesel_2010.xlsx
+longbus_diesel_2010,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,longbus_diesel_2010.xlsx
+longbus_diesel_2010,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,longbus_diesel_2010.xlsx
+longbus_diesel_2010,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,longbus_diesel_2010.xlsx
+longbus_diesel_2010,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,longbus_diesel_2010.xlsx
+longbus_diesel_2010,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,longbus_diesel_2010.xlsx
+longbus_diesel_2010,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,longbus_diesel_2010.xlsx
+longbus_diesel_2010,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,longbus_diesel_2010.xlsx
+longbus_diesel_2010,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,longbus_diesel_2010.xlsx
+longbus_diesel_2010,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,longbus_diesel_2010.xlsx
+longbus_diesel_2010,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,longbus_diesel_2010.xlsx
+longbus_diesel_2010,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,longbus_diesel_2010.xlsx
+longbus_diesel_2010,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,longbus_diesel_2010.xlsx
+longbus_diesel_2010,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,longbus_diesel_2010.xlsx
+longbus_diesel_2010,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,longbus_diesel_2010.xlsx
+longbus_diesel_2010,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,longbus_diesel_2010.xlsx
+longbus_diesel_2010,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,longbus_diesel_2010.xlsx
+longbus_diesel_2010,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,longbus_diesel_2010.xlsx
+longbus_diesel_2020,Impact category UUID,Impact category,,longbus_diesel_2020.xlsx
+longbus_diesel_2020,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,longbus_diesel_2020.xlsx
+longbus_diesel_2020,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,longbus_diesel_2020.xlsx
+longbus_diesel_2020,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,longbus_diesel_2020.xlsx
+longbus_diesel_2020,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,longbus_diesel_2020.xlsx
+longbus_diesel_2020,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,longbus_diesel_2020.xlsx
+longbus_diesel_2020,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,longbus_diesel_2020.xlsx
+longbus_diesel_2020,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,longbus_diesel_2020.xlsx
+longbus_diesel_2020,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,longbus_diesel_2020.xlsx
+longbus_diesel_2020,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,longbus_diesel_2020.xlsx
+longbus_diesel_2020,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,longbus_diesel_2020.xlsx
+longbus_diesel_2020,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,longbus_diesel_2020.xlsx
+longbus_diesel_2020,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,longbus_diesel_2020.xlsx
+longbus_diesel_2020,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,longbus_diesel_2020.xlsx
+longbus_diesel_2020,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,longbus_diesel_2020.xlsx
+longbus_diesel_2020,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,longbus_diesel_2020.xlsx
+longbus_diesel_2020,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,longbus_diesel_2020.xlsx
+longbus_diesel_2020,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,longbus_diesel_2020.xlsx
+longbus_diesel_2020,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,longbus_diesel_2020.xlsx
+longbus_diesel_2020,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,longbus_diesel_2020.xlsx
+longbus_diesel_2020,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,longbus_diesel_2020.xlsx
+longbus_diesel_2020,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,longbus_diesel_2020.xlsx
+longbus_diesel_2020,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,longbus_diesel_2020.xlsx
+longbus_diesel_2020,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,longbus_diesel_2020.xlsx
+longbus_diesel_2020,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,longbus_diesel_2020.xlsx
+longbus_diesel_2020,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,longbus_diesel_2020.xlsx
+longbus_strom_2020,Impact category UUID,Impact category,,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,longbus_strom_conv_2020.xlsx
+longbus_strom_2020,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,longbus_strom_conv_2020.xlsx
+longbus_strom_green_2020,Impact category UUID,Impact category,,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,longbus_strom_green_2020.xlsx
+longbus_strom_green_2020,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,longbus_strom_green_2020.xlsx
+sbahn,Impact category UUID,Impact category,,sbahn_conv.xlsx
+sbahn,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,sbahn_conv.xlsx
+sbahn,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,sbahn_conv.xlsx
+sbahn,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,sbahn_conv.xlsx
+sbahn,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,sbahn_conv.xlsx
+sbahn,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,sbahn_conv.xlsx
+sbahn,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,sbahn_conv.xlsx
+sbahn,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,sbahn_conv.xlsx
+sbahn,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,sbahn_conv.xlsx
+sbahn,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,sbahn_conv.xlsx
+sbahn,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,sbahn_conv.xlsx
+sbahn,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,sbahn_conv.xlsx
+sbahn,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,sbahn_conv.xlsx
+sbahn,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,sbahn_conv.xlsx
+sbahn,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,sbahn_conv.xlsx
+sbahn,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,sbahn_conv.xlsx
+sbahn,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,sbahn_conv.xlsx
+sbahn,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,sbahn_conv.xlsx
+sbahn,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,sbahn_conv.xlsx
+sbahn,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,sbahn_conv.xlsx
+sbahn,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,sbahn_conv.xlsx
+sbahn,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,sbahn_conv.xlsx
+sbahn,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,sbahn_conv.xlsx
+sbahn,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,sbahn_conv.xlsx
+sbahn,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,sbahn_conv.xlsx
+sbahn,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,sbahn_conv.xlsx
+sbahn,Impact category UUID,Impact category,,sbahn_gruen.xlsx
+sbahn,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,sbahn_gruen.xlsx
+sbahn,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,sbahn_gruen.xlsx
+sbahn,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,sbahn_gruen.xlsx
+sbahn,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,sbahn_gruen.xlsx
+sbahn,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,sbahn_gruen.xlsx
+sbahn,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,sbahn_gruen.xlsx
+sbahn,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,sbahn_gruen.xlsx
+sbahn,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,sbahn_gruen.xlsx
+sbahn,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,sbahn_gruen.xlsx
+sbahn,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,sbahn_gruen.xlsx
+sbahn,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,sbahn_gruen.xlsx
+sbahn,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,sbahn_gruen.xlsx
+sbahn,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,sbahn_gruen.xlsx
+sbahn,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,sbahn_gruen.xlsx
+sbahn,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,sbahn_gruen.xlsx
+sbahn,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,sbahn_gruen.xlsx
+sbahn,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,sbahn_gruen.xlsx
+sbahn,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,sbahn_gruen.xlsx
+sbahn,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,sbahn_gruen.xlsx
+sbahn,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,sbahn_gruen.xlsx
+sbahn,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,sbahn_gruen.xlsx
+sbahn,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,sbahn_gruen.xlsx
+sbahn,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,sbahn_gruen.xlsx
+sbahn,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,sbahn_gruen.xlsx
+sbahn,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,sbahn_gruen.xlsx
+tram_strom,Impact category UUID,Impact category,,tram_strom_conv.xlsx
+tram_strom,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,tram_strom_conv.xlsx
+tram_strom,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,tram_strom_conv.xlsx
+tram_strom,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,tram_strom_conv.xlsx
+tram_strom,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,tram_strom_conv.xlsx
+tram_strom,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,tram_strom_conv.xlsx
+tram_strom,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,tram_strom_conv.xlsx
+tram_strom,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,tram_strom_conv.xlsx
+tram_strom,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,tram_strom_conv.xlsx
+tram_strom,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,tram_strom_conv.xlsx
+tram_strom,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,tram_strom_conv.xlsx
+tram_strom,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,tram_strom_conv.xlsx
+tram_strom,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,tram_strom_conv.xlsx
+tram_strom,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,tram_strom_conv.xlsx
+tram_strom,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,tram_strom_conv.xlsx
+tram_strom,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,tram_strom_conv.xlsx
+tram_strom,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,tram_strom_conv.xlsx
+tram_strom,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,tram_strom_conv.xlsx
+tram_strom,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,tram_strom_conv.xlsx
+tram_strom,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,tram_strom_conv.xlsx
+tram_strom,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,tram_strom_conv.xlsx
+tram_strom,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,tram_strom_conv.xlsx
+tram_strom,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,tram_strom_conv.xlsx
+tram_strom,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,tram_strom_conv.xlsx
+tram_strom,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,tram_strom_conv.xlsx
+tram_strom,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,tram_strom_conv.xlsx
+tram_strom_green,Impact category UUID,Impact category,,tram_strom_green.xlsx
+tram_strom_green,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,tram_strom_green.xlsx
+tram_strom_green,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,tram_strom_green.xlsx
+tram_strom_green,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,tram_strom_green.xlsx
+tram_strom_green,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,tram_strom_green.xlsx
+tram_strom_green,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,tram_strom_green.xlsx
+tram_strom_green,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,tram_strom_green.xlsx
+tram_strom_green,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,tram_strom_green.xlsx
+tram_strom_green,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,tram_strom_green.xlsx
+tram_strom_green,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,tram_strom_green.xlsx
+tram_strom_green,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,tram_strom_green.xlsx
+tram_strom_green,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,tram_strom_green.xlsx
+tram_strom_green,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,tram_strom_green.xlsx
+tram_strom_green,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,tram_strom_green.xlsx
+tram_strom_green,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,tram_strom_green.xlsx
+tram_strom_green,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,tram_strom_green.xlsx
+tram_strom_green,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,tram_strom_green.xlsx
+tram_strom_green,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,tram_strom_green.xlsx
+tram_strom_green,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,tram_strom_green.xlsx
+tram_strom_green,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,tram_strom_green.xlsx
+tram_strom_green,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,tram_strom_green.xlsx
+tram_strom_green,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,tram_strom_green.xlsx
+tram_strom_green,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,tram_strom_green.xlsx
+tram_strom_green,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,tram_strom_green.xlsx
+tram_strom_green,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,tram_strom_green.xlsx
+tram_strom_green,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,tram_strom_green.xlsx
+ubahn,Impact category UUID,Impact category,,ubahn_conv.xlsx
+ubahn,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,ubahn_conv.xlsx
+ubahn,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,ubahn_conv.xlsx
+ubahn,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,ubahn_conv.xlsx
+ubahn,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,ubahn_conv.xlsx
+ubahn,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,ubahn_conv.xlsx
+ubahn,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,ubahn_conv.xlsx
+ubahn,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,ubahn_conv.xlsx
+ubahn,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,ubahn_conv.xlsx
+ubahn,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,ubahn_conv.xlsx
+ubahn,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,ubahn_conv.xlsx
+ubahn,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,ubahn_conv.xlsx
+ubahn,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,ubahn_conv.xlsx
+ubahn,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,ubahn_conv.xlsx
+ubahn,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,ubahn_conv.xlsx
+ubahn,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,ubahn_conv.xlsx
+ubahn,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,ubahn_conv.xlsx
+ubahn,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,ubahn_conv.xlsx
+ubahn,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,ubahn_conv.xlsx
+ubahn,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,ubahn_conv.xlsx
+ubahn,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,ubahn_conv.xlsx
+ubahn,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,ubahn_conv.xlsx
+ubahn,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,ubahn_conv.xlsx
+ubahn,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,ubahn_conv.xlsx
+ubahn,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,ubahn_conv.xlsx
+ubahn,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,ubahn_conv.xlsx
+ubahn_green,Impact category UUID,Impact category,,ubahn_green.xlsx
+ubahn_green,b5c611c6-def3-11e6-bf01-fe55135034f3,Acidification,,ubahn_green.xlsx
+ubahn_green,6209b35f-9447-40b5-b68c-a1099e3674a0,Climate change,,ubahn_green.xlsx
+ubahn_green,706261af-a357-4cc0-a50a-f3033fcbd556,Climate change (biogenic),,ubahn_green.xlsx
+ubahn_green,7fce5b3a-66b8-4ce1-91e8-a925aee1f186,Climate change (fossil),,ubahn_green.xlsx
+ubahn_green,14af9ca7-aa1d-4832-b1d9-ab05a06dcb12,Climate change (land use),,ubahn_green.xlsx
+ubahn_green,05316e7a-b254-4bea-9cf0-6bf33eb5c630,Ecotoxicity freshwater,,ubahn_green.xlsx
+ubahn_green,dacd48b5-4da5-49aa-aff4-cd5f5495c037,Ecotoxicity freshwater (inorganics),,ubahn_green.xlsx
+ubahn_green,fd530f00-9325-424a-92ef-aaac67922fd9,Ecotoxicity freshwater (organics),,ubahn_green.xlsx
+ubahn_green,b53ec18f-7377-4ad3-86eb-cc3f4f276b2b,Eutrophication freshwater,,ubahn_green.xlsx
+ubahn_green,b5c619fa-def3-11e6-bf01-fe55135034f3,Eutrophication marine,,ubahn_green.xlsx
+ubahn_green,b5c614d2-def3-11e6-bf01-fe55135034f3,Eutrophication terrestrial,,ubahn_green.xlsx
+ubahn_green,2299222a-bbd8-474f-9d4f-4dd1f18aea7c,Human toxicity cancer,,ubahn_green.xlsx
+ubahn_green,01500b74-7ffb-463e-9bd4-72f17c2263ff,Human toxicity cancer (inorganics),,ubahn_green.xlsx
+ubahn_green,503699e0-eca9-4089-8bf8-e0f49c93e578,Human toxicity cancer (organics),,ubahn_green.xlsx
+ubahn_green,7cfdcfcf-b222-4b26-888a-a55f9fbf7ac8,Human toxicity non-cancer,,ubahn_green.xlsx
+ubahn_green,9d1d43a2-e1aa-4c16-acd4-3dd8a6a2fb85,Human toxicity non-cancer (inorganics),,ubahn_green.xlsx
+ubahn_green,8c3141e9-1f15-43b5-bff2-182e49893a46,Human toxicity non-cancer (organics),,ubahn_green.xlsx
+ubahn_green,b5c632be-def3-11e6-bf01-fe55135034f3,Ionising radiation (human health),,ubahn_green.xlsx
+ubahn_green,b2ad6890-c78d-11e6-9d9d-cec0c932ce01,Land use,,ubahn_green.xlsx
+ubahn_green,b5c629d6-def3-11e6-bf01-fe55135034f3,Ozone depletion,,ubahn_green.xlsx
+ubahn_green,b5c602c6-def3-11e6-bf01-fe55135034f3,Particulate matter,,ubahn_green.xlsx
+ubahn_green,b5c610fe-def3-11e6-bf01-fe55135034f3,Photochemical ozone formation (human health),,ubahn_green.xlsx
+ubahn_green,b2ad6110-c78d-11e6-9d9d-cec0c932ce01,Resource use fossils,,ubahn_green.xlsx
+ubahn_green,b2ad6494-c78d-11e6-9d9d-cec0c932ce01,Resource use minerals and metals,,ubahn_green.xlsx
+ubahn_green,b2ad66ce-c78d-11e6-9d9d-cec0c932ce01,Water use,,ubahn_green.xlsx
