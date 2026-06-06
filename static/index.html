@@ -185,12 +185,13 @@
       padding: 5px 8px; text-align: right;
       border-bottom: 1px solid #1a2744;
       font-variant-numeric: tabular-nums;
+      white-space: nowrap;
     }
     table.mode-tbl tbody td:first-child { text-align: left; }
     table.mode-tbl tbody tr:last-child td { border-bottom: none; }
     .mode-tbl .total-row td { border-top: 1px solid #334155; font-weight: 700; color: #e2e8f0; }
-	.mode-tbl .sub-row td { font-size: .68rem; color: #94a3b8; padding-top: 2px; padding-bottom: 2px; }
-    .mode-tbl .sub-row td:first-child { padding-left: 18px; }
+	.mode-tbl .sub-row td { font-size: .68rem; color: #cbd5e1; padding-top: 2px; padding-bottom: 2px; }
+    .mode-tbl .sub-row td:first-child { padding-left: 13px; }
     .mode-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 5px; }
     .mode-dot.sub-dot { width: 6px; height: 6px; }
     .pct-bar-cell { width: 60px; }
@@ -654,10 +655,13 @@ function updateCityView() {
   document.getElementById('city-year').textContent = fmt(cityAvg(`per_year_${selCat}`));
 
   // city mode table (averaged across all districts)
+  const cTrip = cityAvg(`per_trip_${selCat}`);
+  const cMt   = cityAvg(`${selMetric}_${selCat}`);
   renderModeTable(
     document.getElementById('city-mode-tbody'),
     cityModes(),
-    cityAvg(`per_trip_${selCat}`)
+    cMt,
+    cTrip ? cMt / cTrip : 1
   );
 
   // average modal split bar
@@ -773,7 +777,7 @@ function deselectDistrict() {
 /* ============================================================
    Mode table (shared by city + district views)
    ============================================================ */
-function renderModeTable(tbody, modes, totalImpact) {
+function renderModeTable(tbody, modes, totalImpact, scale = 1) {
   if (!modes) {
     tbody.innerHTML = '<tr><td colspan="5" style="color:#475569;padding:8px">Keine Daten</td></tr>';
     return;
@@ -791,7 +795,7 @@ function renderModeTable(tbody, modes, totalImpact) {
       <tr>
         <td><span class="mode-dot" style="background:${color}"></span>${label}</td>
         <td>${(m.trip_share || 0).toFixed(0)}%</td>
-        <td>${fmt(m.per_trip)}</td>
+        <td>${fmt((m.per_trip || 0) * scale)}</td>
         <td>${(m.pct || 0).toFixed(0)}%</td>
         <td class="pct-bar-cell"><div class="pct-bar-wrap"><div class="pct-bar-fill" style="width:${maxPct>0?(m.pct||0)/maxPct*100:0}%;background:${color}"></div></div></td>
       </tr>
@@ -817,9 +821,9 @@ function renderModeTable(tbody, modes, totalImpact) {
         rows.push(`
           <tr class="sub-row">
             <td><span class="mode-dot sub-dot" style="background:${sm.color}"></span>${sm.label}</td>
-            <td style="color:#94a3b8">${(s.share || 0).toFixed(0)}%</td>
-            <td>${fmt(s.per_trip)}</td>
-            <td>${p.toFixed(0)}%</td>
+            <td>${(s.share || 0).toFixed(0)}% <span style="color:#94a3b8">(${((s.share||0)*(m.trip_share||0)/100).toFixed(0)}%)</span></td>
+            <td>${fmt((s.per_trip || 0) * scale)}</td>
+            <td>${p.toFixed(0)}% <span style="color:#94a3b8">(${((m.pct||0)*p/100).toFixed(0)}%)</span></td>
             <td class="pct-bar-cell"><div class="pct-bar-wrap"><div class="pct-bar-fill" style="width:${maxSub>0?p/maxSub*100:0}%;background:${sm.color};opacity:.85"></div></div></td>
           </tr>
         `);
@@ -863,7 +867,9 @@ function renderDistrictPanel(props) {
   document.getElementById('imp-year').textContent = fmt(catData?.per_year  ?? props[`per_year_${selCat}`]);
 
   // ── Mode table ─────────────────────────────────────────────────────────────
-  renderModeTable(document.getElementById('mode-tbody'), catData?.modes, catData?.per_trip);
+  const mt = catData?.[metricMap[selMetric]] ?? catData?.per_trip;
+  renderModeTable(document.getElementById('mode-tbody'), catData?.modes, mt,
+                  catData?.per_trip ? mt / catData.per_trip : 1);
 
   // ── Stats grid ─────────────────────────────────────────────────────────────
   const wfhDelta    = scenarioParams().wfh_delta;
