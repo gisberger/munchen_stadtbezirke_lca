@@ -821,9 +821,9 @@ function renderModeTable(tbody, modes, totalImpact, scale = 1) {
         rows.push(`
           <tr class="sub-row">
             <td><span class="mode-dot sub-dot" style="background:${sm.color}"></span>${sm.label}</td>
-            <td>${(s.share || 0).toFixed(0)}% <span style="color:#94a3b8">(${((s.share||0)*(m.trip_share||0)/100).toFixed(0)}%)</span></td>
+            <td>${(s.share || 0).toFixed(0)}% <span style="color:#cbd5e1">(${((s.share||0)*(m.trip_share||0)/100).toFixed(0)}%)</span></td>
             <td>${fmt((s.per_trip || 0) * scale)}</td>
-            <td>${p.toFixed(0)}% <span style="color:#94a3b8">(${((m.pct||0)*p/100).toFixed(0)}%)</span></td>
+            <td>${p.toFixed(0)}% <span style="color:#cbd5e1">(${((m.pct||0)*p/100).toFixed(0)}%)</span></td>
             <td class="pct-bar-cell"><div class="pct-bar-wrap"><div class="pct-bar-fill" style="width:${maxSub>0?p/maxSub*100:0}%;background:${sm.color};opacity:.85"></div></div></td>
           </tr>
         `);
