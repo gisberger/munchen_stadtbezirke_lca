@@ -6,6 +6,7 @@
   <title>Mobilitäts-LCA München</title>
   <script src="https://unpkg.com/maplibre-gl@4.1.3/dist/maplibre-gl.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.1.3/dist/maplibre-gl.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -14,7 +15,7 @@
       background: #0f172a; color: #e2e8f0; overflow: hidden;
     }
 
-    /* ── Left sidebar (controls) ── */
+    /* ── Left sidebar ── */
     #sidebar {
       width: 270px; flex-shrink: 0;
       display: flex; flex-direction: column; gap: 8px;
@@ -25,9 +26,7 @@
     .sb-title { font-size: .95rem; font-weight: 700; color: #7dd3fc; }
     .sb-sub   { font-size: .68rem; color: #475569; margin-top: 1px; }
 
-    .card {
-      background: #1e293b; border-radius: 7px; padding: 11px;
-    }
+    .card { background: #1e293b; border-radius: 7px; padding: 11px; }
     .card-hdr {
       font-size: .6rem; text-transform: uppercase;
       letter-spacing: .1em; color: #64748b;
@@ -54,49 +53,37 @@
       width: 100%; height: 14px; background: transparent;
       cursor: pointer; margin-top: 2px;
     }
-    input[type=range]::-webkit-slider-runnable-track {
-      height: 4px; border-radius: 2px; background: #334155;
-    }
-    input[type=range]::-moz-range-track {
-      height: 4px; border-radius: 2px; background: #334155;
-    }
+    input[type=range]::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: #334155; }
+    input[type=range]::-moz-range-track              { height: 4px; border-radius: 2px; background: #334155; }
     input[type=range]::-webkit-slider-thumb {
       -webkit-appearance: none; appearance: none;
       width: 13px; height: 13px; margin-top: -5px;
       border-radius: 50%; background: #38bdf8; border: 2px solid #0f172a;
-      box-shadow: 0 0 0 1px #38bdf8;
-      transition: transform .12s ease, box-shadow .12s ease;
+      box-shadow: 0 0 0 1px #38bdf8; transition: transform .12s, box-shadow .12s;
     }
     input[type=range]::-moz-range-thumb {
       width: 13px; height: 13px;
       border-radius: 50%; background: #38bdf8; border: 2px solid #0f172a;
-      box-shadow: 0 0 0 1px #38bdf8;
-      transition: transform .12s ease, box-shadow .12s ease;
+      box-shadow: 0 0 0 1px #38bdf8; transition: transform .12s, box-shadow .12s;
     }
     input[type=range]:hover::-webkit-slider-thumb  { transform: scale(1.12); }
     input[type=range]:hover::-moz-range-thumb       { transform: scale(1.12); }
-    input[type=range]:active::-webkit-slider-thumb {
-      transform: scale(1.2); box-shadow: 0 0 0 4px rgba(56,189,248,.25);
-    }
-    input[type=range]:active::-moz-range-thumb {
-      transform: scale(1.2); box-shadow: 0 0 0 4px rgba(56,189,248,.25);
-    }
+    input[type=range]:active::-webkit-slider-thumb { transform: scale(1.2); box-shadow: 0 0 0 4px rgba(56,189,248,.25); }
+    input[type=range]:active::-moz-range-thumb     { transform: scale(1.2); box-shadow: 0 0 0 4px rgba(56,189,248,.25); }
     input[type=range]:focus { outline: none; }
-    input[type=range]:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px rgba(56,189,248,.35); }
-    input[type=range]:focus-visible::-moz-range-thumb      { box-shadow: 0 0 0 4px rgba(56,189,248,.35); }
     input[type=range]:disabled { opacity: .35; cursor: default; }
     input[type=range]:disabled::-webkit-slider-thumb { background: #475569; box-shadow: 0 0 0 1px #475569; }
-    input[type=range]:disabled::-moz-range-thumb      { background: #475569; box-shadow: 0 0 0 1px #475569; }
+    input[type=range]:disabled::-moz-range-thumb     { background: #475569; box-shadow: 0 0 0 1px #475569; }
 
-    .seg-toggle {
-      display: flex; border: 1px solid #334155; border-radius: 4px; overflow: hidden;
-    }
+    .seg-toggle { display: flex; border: 1px solid #334155; border-radius: 4px; overflow: hidden; }
     .seg-btn {
       flex: 1; padding: 5px 3px; font-size: .7rem; text-align: center;
       cursor: pointer; color: #64748b; background: transparent; border: none;
       transition: background .15s, color .15s;
     }
     .seg-btn.on { background: #1d4ed8; color: #fff; }
+    .seg-btn[data-view="delta"].on { background: #7c3aed; }
+    .seg-btn.hidden { display: none; }
 
     .tog-row {
       display: flex; justify-content: space-between; align-items: center;
@@ -121,24 +108,27 @@
     #map-wrap { flex: 1; position: relative; min-width: 0; }
     #map { width: 100%; height: 100%; }
 
+    /* ── Legends ── */
+    .legend-box {
+      position: absolute; bottom: 26px; left: 12px;
+      background: rgba(15,23,42,.92); border: 1px solid #1e293b;
+      border-radius: 7px; padding: 9px 13px; min-width: 195px;
+      z-index: 5; backdrop-filter: blur(4px);
+    }
+    .leg-title { font-size: .65rem; color: #94a3b8; margin-bottom: 5px; line-height: 1.4; }
+    .grad       { height: 9px; border-radius: 3px; background: linear-gradient(to right,#ffffb2,#fed976,#feb24c,#f03b20,#bd0026); }
+    .grad-delta { height: 9px; border-radius: 3px; background: linear-gradient(to right,#2563eb,#93c5fd,#f8fafc,#fca5a5,#dc2626); }
+    .grad-lbl   { display: flex; justify-content: space-between; font-size: .62rem; color: #64748b; margin-top: 3px; font-variant-numeric: tabular-nums; }
+
     /* ── Right detail panel ── */
     #detail {
       width: 340px; flex-shrink: 0;
       display: flex; flex-direction: column;
-      background: #0f172a;
-      border-left: 1px solid #1e293b;
+      background: #0f172a; border-left: 1px solid #1e293b;
       overflow-y: auto;
     }
 
-    /* city overview */
     #city-view { padding: 14px; display: flex; flex-direction: column; gap: 10px; }
-    #city-view h2 { font-size: .95rem; color: #7dd3fc; font-weight: 700; }
-    .city-split-bar {
-      display: flex; height: 10px; border-radius: 5px; overflow: hidden;
-    }
-    .city-hint { font-size: .72rem; color: #475569; text-align: center; padding: 4px; }
-
-    /* district view */
     #dist-view { padding: 14px; display: flex; flex-direction: column; gap: 10px; }
     #dist-view.hidden { display: none; }
     #city-view.hidden { display: none; }
@@ -149,32 +139,36 @@
       border: none; cursor: pointer; padding: 0;
     }
     .back-btn:hover { color: #7dd3fc; }
-
     #dist-name { font-size: 1rem; font-weight: 700; color: #7dd3fc; margin-top: 2px; }
 
-    /* Impact summary box */
-    .impact-box {
-      background: #1e293b; border-radius: 7px; padding: 12px;
-    }
-    .impact-primary {
-      font-size: 1.6rem; font-weight: 700; color: #e2e8f0;
-      font-variant-numeric: tabular-nums; line-height: 1.1;
-    }
+    /* Impact box */
+    .impact-box { background: #1e293b; border-radius: 7px; padding: 12px; }
+    .impact-primary-row { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+    .impact-primary { font-size: 1.6rem; font-weight: 700; color: #e2e8f0; font-variant-numeric: tabular-nums; line-height: 1.1; }
     .impact-unit { font-size: .75rem; color: #94a3b8; margin-top: 2px; }
-    .impact-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 6px; margin-top: 10px;
-    }
+    .impact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 10px; }
     .ig-item { background: #0f172a; border-radius: 5px; padding: 7px 9px; }
     .ig-val  { font-size: .9rem; font-weight: 700; color: #e2e8f0; font-variant-numeric: tabular-nums; }
     .ig-lbl  { font-size: .62rem; color: #64748b; margin-top: 1px; }
 
+    /* Delta badge */
+    .delta-badge {
+      font-size: .72rem; font-weight: 700; padding: 2px 6px;
+      border-radius: 4px; font-variant-numeric: tabular-nums; white-space: nowrap;
+    }
+    .delta-badge.pos { background: rgba(239,68,68,.18); color: #f87171; }
+    .delta-badge.neg { background: rgba(59,130,246,.18); color: #60a5fa; }
+    .delta-badge.zer { background: rgba(100,116,139,.15); color: #94a3b8; }
+
+    /* Chart cards */
+    .chart-card { background: #1e293b; border-radius: 7px; overflow: hidden; }
+    .chart-card .tbl-title { font-size: .6rem; text-transform: uppercase; letter-spacing: .1em; color: #64748b; font-weight: 700; padding: 9px 11px 5px; }
+    .chart-inner { padding: 0 10px 10px; position: relative; }
+
     /* Mode table */
     .mode-tbl-wrap { background: #1e293b; border-radius: 7px; overflow: hidden; }
     .tbl-title { font-size: .6rem; text-transform: uppercase; letter-spacing: .1em; color: #64748b; font-weight: 700; padding: 9px 11px 5px; }
-    table.mode-tbl {
-      width: 100%; border-collapse: collapse; font-size: .74rem;
-    }
+    table.mode-tbl { width: 100%; border-collapse: collapse; font-size: .74rem; }
     table.mode-tbl thead th {
       padding: 5px 8px; text-align: right; color: #64748b;
       font-weight: 600; font-size: .65rem; text-transform: uppercase;
@@ -184,13 +178,12 @@
     table.mode-tbl tbody td {
       padding: 5px 8px; text-align: right;
       border-bottom: 1px solid #1a2744;
-      font-variant-numeric: tabular-nums;
-      white-space: nowrap;
+      font-variant-numeric: tabular-nums; white-space: nowrap;
     }
     table.mode-tbl tbody td:first-child { text-align: left; }
     table.mode-tbl tbody tr:last-child td { border-bottom: none; }
     .mode-tbl .total-row td { border-top: 1px solid #334155; font-weight: 700; color: #e2e8f0; }
-	.mode-tbl .sub-row td { font-size: .68rem; color: #cbd5e1; padding-top: 2px; padding-bottom: 2px; }
+    .mode-tbl .sub-row td { font-size: .68rem; color: #cbd5e1; padding-top: 2px; padding-bottom: 2px; }
     .mode-tbl .sub-row td:first-child { padding-left: 13px; }
     .mode-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 5px; }
     .mode-dot.sub-dot { width: 6px; height: 6px; }
@@ -201,53 +194,32 @@
     /* Stats grid */
     .stats-card { background: #1e293b; border-radius: 7px; padding: 11px; }
     .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
-    .stat-item {
-      padding: 6px 8px;
-      border-bottom: 1px solid #1a2744;
-      border-right: 1px solid #1a2744;
-    }
+    .stat-item { padding: 6px 8px; border-bottom: 1px solid #1a2744; border-right: 1px solid #1a2744; }
     .stat-item:nth-child(2n) { border-right: none; }
     .stat-item:nth-last-child(-n+2) { border-bottom: none; }
     .stat-k { font-size: .62rem; color: #64748b; }
     .stat-v { font-size: .82rem; font-weight: 700; color: #e2e8f0; margin-top: 1px; font-variant-numeric: tabular-nums; }
-    .stat-v .delta { font-size: .65rem; font-weight: 400; margin-left: 3px; }
-    .delta.pos { color: #4ade80; }
-    .delta.neg { color: #f87171; }
-    .delta.zer { color: #64748b; }
 
-    /* Legend */
-    #legend {
-      position: absolute; bottom: 26px; left: 12px;
-      background: rgba(15,23,42,.92); border: 1px solid #1e293b;
-      border-radius: 7px; padding: 9px 13px; min-width: 195px;
-      z-index: 5; backdrop-filter: blur(4px);
-    }
-    #leg-title { font-size: .65rem; color: #94a3b8; margin-bottom: 5px; line-height: 1.4; }
-    .grad { height: 9px; border-radius: 3px; background: linear-gradient(to right,#ffffb2,#fed976,#feb24c,#f03b20,#bd0026); }
-    .grad-lbl { display: flex; justify-content: space-between; font-size: .62rem; color: #64748b; margin-top: 3px; font-variant-numeric: tabular-nums; }
+    /* City split bar */
+    .city-split-bar { display: flex; height: 10px; border-radius: 5px; overflow: hidden; }
+    .city-hint { font-size: .72rem; color: #475569; text-align: center; padding: 4px; }
 
     /* Loading */
-    #loading {
-      position: absolute; inset: 0;
-      background: rgba(15,23,42,.5); display: none;
-      align-items: center; justify-content: center; z-index: 20;
-    }
+    #loading { position: absolute; inset: 0; background: rgba(15,23,42,.5); display: none; align-items: center; justify-content: center; z-index: 20; }
     #loading.show { display: flex; }
-    .spin {
-      width: 34px; height: 34px;
-      border: 3px solid #1e293b; border-top-color: #38bdf8;
-      border-radius: 50%; animation: spin .7s linear infinite;
-    }
+    .spin { width: 34px; height: 34px; border: 3px solid #1e293b; border-top-color: #38bdf8; border-radius: 50%; animation: spin .7s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
     /* Popup */
-    .maplibregl-popup-content {
-      background: #1e293b !important; color: #e2e8f0 !important;
-      border-radius: 5px !important; padding: 7px 11px !important;
-      font-size: .73rem; box-shadow: 0 4px 18px rgba(0,0,0,.5) !important;
-    }
+    .maplibregl-popup-content { background: #1e293b !important; color: #e2e8f0 !important; border-radius: 5px !important; padding: 7px 11px !important; font-size: .73rem; box-shadow: 0 4px 18px rgba(0,0,0,.5) !important; }
     .maplibregl-popup-tip { border-top-color: #1e293b !important; }
     .maplibregl-popup-close-button { color: #64748b !important; }
+
+    /* delta sub-values in impact grid */
+    .ig-delta { font-size: .6rem; margin-top: 1px; font-variant-numeric: tabular-nums; }
+    .ig-delta.pos { color: #f87171; }
+    .ig-delta.neg { color: #60a5fa; }
+    .ig-delta.zer { color: #475569; }
   </style>
 </head>
 <body>
@@ -259,28 +231,53 @@
     <div class="sb-sub">Ökobilanz nach Stadtbezirk</div>
   </div>
 
-  <!-- Category + Metric -->
+  <!-- Darstellung -->
   <div class="card">
     <div class="card-hdr">Darstellung</div>
+
     <div class="form-row">
       <label class="lbl"><span>Wirkungskategorie</span></label>
       <select id="cat-sel"></select>
     </div>
+
     <div class="form-row">
-      <label class="lbl"><span>Bezugsgröße (pro Person)</span></label>
-      <div class="seg-toggle">
-        <button class="seg-btn on"  data-m="per_trip">/Weg</button>
-        <button class="seg-btn"     data-m="per_km"  >/km</button>
-        <button class="seg-btn"     data-m="per_year">/Jahr</button>
+      <label class="lbl"><span>Bezugsgröße</span></label>
+      <div class="seg-toggle" id="metric-toggle">
+        <button class="seg-btn on"     data-m="per_trip">/ Fahrt</button>
+        <button class="seg-btn"        data-m="per_km">/ km</button>
+        <button class="seg-btn hidden" data-m="per_day">/ Tag</button>
+        <button class="seg-btn hidden" data-m="per_year">/ Jahr</button>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label class="lbl"><span>Ansicht</span></label>
+      <div class="seg-toggle" id="view-toggle">
+        <button class="seg-btn on" data-view="scenario">Szenario</button>
+        <button class="seg-btn"    data-view="delta">Δ Änderung</button>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <label class="lbl"><span>Skalierung</span></label>
+      <div class="seg-toggle" id="scale-toggle">
+        <button class="seg-btn on" data-scale="capita">Pro Person</button>
+        <button class="seg-btn"    data-scale="absolute">Gesamt</button>
+      </div>
+    </div>
+
+    <div class="form-row" style="margin-bottom:0">
+      <div class="tog-row">
+        <div>Werte auf Karte</div>
+        <label class="sw"><input type="checkbox" id="labels-on" checked><span class="sw-track"></span></label>
       </div>
     </div>
   </div>
 
-  <!-- Scenario sliders -->
+  <!-- Szenarien -->
   <div class="card">
     <div class="card-hdr">Szenarien</div>
 
-    <!-- WFH delta: -50 to +50 -->
     <div class="form-row">
       <label class="lbl">
         <span>Homeoffice Δ</span>
@@ -289,7 +286,6 @@
       <input type="range" id="wfh" min="-50" max="50" value="0" step="5">
     </div>
 
-    <!-- BEV override -->
     <div class="form-row">
       <div class="tog-row">
         <div><div>E-PKW Anteil</div><div class="hint">Aus = Bezirksdaten</div></div>
@@ -304,7 +300,6 @@
       </div>
     </div>
 
-    <!-- E-Bus -->
     <div class="form-row">
       <label class="lbl">
         <span>E-Bus Anteil</span>
@@ -313,7 +308,6 @@
       <input type="range" id="ebus" min="0" max="100" value="25" step="1">
     </div>
 
-    <!-- Car occupancy override -->
     <div class="form-row">
       <div class="tog-row">
         <div><div>Pkw-Besetzung</div><div class="hint">Aus = Bezirksdaten</div></div>
@@ -328,14 +322,13 @@
       </div>
     </div>
 
-    <!-- Green electricity -->
     <div class="form-row" style="margin-bottom:0">
       <div class="tog-row">
         <div>
-          <div>Ökostrom</div>
-          <div class="hint">Alle Elektromodi (Bahn, Bus, Auto)</div>
+          <div>Ökostrom (Standard)</div>
+          <div class="hint">Bahn, Bus, E-Auto</div>
         </div>
-        <label class="sw"><input type="checkbox" id="green"><span class="sw-track"></span></label>
+        <label class="sw"><input type="checkbox" id="green" checked><span class="sw-track"></span></label>
       </div>
     </div>
   </div>
@@ -345,13 +338,25 @@
 <div id="map-wrap">
   <div id="map"></div>
 
-  <div id="legend">
-    <div id="leg-title">–</div>
+  <!-- Normal heat legend -->
+  <div id="legend" class="legend-box">
+    <div class="leg-title" id="leg-title">–</div>
     <div class="grad"></div>
     <div class="grad-lbl">
       <span id="leg-min">–</span>
       <span id="leg-mid">–</span>
       <span id="leg-max">–</span>
+    </div>
+  </div>
+
+  <!-- Delta diverging legend -->
+  <div id="delta-legend" class="legend-box" style="display:none">
+    <div class="leg-title" id="dleg-title">Δ vs. Standard [%]</div>
+    <div class="grad-delta"></div>
+    <div class="grad-lbl">
+      <span id="dleg-min">–</span>
+      <span style="color:#94a3b8">0%</span>
+      <span id="dleg-max">–</span>
     </div>
   </div>
 
@@ -363,21 +368,48 @@
 
   <!-- City overview (default) -->
   <div id="city-view">
-    <h2>München</h2>
+    <h2 style="font-size:.95rem;color:#7dd3fc;font-weight:700">München</h2>
 
-    <!-- Main impact numbers (city average) -->
+    <!-- City impact numbers -->
     <div class="impact-box">
-      <div class="impact-primary" id="city-primary">–</div>
-      <div class="impact-unit"    id="city-unit">–</div>
+      <div class="impact-primary-row">
+        <div class="impact-primary" id="city-primary">–</div>
+        <div id="city-delta-badge" class="delta-badge" style="display:none"></div>
+      </div>
+      <div class="impact-unit" id="city-unit">–</div>
       <div class="impact-grid">
-        <div class="ig-item"><div class="ig-val" id="city-trip">–</div><div class="ig-lbl">/ Fahrt</div></div>
-        <div class="ig-item"><div class="ig-val" id="city-km">–</div>  <div class="ig-lbl">/ km</div></div>
-        <div class="ig-item"><div class="ig-val" id="city-day">–</div> <div class="ig-lbl">/ Tag</div></div>
-        <div class="ig-item"><div class="ig-val" id="city-year">–</div><div class="ig-lbl">/ Jahr</div></div>
+        <div class="ig-item">
+          <div class="ig-val" id="city-trip">–</div>
+          <div class="ig-lbl">/ Fahrt</div>
+          <div class="ig-delta zer" id="city-trip-d"></div>
+        </div>
+        <div class="ig-item">
+          <div class="ig-val" id="city-km">–</div>
+          <div class="ig-lbl">/ km</div>
+          <div class="ig-delta zer" id="city-km-d"></div>
+        </div>
+        <div class="ig-item">
+          <div class="ig-val" id="city-day">–</div>
+          <div class="ig-lbl">/ Tag (Σ)</div>
+          <div class="ig-delta zer" id="city-day-d"></div>
+        </div>
+        <div class="ig-item">
+          <div class="ig-val" id="city-year">–</div>
+          <div class="ig-lbl">/ Jahr (Σ)</div>
+          <div class="ig-delta zer" id="city-year-d"></div>
+        </div>
       </div>
     </div>
 
-    <!-- City mode table (averaged across districts) -->
+    <!-- Before/After chart -->
+    <div class="chart-card">
+      <div class="tbl-title">Standard vs. Szenario — Stadtdurchschnitt</div>
+      <div class="chart-inner" style="height:62px">
+        <canvas id="city-chart"></canvas>
+      </div>
+    </div>
+
+    <!-- City mode table -->
     <div class="mode-tbl-wrap">
       <div class="tbl-title">&#216; Verkehrsmittel &amp; Wirkung</div>
       <table class="mode-tbl">
@@ -394,6 +426,15 @@
       </table>
     </div>
 
+    <!-- District Δ ranking chart -->
+    <div class="chart-card">
+      <div class="tbl-title">Bezirke: Δ vs. Standard</div>
+      <div class="chart-inner" style="height:300px">
+        <canvas id="delta-chart"></canvas>
+      </div>
+    </div>
+
+    <!-- Average split bar -->
     <div class="card">
       <div class="card-hdr">Durchschnittliche Anteile</div>
       <div class="city-split-bar" id="city-split-bar"></div>
@@ -408,15 +449,34 @@
     <button class="back-btn" id="back-btn">&#8592; Stadtübersicht</button>
     <div id="dist-name">–</div>
 
-    <!-- Main impact numbers -->
+    <!-- District impact numbers -->
     <div class="impact-box">
-      <div class="impact-primary" id="imp-primary">–</div>
-      <div class="impact-unit"    id="imp-unit">–</div>
+      <div class="impact-primary-row">
+        <div class="impact-primary" id="imp-primary">–</div>
+        <div id="imp-delta-badge" class="delta-badge" style="display:none"></div>
+      </div>
+      <div class="impact-unit" id="imp-unit">–</div>
       <div class="impact-grid">
-        <div class="ig-item"><div class="ig-val" id="imp-trip">–</div><div class="ig-lbl">/ Fahrt</div></div>
-        <div class="ig-item"><div class="ig-val" id="imp-km">–</div>  <div class="ig-lbl">/ km</div></div>
-        <div class="ig-item"><div class="ig-val" id="imp-day">–</div> <div class="ig-lbl">/ Tag</div></div>
-        <div class="ig-item"><div class="ig-val" id="imp-year">–</div><div class="ig-lbl">/ Jahr</div></div>
+        <div class="ig-item">
+          <div class="ig-val" id="imp-trip">–</div>
+          <div class="ig-lbl">/ Fahrt</div>
+          <div class="ig-delta zer" id="imp-trip-d"></div>
+        </div>
+        <div class="ig-item">
+          <div class="ig-val" id="imp-km">–</div>
+          <div class="ig-lbl">/ km</div>
+          <div class="ig-delta zer" id="imp-km-d"></div>
+        </div>
+        <div class="ig-item">
+          <div class="ig-val" id="imp-day">–</div>
+          <div class="ig-lbl">/ Tag (Σ)</div>
+          <div class="ig-delta zer" id="imp-day-d"></div>
+        </div>
+        <div class="ig-item">
+          <div class="ig-val" id="imp-year">–</div>
+          <div class="ig-lbl">/ Jahr (Σ)</div>
+          <div class="ig-delta zer" id="imp-year-d"></div>
+        </div>
       </div>
     </div>
 
@@ -447,38 +507,44 @@
 </div><!-- #detail -->
 
 <script>
-/* ============================================================
-   Constants / palette
-   ============================================================ */
-const MODE_COLORS = {
-  fuss:  '#4ade80',
-  rad:   '#a3e635',
-  opnv:  '#38bdf8',
-  auto:  '#fb923c',
-};
-const MODE_LABELS = { fuss: 'Fuß', rad: 'Rad', opnv: 'ÖPNV', auto: 'Auto' };
-const SUBMODES = [
-  { key: 'ubahn', label: 'U-Bahn', color: '#0ea5e9' },
-  { key: 'sbahn', label: 'S-Bahn', color: '#22d3ee' },
-  { key: 'bus',   label: 'Bus',    color: '#818cf8' },
-  { key: 'tram',  label: 'Tram',   color: '#2dd4bf' },
+/* ── Palette & constants ─────────────────────────────────────────────────── */
+const MODE_COLORS  = { fuss:'#4ade80', rad:'#a3e635', opnv:'#38bdf8', auto:'#fb923c' };
+const MODE_LABELS  = { fuss:'Fuß', rad:'Rad', opnv:'ÖPNV', auto:'Auto' };
+const SUBMODES     = [
+  { key:'ubahn', label:'U-Bahn', color:'#0ea5e9' },
+  { key:'sbahn', label:'S-Bahn', color:'#22d3ee' },
+  { key:'bus',   label:'Bus',    color:'#818cf8' },
+  { key:'tram',  label:'Tram',   color:'#2dd4bf' },
 ];
+const PRIORITY     = ['Climate change','Particulate matter','Acidification',
+  'Eutrophication freshwater','Eutrophication marine','Resource use fossils'];
 
-/* ============================================================
-   State
-   ============================================================ */
+const BASELINE = {
+  wfh_delta: 0, bev_share: null, ebus_share: 0.25,
+  green_elec: true, auto_besetzung_override: null
+};
+
+/* ── State ───────────────────────────────────────────────────────────────── */
 let map, mapReady = false;
-let geojson = null;
-let categories = [];
-let selCat    = null;
-let selMetric = 'per_trip';
-let debTimer  = null;
-let featuresByDistId = {};   // id → full feature (with nested breakdown)
-let activeDistId = null;
+let geojson      = null;
+let categories   = [];
+let selCat       = null;
+let selMetric    = 'per_trip';   // per_trip|per_km (capita)  per_day|per_year (absolute)
+let debTimer     = null;
+let featuresByDistId = {};
+let baselineById     = {};       // district_id → properties snapshot
+let activeDistId     = null;
+let viewMode     = 'scenario';   // 'scenario' | 'delta'
+let scalingMode  = 'capita';     // 'capita'   | 'absolute'
+let showLabels   = true;
+let cityChart    = null;
+let distChart    = null;
 
-/* ============================================================
-   Boot
-   ============================================================ */
+/* ── Chart.js global theme ───────────────────────────────────────────────── */
+Chart.defaults.color = '#64748b';
+Chart.defaults.font.family = "'Segoe UI', system-ui, sans-serif";
+
+/* ── Boot ────────────────────────────────────────────────────────────────── */
 async function init() {
   try {
     categories = await fetch('/api/categories').then(r => r.json());
@@ -487,11 +553,34 @@ async function init() {
   }
   buildCatSelect();
   initMap();
-  await loadScenario();
+
+  // Load baseline and first scenario in parallel (baseline === scenario at start)
+  const [baselineData] = await Promise.all([
+    fetch('/api/scenario', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(BASELINE),
+    }).then(r => r.json()).catch(() => null),
+    loadScenario(),
+  ]);
+
+  if (baselineData) {
+    baselineById = {};
+    baselineData.features.forEach(f => {
+      baselineById[f.properties.district_id] = f.properties;
+    });
+    computeDeltas();
+    refreshMap();
+    updateCityView();
+    refreshCharts();
+    if (activeDistId != null && featuresByDistId[activeDistId]) {
+      renderDistrictPanel(featuresByDistId[activeDistId].properties);
+    }
+  }
 }
 
-const PRIORITY = ['Climate change', 'Particulate matter', 'Acidification',
-  'Eutrophication freshwater', 'Eutrophication marine', 'Resource use fossils'];
+const PRIORITY_CATS = ['Climate change','Particulate matter','Acidification',
+  'Eutrophication freshwater','Eutrophication marine','Resource use fossils'];
 
 function buildCatSelect() {
   const sel = document.getElementById('cat-sel');
@@ -508,9 +597,7 @@ function buildCatSelect() {
   selCat = sorted[0]?.impact_category ?? null;
 }
 
-/* ============================================================
-   MapLibre
-   ============================================================ */
+/* ── MapLibre ────────────────────────────────────────────────────────────── */
 function initMap() {
   map = new maplibregl.Map({
     container: 'map',
@@ -523,27 +610,51 @@ function initMap() {
 
   map.on('load', () => {
     mapReady = true;
-    map.addSource('districts', { type: 'geojson', data: { type: 'FeatureCollection', features: [] } });
-    map.addLayer({ id: 'dists-fill', type: 'fill', source: 'districts',
-      paint: { 'fill-color': '#64748b', 'fill-opacity': 0.72 } });
-    map.addLayer({ id: 'dists-line', type: 'line', source: 'districts',
-      paint: { 'line-color': '#fff', 'line-width': 0.7, 'line-opacity': 0.65 } });
-    map.addLayer({ id: 'dists-hover', type: 'line', source: 'districts',
-      filter: ['==', ['get', 'district_id'], -1],
-      paint: { 'line-color': '#7dd3fc', 'line-width': 2.5 } });
-    map.addLayer({ id: 'dists-select', type: 'line', source: 'districts',
-      filter: ['==', ['get', 'district_id'], -1],
-      paint: { 'line-color': '#f59e0b', 'line-width': 2.5 } });
+    map.addSource('districts', {
+      type: 'geojson',
+      data: { type: 'FeatureCollection', features: [] },
+    });
+    map.addLayer({ id:'dists-fill', type:'fill', source:'districts',
+      paint: { 'fill-color':'#64748b', 'fill-opacity':0.72 } });
+    map.addLayer({ id:'dists-line', type:'line', source:'districts',
+      paint: { 'line-color':'#fff', 'line-width':0.7, 'line-opacity':0.65 } });
+    map.addLayer({ id:'dists-hover', type:'line', source:'districts',
+      filter: ['==',['get','district_id'], -1],
+      paint: { 'line-color':'#7dd3fc', 'line-width':2.5 } });
+    map.addLayer({ id:'dists-select', type:'line', source:'districts',
+      filter: ['==',['get','district_id'], -1],
+      paint: { 'line-color':'#f59e0b', 'line-width':2.5 } });
 
-    if (geojson) applyToMap();
+    // Value labels on each district polygon
+    map.addLayer({
+      id: 'dists-labels',
+      type: 'symbol',
+      source: 'districts',
+      layout: {
+        'text-field': ['get', 'label_val'],
+        'text-size': 9,
+        'text-font': ['Noto Sans Regular'],
+        'text-allow-overlap': true,
+        'text-ignore-placement': true,
+        'text-max-width': 8,
+      },
+      paint: {
+        'text-color': '#ffffff',
+        'text-halo-color': 'rgba(15,23,42,0.85)',
+        'text-halo-width': 1.2,
+        'text-opacity': 0.95,
+      },
+    });
+
+    if (geojson) refreshMap();
 
     map.on('mousemove', 'dists-fill', e => {
       map.getCanvas().style.cursor = 'pointer';
-      map.setFilter('dists-hover', ['==', ['get', 'district_id'], e.features[0].properties.district_id]);
+      map.setFilter('dists-hover', ['==',['get','district_id'], e.features[0].properties.district_id]);
     });
     map.on('mouseleave', 'dists-fill', () => {
       map.getCanvas().style.cursor = '';
-      map.setFilter('dists-hover', ['==', ['get', 'district_id'], -1]);
+      map.setFilter('dists-hover', ['==',['get','district_id'], -1]);
     });
     map.on('click', 'dists-fill', e => {
       const id = e.features[0].properties.district_id;
@@ -553,9 +664,7 @@ function initMap() {
   });
 }
 
-/* ============================================================
-   Scenario
-   ============================================================ */
+/* ── Scenario ────────────────────────────────────────────────────────────── */
 function scenarioParams() {
   const wfhDelta = parseInt(document.getElementById('wfh').value) / 100;
   const bevOn    = document.getElementById('bev-en').checked;
@@ -578,12 +687,12 @@ async function loadScenario() {
     });
     if (!res.ok) throw new Error(await res.text());
     geojson = await res.json();
-
     featuresByDistId = {};
     geojson.features.forEach(f => { featuresByDistId[f.properties.district_id] = f; });
-
-    applyToMap();
+    computeDeltas();
+    refreshMap();
     updateCityView();
+    refreshCharts();
     if (activeDistId != null && featuresByDistId[activeDistId]) {
       renderDistrictPanel(featuresByDistId[activeDistId].properties);
     }
@@ -599,126 +708,245 @@ function schedule() {
   debTimer = setTimeout(loadScenario, 350);
 }
 
-/* ============================================================
-   Map coloring
-   ============================================================ */
-function applyToMap() {
-  if (!mapReady || !geojson) return;
-  map.getSource('districts').setData(geojson);
-  updateColors();
+/* ── Active field helpers ────────────────────────────────────────────────── */
+function getActiveMetric() {
+  if (scalingMode === 'capita') return selMetric;  // per_trip | per_km
+  // absolute: selMetric is per_day | per_year
+  return (selMetric === 'per_day' || selMetric === 'per_year') ? selMetric : 'per_day';
 }
 
-function updateColors() {
-  if (!mapReady || !geojson || !selCat) return;
-  const field = `${selMetric}_${selCat}`;
-  const vals = geojson.features.map(f => f.properties[field]).filter(v => v != null && isFinite(v) && v >= 0);
+function getActiveField() {
+  const m = getActiveMetric();
+  return viewMode === 'delta' ? `delta_${m}_${selCat}` : `${m}_${selCat}`;
+}
+
+/* ── Delta computation ───────────────────────────────────────────────────── */
+function computeDeltas() {
+  if (!geojson) return;
+  geojson.features.forEach(f => {
+    const base = baselineById[f.properties.district_id];
+    if (!base) return;
+    for (const cat of categories) {
+      const ck = cat.impact_category;
+      for (const m of ['per_trip','per_km','per_day','per_year']) {
+        const field = `${m}_${ck}`;
+        const curr = f.properties[field];
+        const bv   = base[field];
+        f.properties[`delta_${field}`] =
+          (bv != null && Math.abs(bv) > 1e-15 && curr != null)
+            ? (curr - bv) / Math.abs(bv) * 100
+            : 0;
+      }
+    }
+  });
+}
+
+/* ── Map refresh ─────────────────────────────────────────────────────────── */
+function refreshMap() {
+  if (!mapReady || !geojson) return;
+  const field    = getActiveField();
+  const isDelta  = viewMode === 'delta';
+
+  // Stamp label_val on each feature
+  geojson.features.forEach(f => {
+    f.properties.label_val = showLabels ? fmtLabel(f.properties[field], isDelta) : '';
+  });
+
+  map.getSource('districts').setData(geojson);
+
+  if (isDelta) {
+    colorDelta(field);
+    document.getElementById('legend').style.display       = 'none';
+    document.getElementById('delta-legend').style.display = 'block';
+  } else {
+    colorHeat(field);
+    document.getElementById('legend').style.display       = 'block';
+    document.getElementById('delta-legend').style.display = 'none';
+  }
+}
+
+function colorHeat(field) {
+  const vals = geojson.features
+    .map(f => f.properties[field])
+    .filter(v => v != null && isFinite(v) && v >= 0);
   if (!vals.length) return;
   const mn = Math.min(...vals), mx = Math.max(...vals), r = mx - mn || 1e-12;
-  const expr = ['interpolate', ['linear'], ['get', field],
-    mn,             '#ffffb2',
-    mn + r * 0.25,  '#fed976',
-    mn + r * 0.5,   '#feb24c',
-    mn + r * 0.75,  '#f03b20',
-    mx,             '#bd0026',
-  ];
-  map.setPaintProperty('dists-fill', 'fill-color', expr);
-  updateLegend(mn, mx);
-}
-
-function updateLegend(mn, mx) {
+  map.setPaintProperty('dists-fill', 'fill-color', [
+    'interpolate',['linear'],['get', field],
+    mn,          '#ffffb2',
+    mn+r*0.25,   '#fed976',
+    mn+r*0.5,    '#feb24c',
+    mn+r*0.75,   '#f03b20',
+    mx,          '#bd0026',
+  ]);
   const cat = categories.find(c => c.impact_category === selCat);
-  const unit = cat?.unit ?? '';
-  const metric = { per_trip: '/ Fahrt', per_km: '/ km', per_year: '/ Jahr' }[selMetric];
-  document.getElementById('leg-title').textContent = `${selCat}  [${unit}]  —  ${metric}`;
+  const metricLabel = { per_trip:'/ Fahrt', per_km:'/ km', per_day:'/ Tag (Σ)', per_year:'/ Jahr (Σ)' }[getActiveMetric()];
+  document.getElementById('leg-title').textContent = `${selCat}  [${cat?.unit ?? ''}]  —  ${metricLabel}`;
   document.getElementById('leg-min').textContent = fmt(mn);
-  document.getElementById('leg-mid').textContent = fmt((mn + mx) / 2);
+  document.getElementById('leg-mid').textContent = fmt((mn+mx)/2);
   document.getElementById('leg-max').textContent = fmt(mx);
 }
 
-/* ============================================================
-   City overview
-   ============================================================ */
+function colorDelta(field) {
+  const vals = geojson.features
+    .map(f => f.properties[field])
+    .filter(v => v != null && isFinite(v));
+  if (!vals.length) return;
+  const mn = Math.min(...vals), mx = Math.max(...vals);
+  const ext = Math.max(Math.abs(mn), Math.abs(mx)) || 1;
+  map.setPaintProperty('dists-fill', 'fill-color', [
+    'interpolate',['linear'],['get', field],
+    -ext,       '#2563eb',
+    -ext*0.35,  '#93c5fd',
+     0,         '#f8fafc',
+     ext*0.35,  '#fca5a5',
+     ext,       '#dc2626',
+  ]);
+  const cat = categories.find(c => c.impact_category === selCat);
+  const metricLabel = { per_trip:'/ Fahrt', per_km:'/ km', per_day:'/ Tag (Σ)', per_year:'/ Jahr (Σ)' }[getActiveMetric()];
+  document.getElementById('dleg-title').textContent = `Δ vs. Standard  —  ${selCat} [${cat?.unit ?? ''}]  ${metricLabel}`;
+  document.getElementById('dleg-min').textContent = mn.toFixed(1) + '%';
+  document.getElementById('dleg-max').textContent = (mx > 0 ? '+' : '') + mx.toFixed(1) + '%';
+}
+
+/* ── City overview ───────────────────────────────────────────────────────── */
+function cityAvg(field) {
+  if (!geojson) return null;
+  const vals = geojson.features.map(f => f.properties[field]).filter(v => v != null && isFinite(v));
+  return vals.length ? vals.reduce((a,b)=>a+b,0) / vals.length : null;
+}
+
+function citySum(field) {
+  if (!geojson) return null;
+  const vals = geojson.features.map(f => f.properties[field]).filter(v => v != null && isFinite(v));
+  return vals.length ? vals.reduce((a,b)=>a+b,0) : null;
+}
+
+function baselineAvg(field) {
+  const vals = Object.values(baselineById).map(p => p[field]).filter(v => v != null && isFinite(v));
+  return vals.length ? vals.reduce((a,b)=>a+b,0) / vals.length : null;
+}
+
+function baselineSum(field) {
+  const vals = Object.values(baselineById).map(p => p[field]).filter(v => v != null && isFinite(v));
+  return vals.length ? vals.reduce((a,b)=>a+b,0) : null;
+}
+
+function avg_prop(key) {
+  if (!geojson) return 0;
+  const vals = geojson.features.map(f => parseFloat(f.properties[key]) || 0);
+  return vals.reduce((a,b)=>a+b,0) / vals.length;
+}
+
+function setDeltaBadge(elId, currVal, baseVal) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  if (baseVal == null || Math.abs(baseVal) < 1e-15 || currVal == null) {
+    el.style.display = 'none'; return;
+  }
+  const pct = (currVal - baseVal) / Math.abs(baseVal) * 100;
+  if (Math.abs(pct) < 0.05) {
+    el.className = 'delta-badge zer'; el.textContent = '±0%'; el.style.display = 'inline-block'; return;
+  }
+  const cls = pct > 0 ? 'pos' : 'neg';
+  el.className = `delta-badge ${cls}`;
+  el.textContent = (pct > 0 ? '+' : '') + pct.toFixed(1) + '% vs Standard';
+  el.style.display = 'inline-block';
+}
+
+function setDeltaSubEl(elId, currVal, baseVal) {
+  const el = document.getElementById(elId);
+  if (!el || baseVal == null || Math.abs(baseVal) < 1e-15 || currVal == null) {
+    if (el) el.textContent = ''; return;
+  }
+  const pct = (currVal - baseVal) / Math.abs(baseVal) * 100;
+  if (Math.abs(pct) < 0.05) { el.textContent = ''; return; }
+  el.className = `ig-delta ${pct > 0 ? 'pos' : 'neg'}`;
+  el.textContent = (pct > 0 ? '▲' : '▼') + ' ' + Math.abs(pct).toFixed(1) + '%';
+}
+
 function updateCityView() {
   if (!geojson) return;
   const cat  = categories.find(c => c.impact_category === selCat);
   const unit = cat?.unit ?? '';
-  const field = `${selMetric}_${selCat}`;
-  const avg  = cityAvg(field);
-  const metricLabel = { per_trip: '/ Fahrt', per_km: '/ km', per_year: '/ Jahr' }[selMetric];
+  const m    = getActiveMetric();
 
-  document.getElementById('city-primary').textContent = avg != null ? fmt(avg) : '–';
+  // Primary number: avg for per-capita, sum for absolute
+  const isPrimSum = scalingMode === 'absolute';
+  const primField = `${m}_${selCat}`;
+  const primVal   = isPrimSum ? citySum(primField) : cityAvg(primField);
+  const metricLabel = { per_trip:'/ Fahrt ∅', per_km:'/ km ∅', per_day:'/ Tag (Σ)', per_year:'/ Jahr (Σ)' }[m];
+
+  document.getElementById('city-primary').textContent = primVal != null ? fmt(primVal) : '–';
   document.getElementById('city-unit').textContent    = `${selCat}  [${unit}]  ${metricLabel}`;
 
-  document.getElementById('city-trip').textContent = fmt(cityAvg(`per_trip_${selCat}`));
-  document.getElementById('city-km').textContent   = fmt(cityAvg(`per_km_${selCat}`));
-  document.getElementById('city-day').textContent  = fmt(cityAvg(`per_day_${selCat}`));
-  document.getElementById('city-year').textContent = fmt(cityAvg(`per_year_${selCat}`));
+  const baseTrip  = baselineAvg(`per_trip_${selCat}`);
+  const baseKm    = baselineAvg(`per_km_${selCat}`);
+  const baseDay   = baselineSum(`per_day_${selCat}`);
+  const baseYear  = baselineSum(`per_year_${selCat}`);
+  const currTrip  = cityAvg(`per_trip_${selCat}`);
+  const currKm    = cityAvg(`per_km_${selCat}`);
+  const currDay   = citySum(`per_day_${selCat}`);
+  const currYear  = citySum(`per_year_${selCat}`);
 
-  // city mode table (averaged across all districts)
+  document.getElementById('city-trip').textContent  = fmt(currTrip);
+  document.getElementById('city-km').textContent    = fmt(currKm);
+  document.getElementById('city-day').textContent   = fmt(currDay);
+  document.getElementById('city-year').textContent  = fmt(currYear);
+
+  setDeltaBadge('city-delta-badge', primVal, isPrimSum ? baselineSum(primField) : baselineAvg(primField));
+  setDeltaSubEl('city-trip-d',  currTrip,  baseTrip);
+  setDeltaSubEl('city-km-d',    currKm,    baseKm);
+  setDeltaSubEl('city-day-d',   currDay,   baseDay);
+  setDeltaSubEl('city-year-d',  currYear,  baseYear);
+
+  // Mode table
   const cTrip = cityAvg(`per_trip_${selCat}`);
-  const cMt   = cityAvg(`${selMetric}_${selCat}`);
+  const cMt   = cityAvg(`${m}_${selCat}`);
   renderModeTable(
     document.getElementById('city-mode-tbody'),
-    cityModes(),
-    cMt,
+    cityModes(), cMt,
     cTrip ? cMt / cTrip : 1
   );
 
-  // average modal split bar
+  // Modal split bar
   const avg_sf = avg_prop('split_fuss');
   const avg_sr = avg_prop('split_rad');
   const avg_so = avg_prop('split_opnv');
   const avg_sa = avg_prop('split_auto');
   const tot = avg_sf + avg_sr + avg_so + avg_sa || 100;
-  const bar = document.getElementById('city-split-bar');
-  bar.innerHTML = `
+  document.getElementById('city-split-bar').innerHTML = `
     <div style="width:${avg_sf/tot*100}%;background:#4ade80" title="Fuß ${(avg_sf/tot*100).toFixed(0)}%"></div>
     <div style="width:${avg_sr/tot*100}%;background:#a3e635" title="Rad ${(avg_sr/tot*100).toFixed(0)}%"></div>
     <div style="width:${avg_so/tot*100}%;background:#38bdf8" title="ÖPNV ${(avg_so/tot*100).toFixed(0)}%"></div>
     <div style="width:${avg_sa/tot*100}%;background:#fb923c" title="Auto ${(avg_sa/tot*100).toFixed(0)}%"></div>
   `;
   document.getElementById('city-split-legend').innerHTML = [
-    ['Fuß', avg_sf/tot*100, '#4ade80'], ['Rad', avg_sr/tot*100, '#a3e635'],
-    ['ÖPNV', avg_so/tot*100, '#38bdf8'], ['Auto', avg_sa/tot*100, '#fb923c'],
-  ].map(([l, v, c]) =>
+    ['Fuß',avg_sf/tot*100,'#4ade80'],['Rad',avg_sr/tot*100,'#a3e635'],
+    ['ÖPNV',avg_so/tot*100,'#38bdf8'],['Auto',avg_sa/tot*100,'#fb923c'],
+  ].map(([l,v,c]) =>
     `<span><span style="width:8px;height:8px;border-radius:50%;background:${c};display:inline-block;margin-right:3px"></span>${l} ${v.toFixed(0)}%</span>`
   ).join('');
 }
 
-// Mean of a numeric flat property across all districts (null if none).
-function cityAvg(key) {
-  if (!geojson) return null;
-  const vals = geojson.features
-    .map(f => f.properties[key])
-    .filter(v => v != null && isFinite(v));
-  return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
-}
-
-// Aggregate the per-district mode breakdown into a city-average `modes` object
-// with the same shape the district panel uses.
 function cityModes() {
   if (!geojson) return null;
-  const order = ['fuss', 'rad', 'opnv', 'auto'];
-  const acc = {};
-  order.forEach(k => acc[k] = { ts: 0, pt: 0, n: 0, sub: {} });
-
+  const order = ['fuss','rad','opnv','auto'];
+  const acc   = {};
+  order.forEach(k => acc[k] = { ts:0, pt:0, n:0, sub:{} });
   let any = false;
   geojson.features.forEach(f => {
     const modes = f.properties.breakdown?.[selCat]?.modes;
     if (!modes) return;
     any = true;
     order.forEach(k => {
-      const m = modes[k];
-      if (!m) return;
+      const m = modes[k]; if (!m) return;
       const a = acc[k];
-      a.ts += m.trip_share || 0;
-      a.pt += m.per_trip   || 0;
-      a.n++;
+      a.ts += m.trip_share || 0; a.pt += m.per_trip || 0; a.n++;
       if (k === 'opnv' && m.sub) {
         for (const sm of SUBMODES) {
-          const sv = m.sub[sm.key];
-          if (!sv) continue;
-          if (!a.sub[sm.key]) a.sub[sm.key] = { share: 0, per_trip: 0, n: 0 };
+          const sv = m.sub[sm.key]; if (!sv) continue;
+          if (!a.sub[sm.key]) a.sub[sm.key] = { share:0, per_trip:0, n:0 };
           a.sub[sm.key].share    += sv.share    || 0;
           a.sub[sm.key].per_trip += sv.per_trip || 0;
           a.sub[sm.key].n++;
@@ -727,41 +955,134 @@ function cityModes() {
     });
   });
   if (!any) return null;
-
   const out = {};
   order.forEach(k => {
-    const a = acc[k];
-    if (!a.n) return;
-    out[k] = { trip_share: a.ts / a.n, per_trip: a.pt / a.n, pct: 0 };
+    const a = acc[k]; if (!a.n) return;
+    out[k] = { trip_share: a.ts/a.n, per_trip: a.pt/a.n, pct:0 };
     if (k === 'opnv' && Object.keys(a.sub).length) {
       out[k].sub = {};
       for (const key in a.sub) {
         const sv = a.sub[key];
-        out[k].sub[key] = { share: sv.share / sv.n, per_trip: sv.per_trip / sv.n };
+        out[k].sub[key] = { share: sv.share/sv.n, per_trip: sv.per_trip/sv.n };
       }
     }
   });
-
-  // recompute each mode's % of total impact so the city table sums to 100
   let totC = 0; const contrib = {};
-  order.forEach(k => { if (out[k]) { contrib[k] = (out[k].trip_share / 100) * out[k].per_trip; totC += contrib[k]; } });
-  order.forEach(k => { if (out[k]) out[k].pct = totC > 0 ? contrib[k] / totC * 100 : 0; });
-
+  order.forEach(k => { if (out[k]) { contrib[k] = (out[k].trip_share/100) * out[k].per_trip; totC += contrib[k]; } });
+  order.forEach(k => { if (out[k]) out[k].pct = totC > 0 ? contrib[k]/totC*100 : 0; });
   return out;
 }
 
-function avg_prop(key) {
-  if (!geojson) return 0;
-  const vals = geojson.features.map(f => parseFloat(f.properties[key]) || 0);
-  return vals.reduce((a, b) => a + b, 0) / vals.length;
+/* ── Charts ──────────────────────────────────────────────────────────────── */
+function refreshCharts() {
+  if (!document.getElementById('city-view').classList.contains('hidden')) {
+    renderCityChart();
+    renderDeltaChart();
+  }
 }
 
-/* ============================================================
-   District selection
-   ============================================================ */
+function renderCityChart() {
+  const canvas = document.getElementById('city-chart');
+  const m = getActiveMetric();
+  const field = `${m}_${selCat}`;
+  const isPrimSum = scalingMode === 'absolute';
+  const currVal = isPrimSum ? citySum(field) : cityAvg(field);
+  const baseVal = isPrimSum ? baselineSum(field) : baselineAvg(field);
+  const cat  = categories.find(c => c.impact_category === selCat);
+  const unit = cat?.unit ?? '';
+
+  if (cityChart) { cityChart.destroy(); cityChart = null; }
+  if (currVal == null && baseVal == null) return;
+
+  cityChart = new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: ['Standard (Grün)', 'Szenario'],
+      datasets: [{
+        data: [baseVal ?? 0, currVal ?? 0],
+        backgroundColor: ['rgba(34,197,94,0.5)', 'rgba(56,189,248,0.5)'],
+        borderColor:     ['#22c55e',              '#38bdf8'],
+        borderWidth: 1, borderRadius: 3, barThickness: 16,
+      }],
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: ctx => fmt(ctx.raw) + ' ' + unit } },
+      },
+      scales: {
+        x: {
+          grid:   { color: 'rgba(51,65,85,0.5)' },
+          border: { color: '#334155' },
+          ticks:  { color: '#64748b', font: { size: 9 }, callback: v => fmt(v) },
+        },
+        y: {
+          grid:   { display: false },
+          border: { color: '#334155' },
+          ticks:  { color: '#94a3b8', font: { size: 9 } },
+        },
+      },
+    },
+  });
+}
+
+function renderDeltaChart() {
+  const canvas = document.getElementById('delta-chart');
+  const m = getActiveMetric();
+  const field = `delta_${m}_${selCat}`;
+
+  if (distChart) { distChart.destroy(); distChart = null; }
+  if (!geojson) return;
+
+  const data = geojson.features
+    .map(f => ({
+      name: (f.properties.district_name || f.properties.sb_name || '').slice(0, 20),
+      delta: f.properties[field] ?? 0,
+    }))
+    .sort((a, b) => b.delta - a.delta);  // worst (highest Δ) at top
+
+  distChart = new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: data.map(d => d.name),
+      datasets: [{
+        data:            data.map(d => d.delta),
+        backgroundColor: data.map(d => d.delta > 0.05 ? 'rgba(220,38,38,0.6)' : d.delta < -0.05 ? 'rgba(37,99,235,0.6)' : 'rgba(100,116,139,0.4)'),
+        borderColor:     data.map(d => d.delta > 0.05 ? '#dc2626' : d.delta < -0.05 ? '#2563eb' : '#64748b'),
+        borderWidth: 1, borderRadius: 2, barThickness: 9,
+      }],
+    },
+    options: {
+      indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: ctx => (ctx.raw > 0 ? '+' : '') + ctx.raw.toFixed(1) + '% vs Standard',
+          },
+        },
+      },
+      scales: {
+        x: {
+          grid:   { color: 'rgba(51,65,85,0.5)' },
+          border: { color: '#334155' },
+          ticks:  { color: '#64748b', font: { size: 8 }, callback: v => v.toFixed(0) + '%' },
+        },
+        y: {
+          grid:   { display: false },
+          border: { color: '#334155' },
+          ticks:  { color: '#94a3b8', font: { size: 8 } },
+        },
+      },
+    },
+  });
+}
+
+/* ── District selection ──────────────────────────────────────────────────── */
 function selectDistrict(feat) {
   activeDistId = feat.properties.district_id;
-  map.setFilter('dists-select', ['==', ['get', 'district_id'], activeDistId]);
+  map.setFilter('dists-select', ['==',['get','district_id'], activeDistId]);
   document.getElementById('city-view').classList.add('hidden');
   document.getElementById('dist-view').classList.remove('hidden');
   renderDistrictPanel(feat.properties);
@@ -769,171 +1090,209 @@ function selectDistrict(feat) {
 
 function deselectDistrict() {
   activeDistId = null;
-  map.setFilter('dists-select', ['==', ['get', 'district_id'], -1]);
+  map.setFilter('dists-select', ['==',['get','district_id'], -1]);
   document.getElementById('dist-view').classList.add('hidden');
   document.getElementById('city-view').classList.remove('hidden');
+  refreshCharts();
 }
 
-/* ============================================================
-   Mode table (shared by city + district views)
-   ============================================================ */
+/* ── Mode table ──────────────────────────────────────────────────────────── */
 function renderModeTable(tbody, modes, totalImpact, scale = 1) {
   if (!modes) {
     tbody.innerHTML = '<tr><td colspan="5" style="color:#475569;padding:8px">Keine Daten</td></tr>';
     return;
   }
-  const order = ['fuss', 'rad', 'opnv', 'auto'];
-  const rows = [];
+  const order  = ['fuss','rad','opnv','auto'];
+  const rows   = [];
   const maxPct = Math.max(0, ...order.map(k => modes[k]?.pct || 0));
 
   for (const key of order) {
-    const m = modes[key];
-    if (!m) continue;
+    const m = modes[key]; if (!m) continue;
     const color = MODE_COLORS[key];
-    const label = MODE_LABELS[key];
     rows.push(`
       <tr>
-        <td><span class="mode-dot" style="background:${color}"></span>${label}</td>
-        <td>${(m.trip_share || 0).toFixed(0)}%</td>
-        <td>${fmt((m.per_trip || 0) * scale)}</td>
-        <td>${(m.pct || 0).toFixed(0)}%</td>
+        <td><span class="mode-dot" style="background:${color}"></span>${MODE_LABELS[key]}</td>
+        <td>${(m.trip_share||0).toFixed(0)}%</td>
+        <td>${fmt((m.per_trip||0)*scale)}</td>
+        <td>${(m.pct||0).toFixed(0)}%</td>
         <td class="pct-bar-cell"><div class="pct-bar-wrap"><div class="pct-bar-fill" style="width:${maxPct>0?(m.pct||0)/maxPct*100:0}%;background:${color}"></div></div></td>
-      </tr>
-    `);
+      </tr>`);
 
     if (key === 'opnv' && m.sub) {
-      // each sub-mode's contribution to the total ÖPNV impact (share-weighted)
-      const contrib = {};
-      let subTot = 0;
+      const contrib = {}; let subTot = 0;
       for (const sm of SUBMODES) {
-        const s = m.sub[sm.key];
-        if (!s) continue;
-        contrib[sm.key] = (s.share || 0) * (s.per_trip || 0);
-        subTot += contrib[sm.key];
+        const s = m.sub[sm.key]; if (!s) continue;
+        contrib[sm.key] = (s.share||0) * (s.per_trip||0); subTot += contrib[sm.key];
       }
-      const subPct = k => subTot > 0 ? contrib[k] / subTot * 100 : 0;
+      const subPct = k => subTot > 0 ? contrib[k]/subTot*100 : 0;
       const maxSub = Math.max(0, ...SUBMODES.map(sm => contrib[sm.key] != null ? subPct(sm.key) : 0));
-
       for (const sm of SUBMODES) {
-        const s = m.sub[sm.key];
-        if (!s) continue;
+        const s = m.sub[sm.key]; if (!s) continue;
         const p = subPct(sm.key);
         rows.push(`
           <tr class="sub-row">
             <td><span class="mode-dot sub-dot" style="background:${sm.color}"></span>${sm.label}</td>
-            <td>${(s.share || 0).toFixed(0)}% <span style="color:#cbd5e1">(${((s.share||0)*(m.trip_share||0)/100).toFixed(0)}%)</span></td>
-            <td>${fmt((s.per_trip || 0) * scale)}</td>
+            <td>${(s.share||0).toFixed(0)}% <span style="color:#cbd5e1">(${((s.share||0)*(m.trip_share||0)/100).toFixed(0)}%)</span></td>
+            <td>${fmt((s.per_trip||0)*scale)}</td>
             <td>${p.toFixed(0)}% <span style="color:#cbd5e1">(${((m.pct||0)*p/100).toFixed(0)}%)</span></td>
             <td class="pct-bar-cell"><div class="pct-bar-wrap"><div class="pct-bar-fill" style="width:${maxSub>0?p/maxSub*100:0}%;background:${sm.color};opacity:.85"></div></div></td>
-          </tr>
-        `);
+          </tr>`);
       }
     }
   }
-
   rows.push(`
     <tr class="total-row">
-      <td>Gesamt</td>
-      <td>100%</td>
-      <td>${fmt(totalImpact)}</td>
-      <td>100%</td>
-      <td></td>
-    </tr>
-  `);
+      <td>Gesamt</td><td>100%</td><td>${fmt(totalImpact)}</td><td>100%</td><td></td>
+    </tr>`);
   tbody.innerHTML = rows.join('');
 }
 
-/* ============================================================
-   District panel rendering
-   ============================================================ */
+/* ── District panel ──────────────────────────────────────────────────────── */
 function renderDistrictPanel(props) {
-  const bd = props.breakdown;         // nested object (from featuresByDistId, not MapLibre)
+  const bd      = props.breakdown;
   const catData = bd?.[selCat];
-  const cat = categories.find(c => c.impact_category === selCat);
-  const unit = cat?.unit ?? '';
+  const cat     = categories.find(c => c.impact_category === selCat);
+  const unit    = cat?.unit ?? '';
+  const m       = getActiveMetric();
+  const base    = baselineById[props.district_id];
 
   document.getElementById('dist-name').textContent = props.district_name || props.sb_name;
 
-  // ── Impact summary ─────────────────────────────────────────────────────────
-  const metricMap = { per_trip: 'per_trip', per_km: 'per_km', per_year: 'per_year' };
-  const primaryVal  = catData?.[metricMap[selMetric]] ?? props[`${selMetric}_${selCat}`];
-  const metricLabel = { per_trip: '/ Fahrt', per_km: '/ km', per_year: '/ Jahr' }[selMetric];
+  const currTrip = catData?.per_trip  ?? props[`per_trip_${selCat}`];
+  const currKm   = catData?.per_km    ?? props[`per_km_${selCat}`];
+  const currDay  = catData?.per_day   ?? props[`per_day_${selCat}`];
+  const currYear = catData?.per_year  ?? props[`per_year_${selCat}`];
 
-  document.getElementById('imp-primary').textContent = fmt(primaryVal);
+  const primVal  = (m === 'per_day' ? currDay : m === 'per_year' ? currYear : m === 'per_km' ? currKm : currTrip);
+  const metricLabel = { per_trip:'/ Fahrt', per_km:'/ km', per_day:'/ Tag (Σ)', per_year:'/ Jahr (Σ)' }[m];
+
+  document.getElementById('imp-primary').textContent = fmt(primVal);
   document.getElementById('imp-unit').textContent    = `${selCat}  [${unit}]  ${metricLabel}`;
-  document.getElementById('imp-trip').textContent = fmt(catData?.per_trip  ?? props[`per_trip_${selCat}`]);
-  document.getElementById('imp-km').textContent   = fmt(catData?.per_km    ?? props[`per_km_${selCat}`]);
-  document.getElementById('imp-day').textContent  = fmt(catData?.per_day   ?? props[`per_day_${selCat}`]);
-  document.getElementById('imp-year').textContent = fmt(catData?.per_year  ?? props[`per_year_${selCat}`]);
 
-  // ── Mode table ─────────────────────────────────────────────────────────────
-  const mt = catData?.[metricMap[selMetric]] ?? catData?.per_trip;
-  renderModeTable(document.getElementById('mode-tbody'), catData?.modes, mt,
-                  catData?.per_trip ? mt / catData.per_trip : 1);
+  document.getElementById('imp-trip').textContent  = fmt(currTrip);
+  document.getElementById('imp-km').textContent    = fmt(currKm);
+  document.getElementById('imp-day').textContent   = fmt(currDay);
+  document.getElementById('imp-year').textContent  = fmt(currYear);
 
-  // ── Stats grid ─────────────────────────────────────────────────────────────
-  const wfhDelta    = scenarioParams().wfh_delta;
-  const baseHO      = parseFloat(props.homeoffice_pct) || 0;
-  const effHO       = Math.max(0, baseHO + wfhDelta * 100);
-  const deltaHO     = Math.round(wfhDelta * 100);
-  const baseOcc     = parseFloat(props.auto_besetzung) || 1.4;
-  const effOcc      = parseFloat(props.eff_auto_besetzung) || baseOcc;
-  const occDiff     = +(effOcc - baseOcc).toFixed(2);
+  // Delta badges/sub elements
+  setDeltaBadge('imp-delta-badge', primVal, base?.[`${m}_${selCat}`]);
+  setDeltaSubEl('imp-trip-d',  currTrip,  base?.[`per_trip_${selCat}`]);
+  setDeltaSubEl('imp-km-d',    currKm,    base?.[`per_km_${selCat}`]);
+  setDeltaSubEl('imp-day-d',   currDay,   base?.[`per_day_${selCat}`]);
+  setDeltaSubEl('imp-year-d',  currYear,  base?.[`per_year_${selCat}`]);
 
-  const flaeche = props.flaeche_qm ? (props.flaeche_qm / 1e6).toFixed(2) + ' km²' : '–';
+  // Mode table
+  const mt = primVal;
+  const scale = catData?.per_trip ? mt / catData.per_trip : 1;
+  renderModeTable(document.getElementById('mode-tbody'), catData?.modes, mt, scale);
 
-  function deltaSpan(val) {
-    if (Math.abs(val) < 0.01) return `<span class="delta zer">(±0)</span>`;
-    const cls = val > 0 ? 'pos' : 'neg';
-    const sign = val > 0 ? '+' : '';
-    return `<span class="delta ${cls}">(${sign}${val})</span>`;
+  // Stats grid
+  const wfhDelta = scenarioParams().wfh_delta;
+  const baseHO   = parseFloat(props.homeoffice_pct) || 0;
+  const deltaHO  = Math.round(wfhDelta * 100);
+  const baseOcc  = parseFloat(props.auto_besetzung) || 1.4;
+  const effOcc   = parseFloat(props.eff_auto_besetzung) || baseOcc;
+  const occDiff  = +(effOcc - baseOcc).toFixed(2);
+  const flaeche  = props.flaeche_qm ? (props.flaeche_qm/1e6).toFixed(2)+' km²' : '–';
+
+  function dspan(val) {
+    if (Math.abs(val) < 0.01) return `<span style="color:#475569;font-size:.65rem;font-weight:400">(±0)</span>`;
+    const cls = val > 0 ? '#4ade80' : '#f87171';
+    return `<span style="color:${cls};font-size:.65rem;font-weight:400">(${val>0?'+':''}${val})</span>`;
   }
 
   const statItems = [
-    ['Einwohner',     props.population != null ? (+props.population).toLocaleString('de-DE') : '–'],
-    ['Haushaltsgröße', props.household_size != null ? (+props.household_size).toFixed(1) : '–'],
-    ['Autos/HH',       props.car_per_household != null ? (+props.car_per_household).toFixed(1) : '–'],
-    ['Fläche',         flaeche],
-    ['Homeoffice',     `${baseHO.toFixed(0)}% ${deltaSpan(deltaHO)}%`],
-    ['Pkw-Besetzung',  `${baseOcc.toFixed(1)} ${deltaSpan(occDiff)}`],
-    ['Fahrten/Tag',    `${parseFloat(props.trips_per_day).toFixed(1)} (eff: ${parseFloat(props.effective_trips).toFixed(1)})`],
-    ['Distanz/Fahrt',  `${parseFloat(props.km_per_trip).toFixed(1)} km`],
+    ['Einwohner',    props.population != null ? (+props.population).toLocaleString('de-DE') : '–'],
+    ['Haushaltsgr.', props.household_size != null ? (+props.household_size).toFixed(1) : '–'],
+    ['Autos/HH',     props.car_per_household != null ? (+props.car_per_household).toFixed(1) : '–'],
+    ['Fläche',       flaeche],
+    ['Homeoffice',   `${baseHO.toFixed(0)}% ${dspan(deltaHO)}%`],
+    ['Pkw-Besetz.',  `${baseOcc.toFixed(1)} ${dspan(occDiff)}`],
+    ['Fahrten/Tag',  `${parseFloat(props.trips_per_day).toFixed(1)} (${parseFloat(props.effective_trips).toFixed(1)})`],
+    ['Distanz',      `${parseFloat(props.km_per_trip).toFixed(1)} km`],
   ];
 
-  document.getElementById('stats-grid').innerHTML = statItems.map(([k, v]) =>
+  document.getElementById('stats-grid').innerHTML = statItems.map(([k,v]) =>
     `<div class="stat-item"><div class="stat-k">${esc(k)}</div><div class="stat-v">${v}</div></div>`
   ).join('');
 }
 
-/* ============================================================
-   Event listeners — controls
-   ============================================================ */
+/* ── Event listeners ─────────────────────────────────────────────────────── */
+// Category
 document.getElementById('cat-sel').addEventListener('change', e => {
   selCat = e.target.value;
-  updateColors();
-  updateCityView();
-  if (activeDistId != null && featuresByDistId[activeDistId]) {
+  refreshMap(); updateCityView(); refreshCharts();
+  if (activeDistId != null && featuresByDistId[activeDistId])
     renderDistrictPanel(featuresByDistId[activeDistId].properties);
-  }
 });
 
-document.querySelectorAll('.seg-btn').forEach(btn => {
+// Metric (per_trip / per_km / per_day / per_year)
+document.querySelectorAll('#metric-toggle .seg-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.seg-btn').forEach(b => b.classList.remove('on'));
+    document.querySelectorAll('#metric-toggle .seg-btn').forEach(b => b.classList.remove('on'));
     btn.classList.add('on');
     selMetric = btn.dataset.m;
-    updateColors();
-    updateCityView();
-    if (activeDistId != null && featuresByDistId[activeDistId]) {
+    refreshMap(); updateCityView(); refreshCharts();
+    if (activeDistId != null && featuresByDistId[activeDistId])
       renderDistrictPanel(featuresByDistId[activeDistId].properties);
-    }
   });
+});
+
+// View mode (scenario / delta)
+document.querySelectorAll('#view-toggle .seg-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#view-toggle .seg-btn').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    viewMode = btn.dataset.view;
+    refreshMap(); updateCityView(); refreshCharts();
+    if (activeDistId != null && featuresByDistId[activeDistId])
+      renderDistrictPanel(featuresByDistId[activeDistId].properties);
+  });
+});
+
+// Scale mode (capita / absolute)
+document.querySelectorAll('#scale-toggle .seg-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#scale-toggle .seg-btn').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    scalingMode = btn.dataset.scale;
+
+    // Swap metric buttons
+    const capitaMetrics   = ['per_trip','per_km'];
+    const absoluteMetrics = ['per_day','per_year'];
+    document.querySelectorAll('#metric-toggle .seg-btn').forEach(b => {
+      const inCapita   = capitaMetrics.includes(b.dataset.m);
+      const inAbsolute = absoluteMetrics.includes(b.dataset.m);
+      b.classList.toggle('hidden', scalingMode === 'capita' ? inAbsolute : inCapita);
+    });
+
+    // Reset selMetric to a valid value for new mode
+    if (scalingMode === 'capita' && !capitaMetrics.includes(selMetric)) {
+      selMetric = 'per_trip';
+      document.querySelector('#metric-toggle .seg-btn[data-m="per_trip"]').classList.add('on');
+      document.querySelector('#metric-toggle .seg-btn[data-m="per_km"]').classList.remove('on');
+    } else if (scalingMode === 'absolute' && !absoluteMetrics.includes(selMetric)) {
+      selMetric = 'per_day';
+      document.querySelector('#metric-toggle .seg-btn[data-m="per_day"]').classList.add('on');
+      document.querySelector('#metric-toggle .seg-btn[data-m="per_year"]').classList.remove('on');
+    }
+
+    refreshMap(); updateCityView(); refreshCharts();
+    if (activeDistId != null && featuresByDistId[activeDistId])
+      renderDistrictPanel(featuresByDistId[activeDistId].properties);
+  });
+});
+
+// Labels toggle
+document.getElementById('labels-on').addEventListener('change', e => {
+  showLabels = e.target.checked;
+  refreshMap();
 });
 
 // WFH
 document.getElementById('wfh').addEventListener('input', e => {
   const v = parseInt(e.target.value);
-  document.getElementById('wfh-v').textContent = v > 0 ? `+${v}%` : v === 0 ? '±0%' : `${v}%`;
+  document.getElementById('wfh-v').textContent = v>0?`+${v}%`:v===0?'±0%':`${v}%`;
   schedule();
 });
 
@@ -965,11 +1324,11 @@ occEn.addEventListener('change', () => {
   const on = occEn.checked;
   occSl.disabled = !on;
   document.getElementById('occ-row-lbl').style.color = on ? '#cbd5e1' : '#475569';
-  document.getElementById('occ-v').textContent = on ? (parseInt(occSl.value) / 10).toFixed(1) : '–';
+  document.getElementById('occ-v').textContent = on ? (parseInt(occSl.value)/10).toFixed(1) : '–';
   schedule();
 });
 occSl.addEventListener('input', e => {
-  document.getElementById('occ-v').textContent = (parseInt(e.target.value) / 10).toFixed(1);
+  document.getElementById('occ-v').textContent = (parseInt(e.target.value)/10).toFixed(1);
   schedule();
 });
 
@@ -979,9 +1338,7 @@ document.getElementById('green').addEventListener('change', schedule);
 // Back button
 document.getElementById('back-btn').addEventListener('click', deselectDistrict);
 
-/* ============================================================
-   Utilities
-   ============================================================ */
+/* ── Utilities ───────────────────────────────────────────────────────────── */
 function setLoading(show) {
   document.getElementById('loading').classList.toggle('show', show);
 }
@@ -989,22 +1346,36 @@ function setLoading(show) {
 function fmt(v) {
   if (v == null || !isFinite(v)) return '–';
   const a = Math.abs(v);
-  if (a === 0)    return '0';
-  if (a < 0.0001) return v.toExponential(2);
-  if (a < 0.001)  return v.toFixed(5);
-  if (a < 0.1)    return v.toFixed(4);
-  if (a < 10)     return v.toFixed(3);
-  if (a < 1000)   return v.toFixed(1);
+  if (a === 0)     return '0';
+  if (a < 0.0001)  return v.toExponential(2);
+  if (a < 0.001)   return v.toFixed(5);
+  if (a < 0.1)     return v.toFixed(4);
+  if (a < 10)      return v.toFixed(3);
+  if (a < 1000)    return v.toFixed(1);
   return Math.round(v).toLocaleString('de-DE');
 }
 
-function esc(s) {
-  return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+function fmtLabel(v, isDelta) {
+  if (v == null || !isFinite(v)) return '';
+  if (isDelta) {
+    const s = Math.abs(v) < 0.05 ? '±0' : (v > 0 ? '+' : '') + v.toFixed(0);
+    return s + '%';
+  }
+  const a = Math.abs(v);
+  if (a === 0)      return '0';
+  if (a < 0.0001)   return v.toExponential(1);
+  if (a < 0.001)    return v.toFixed(4);
+  if (a < 0.1)      return v.toFixed(3);
+  if (a < 10)       return v.toFixed(2);
+  if (a < 10000)    return v.toFixed(0);
+  return (v/1000).toFixed(1) + 'k';
 }
 
-/* ============================================================
-   Go
-   ============================================================ */
+function esc(s) {
+  return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ── Go ──────────────────────────────────────────────────────────────────── */
 init();
 </script>
 </body>
