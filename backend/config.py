@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     db_port: int = 5432
     db_name: str = "gisdb"
     db_user: str = "gisuser"
-    db_password: str = "123"
+    db_password: str = "password123"
     app_host: str = "0.0.0.0"
     app_port: int = 8000
     model_config = {

@@ -7,6 +7,7 @@
   <script src="https://unpkg.com/maplibre-gl@4.1.3/dist/maplibre-gl.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.1.3/dist/maplibre-gl.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.2/package/dist/xlsx.full.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -261,18 +262,11 @@
       </div>
     </div>
 
-    <div class="form-row">
-      <label class="lbl"><span>Kartenwerte &amp; Grafik</span></label>
+    <div class="form-row" style="margin-bottom:0">
+      <label class="lbl"><span>Werte auf Karte</span></label>
       <div class="seg-toggle" id="lbl-mode-toggle">
         <button class="seg-btn on" data-lm="abs">Absolut</button>
         <button class="seg-btn"    data-lm="rel">Δ-Relativ</button>
-      </div>
-    </div>
-
-    <div class="form-row" style="margin-bottom:0">
-      <div class="tog-row">
-        <div>Werte auf Karte</div>
-        <label class="sw"><input type="checkbox" id="labels-on" checked><span class="sw-track"></span></label>
       </div>
     </div>
   </div>
@@ -293,10 +287,18 @@
 
     <div class="form-row">
       <label class="lbl">
-        <span>E-PKW Anteil</span>
-        <span class="v" id="bev-v">20%</span>
+        <span>BEV Δ</span>
+        <span class="v" id="bev-delta-v">±0%</span>
       </label>
-      <input type="range" id="bev" min="0" max="100" value="20" step="1">
+      <input type="range" id="bev-delta" min="-20" max="60" value="0" step="5">
+    </div>
+
+    <div class="form-row">
+      <label class="lbl">
+        <span>PHEV Δ</span>
+        <span class="v" id="phev-delta-v">±0%</span>
+      </label>
+      <input type="range" id="phev-delta" min="-20" max="40" value="0" step="5">
     </div>
 
     <div class="form-row">
@@ -432,6 +434,8 @@
       </div>
     </div>
 
+    <button id="download-btn" class="revert-btn" style="margin-bottom:0">↓ Bezirkstabelle (.xlsx)</button>
+
     <!-- Modal split bar -->
     <div class="card">
       <div class="card-hdr">Durchschnittliche Anteile</div>
@@ -516,7 +520,7 @@ const PRIORITY = ['Climate change','Particulate matter','Acidification',
 
 // Baseline = green electricity + slider defaults
 const BASELINE = {
-  wfh_delta: 0, bev_share: 0.20, ebus_share: 0.25,
+  wfh_delta: 0, bev_delta: 0, phev_delta: 0, ebus_share: 0.25,
   green_elec: true, auto_besetzung_override: null
 };
 
@@ -533,7 +537,6 @@ let activeDistId     = null;
 let viewMode         = 'scenario';  // 'scenario' | 'delta'
 let scalingMode      = 'capita';    // 'capita'   | 'absolute'
 let labelMode        = 'abs';       // 'abs' | 'rel'  (absolute value vs Δ% from baseline)
-let showLabels       = true;
 let cityChart        = null;
 let distChart        = null;
 
@@ -643,14 +646,15 @@ function initMap() {
 
 /* ── Scenario loading ────────────────────────────────────────────────────── */
 function scenarioParams() {
-  const wfhDelta = parseInt(document.getElementById('wfh').value) / 100;
-  const bev      = parseInt(document.getElementById('bev').value) / 100;
-  const ebus     = parseInt(document.getElementById('ebus').value) / 100;
-  const green    = document.getElementById('green').checked;
-  const occOn    = document.getElementById('occ-en').checked;
-  const occ      = occOn ? parseInt(document.getElementById('occ').value) / 10 : null;
-  return { wfh_delta: wfhDelta, bev_share: bev, ebus_share: ebus,
-           green_elec: green, auto_besetzung_override: occ };
+  const wfhDelta  = parseInt(document.getElementById('wfh').value) / 100;
+  const bevDelta  = parseInt(document.getElementById('bev-delta').value) / 100;
+  const phevDelta = parseInt(document.getElementById('phev-delta').value) / 100;
+  const ebus      = parseInt(document.getElementById('ebus').value) / 100;
+  const green     = document.getElementById('green').checked;
+  const occOn     = document.getElementById('occ-en').checked;
+  const occ       = occOn ? parseInt(document.getElementById('occ').value) / 10 : null;
+  return { wfh_delta: wfhDelta, bev_delta: bevDelta, phev_delta: phevDelta,
+           ebus_share: ebus, green_elec: green, auto_besetzung_override: occ };
 }
 
 async function loadScenario() {
@@ -718,7 +722,6 @@ function refreshMap() {
 
   // Compute label text per feature
   geojson.features.forEach(f => {
-    if (!showLabels) { f.properties.label_val = ''; return; }
     if (labelMode === 'rel') {
       // Δ% from baseline for the active metric
       const dfield = getDeltaField();
@@ -1066,7 +1069,7 @@ function renderDistChart() {
   // Sort: by chartVal descending (worst/highest at top)
   const sorted = [...allDists].sort((a,b) => b.chartVal - a.chartVal);
   const top6   = sorted.slice(0, 6);
-  const bot6   = sorted.slice(-6).reverse();  // best 6, ascending from worst→best
+  const bot6   = sorted.slice(-6);  // best 6, lowest at bottom
 
   // Separator entry
   const sep = { name: '· · ·', chartVal: null, isSep: true };
@@ -1307,16 +1310,14 @@ document.querySelectorAll('#lbl-mode-toggle .seg-btn').forEach(btn => {
   });
 });
 
-document.getElementById('labels-on').addEventListener('change', e => {
-  showLabels = e.target.checked; refreshMap();
-});
-
 // Revert button
 document.getElementById('revert-btn').addEventListener('click', () => {
   document.getElementById('wfh').value = 0;
   document.getElementById('wfh-v').textContent = '±0%';
-  document.getElementById('bev').value = 20;
-  document.getElementById('bev-v').textContent = '20%';
+  document.getElementById('bev-delta').value = 0;
+  document.getElementById('bev-delta-v').textContent = '±0%';
+  document.getElementById('phev-delta').value = 0;
+  document.getElementById('phev-delta-v').textContent = '±0%';
   document.getElementById('ebus').value = 25;
   document.getElementById('ebus-v').textContent = '25%';
   document.getElementById('occ-en').checked = false;
@@ -1334,9 +1335,17 @@ document.getElementById('wfh').addEventListener('input', e => {
   schedule();
 });
 
-// BEV (always active, no toggle)
-document.getElementById('bev').addEventListener('input', e => {
-  document.getElementById('bev-v').textContent = `${e.target.value}%`;
+// BEV Δ
+document.getElementById('bev-delta').addEventListener('input', e => {
+  const v = parseInt(e.target.value);
+  document.getElementById('bev-delta-v').textContent = v > 0 ? `+${v}%` : v === 0 ? '±0%' : `${v}%`;
+  schedule();
+});
+
+// PHEV Δ
+document.getElementById('phev-delta').addEventListener('input', e => {
+  const v = parseInt(e.target.value);
+  document.getElementById('phev-delta-v').textContent = v > 0 ? `+${v}%` : v === 0 ? '±0%' : `${v}%`;
   schedule();
 });
 
@@ -1410,6 +1419,46 @@ function fmtDelta(v) {
 function esc(s) {
   return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
+
+/* ── Download table ──────────────────────────────────────────────────────── */
+function downloadTable() {
+  if (!geojson) return;
+  const cats = [...categories].sort((a, b) => {
+    const ai = PRIORITY.indexOf(a.impact_category);
+    const bi = PRIORITY.indexOf(b.impact_category);
+    if (ai >= 0 && bi >= 0) return ai - bi;
+    if (ai >= 0) return -1; if (bi >= 0) return 1;
+    return a.impact_category.localeCompare(b.impact_category);
+  });
+
+  const header = ['Bezirk'];
+  for (const c of cats) {
+    header.push(`${c.impact_category} [${c.unit}] / Fahrt`);
+    header.push(`${c.impact_category} [${c.unit}] / Jahr`);
+  }
+
+  const rows = [header];
+  const dists = [...geojson.features].sort((a, b) =>
+    a.properties.district_id - b.properties.district_id
+  );
+  for (const f of dists) {
+    const p = f.properties;
+    const row = [p.district_name || p.sb_name || String(p.district_id)];
+    for (const c of cats) {
+      const ck = c.impact_category;
+      row.push(p[`per_trip_${ck}`] ?? '');
+      row.push(p[`per_year_${ck}`] ?? '');
+    }
+    rows.push(row);
+  }
+
+  const ws = XLSX.utils.aoa_to_sheet(rows);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'Bezirke');
+  XLSX.writeFile(wb, 'bezirk_impacts.xlsx');
+}
+
+document.getElementById('download-btn').addEventListener('click', downloadTable);
 
 /* ── Go ──────────────────────────────────────────────────────────────────── */
 init();

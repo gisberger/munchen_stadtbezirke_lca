@@ -31,9 +31,13 @@ class ScenarioParams(BaseModel):
         default=0.0, ge=-1.0, le=1.0,
         description="Delta applied to trips_per_day; negative = fewer WFH (more trips)"
     )
-    bev_share: float | None = Field(
-        default=None, ge=0.0, le=1.0,
-        description="Global BEV share override; None = use district data"
+    bev_delta: float = Field(
+        default=0.0, ge=-1.0, le=1.0,
+        description="Percentage-point delta on district BEV share"
+    )
+    phev_delta: float = Field(
+        default=0.0, ge=-1.0, le=1.0,
+        description="Percentage-point delta on district PHEV share"
     )
     ebus_share: float = Field(
         default=0.25, ge=0.0, le=1.0,
@@ -139,13 +143,14 @@ async def run_scenario(params: ScenarioParams):
             district=d,
             lca=lca,
             wfh_delta=params.wfh_delta,
-            bev_share=params.bev_share,
+            bev_delta=params.bev_delta,
+            phev_delta=params.phev_delta,
             ebus_share=params.ebus_share,
             green_elec=params.green_elec,
             auto_besetzung_override=params.auto_besetzung_override,
         )
 
-        effective_trips = float(d["trips_per_day"]) * max(0.01, 1.0 - params.wfh_delta)
+        effective_trips = float(d["trips_per_day"]) * max(0.01, 1.0 - params.wfh_delta / 3.0)
         base_occ = float(d["auto_besetzung"]) if d.get("auto_besetzung") else 1.4
         eff_occ  = params.auto_besetzung_override if params.auto_besetzung_override is not None else base_occ
 

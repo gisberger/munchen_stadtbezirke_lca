@@ -29,8 +29,9 @@ def _pct(value: Any) -> float:
 def calculate_impacts(
     district: DistrictRow,
     lca: LcaData,
-    wfh_delta: float,                       # fraction delta on trips_per_day (-0.5 → +0.5)
-    bev_share: float | None,               # None = use district's auto_share_elektro
+    wfh_delta: float,                       # fraction; only 1/3 of trips are affected
+    bev_delta: float,                       # percentage-point delta on BEV share (0.20 = +20pp)
+    phev_delta: float,                      # percentage-point delta on PHEV share
     ebus_share: float,                     # 0–1 fraction of bus fleet that is electric
     green_elec: bool,                      # use _green vs _conv LCA variants
     auto_besetzung_override: float | None, # None = use district value
@@ -58,7 +59,8 @@ def calculate_impacts(
     """
 
     km = float(district["km_per_trip"])
-    effective_trips = float(district["trips_per_day"]) * max(0.01, 1.0 - wfh_delta)
+    # WFH only affects the commute portion (~1/3 of all trips)
+    effective_trips = float(district["trips_per_day"]) * max(0.01, 1.0 - wfh_delta / 3.0)
 
     # ── Occupancy scaling ────────────────────────────────────────────────────
     base_occ = float(district["auto_besetzung"]) if district.get("auto_besetzung") else 1.4
@@ -84,20 +86,25 @@ def calculate_impacts(
     a_phev_0   = _pct(district["auto_share_phev"])
     a_elec_0   = _pct(district["auto_share_elektro"])
 
-    if bev_share is None:
-        a_benzin, a_diesel, a_phev, a_elec = (
-            a_benzin_0, a_diesel_0, a_phev_0, a_elec_0
-        )
+    # Apply percentage-point deltas, clamp to [0, 1]
+    a_elec = min(1.0, max(0.0, a_elec_0 + bev_delta))
+    a_phev = min(1.0, max(0.0, a_phev_0 + phev_delta))
+
+    # If combined BEV+PHEV exceeds 100%, scale them back proportionally
+    if a_elec + a_phev > 1.0:
+        total_ep = a_elec + a_phev
+        a_elec /= total_ep
+        a_phev /= total_ep
+
+    # Distribute remaining share to benzin/diesel in their original ratio
+    remaining = max(0.0, 1.0 - a_elec - a_phev)
+    fossil = a_benzin_0 + a_diesel_0
+    if fossil > 1e-6:
+        a_benzin = remaining * a_benzin_0 / fossil
+        a_diesel = remaining * a_diesel_0 / fossil
     else:
-        non_bev = a_benzin_0 + a_diesel_0 + a_phev_0
-        if non_bev > 0:
-            scale = (1.0 - bev_share) / non_bev
-            a_benzin = a_benzin_0 * scale
-            a_diesel = a_diesel_0 * scale
-            a_phev   = a_phev_0   * scale
-        else:
-            a_benzin = a_diesel = a_phev = 0.0
-        a_elec = bev_share
+        a_benzin = remaining * 0.5
+        a_diesel = remaining * 0.5
 
     esuf = "_green" if green_elec else "_conv"
 
