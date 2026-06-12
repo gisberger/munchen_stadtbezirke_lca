@@ -347,7 +347,7 @@
   <!-- Heat legend (scenario mode) -->
   <div id="legend" class="legend-box">
     <div class="leg-title" id="leg-title">–</div>
-    <div class="grad"></div>
+    <div class="grad" id="leg-grad"></div>
     <div class="grad-lbl">
       <span id="leg-min">–</span>
       <span id="leg-mid">–</span>
@@ -767,23 +767,30 @@ function computeDeltas() {
 function refreshMap() {
   if (!mapReady || !geojson) return;
 
-  // Compute label text per feature
-  const demOpt = DEMO_OPTIONS.find(o => o.value === selDemographic);
+  // Compute per-feature display values (used by both labels and color functions)
+  const demOpt   = DEMO_OPTIONS.find(o => o.value === selDemographic);
+  const scenField = getScenarioField();
+  const cavg      = cityAvg(scenField);
   geojson.features.forEach(f => {
+    const curr = f.properties[scenField];
+    const base = baselineById[f.properties.district_id]?.[scenField];
+    f.properties._absdelta = (curr != null && base != null) ? curr - base : 0;
+    f.properties._rel_avg  = (cavg && Math.abs(cavg) > 1e-15 && curr != null)
+                              ? (curr / cavg - 1) * 100 : 0;
+
     if (viewMode === 'delta') {
       if (labelMode === 'rel') {
         f.properties.label_val = fmtDelta(f.properties[getDeltaField()]);
       } else {
-        // Absolute Δ in metric unit: scenario − baseline
-        const curr = f.properties[getScenarioField()];
-        const base = baselineById[f.properties.district_id]?.[getScenarioField()];
-        const d    = (curr != null && base != null) ? curr - base : null;
-        f.properties.label_val = d != null ? (d >= 0 ? '+' : '') + fmtLabel(d) : '';
+        const d = f.properties._absdelta;
+        f.properties.label_val = (d >= 0 ? '+' : '') + fmtLabel(d);
       }
-    } else if (labelMode === 'rel') {
-      f.properties.label_val = fmtDelta(f.properties[getDeltaField()]);
     } else {
-      f.properties.label_val = fmtLabel(f.properties[getScenarioField()]);
+      if (labelMode === 'rel') {
+        f.properties.label_val = fmtDelta(f.properties._rel_avg);
+      } else {
+        f.properties.label_val = fmtLabel(curr);
+      }
     }
     const dv = demOpt?.value ? f.properties[demOpt.value] : null;
     f.properties.label_dem = (dv != null && isFinite(dv)) ? demOpt.fmt(dv) : '';
@@ -803,10 +810,47 @@ function refreshMap() {
 }
 
 function colorHeat() {
+  const cat     = categories.find(c => c.impact_category === selCat);
+  const ml      = metricLabel(getActiveMetric(), scalingMode === 'absolute');
+  const legGrad = document.getElementById('leg-grad');
+
+  if (labelMode === 'rel') {
+    // % vs city average — diverging blue / white / red
+    const vals = geojson.features.map(f => f.properties._rel_avg).filter(v => isFinite(v));
+    if (!vals.length) return;
+    const mn = Math.min(...vals), mx = Math.max(...vals), r = mx - mn;
+    const fmtLeg = v => (v > 0 ? '+' : '') + v.toFixed(1) + '%';
+    document.getElementById('leg-title').textContent = `${selCat}  — % vs. Stadtdurchschnitt`;
+    if (r < 0.01) {
+      map.setPaintProperty('dists-fill', 'fill-color', '#94a3b8');
+      legGrad.style.background = '#94a3b8';
+      ['leg-min','leg-mid','leg-max'].forEach(id => document.getElementById(id).textContent = '≈0%');
+      return;
+    }
+    let expr, gradCss;
+    if (mn >= 0) {
+      expr    = ['interpolate',['linear'],['get','_rel_avg'], mn,'#fef2f2', mn+r*.5,'#fca5a5', mx,'#dc2626'];
+      gradCss = `linear-gradient(to right,#fef2f2,#fca5a5,#dc2626)`;
+    } else if (mx <= 0) {
+      expr    = ['interpolate',['linear'],['get','_rel_avg'], mn,'#1d4ed8', mn+r*.5,'#93c5fd', mx,'#dbeafe'];
+      gradCss = `linear-gradient(to right,#1d4ed8,#93c5fd,#dbeafe)`;
+    } else {
+      const z = (-mn / r) * 100;
+      expr    = ['interpolate',['linear'],['get','_rel_avg'],
+                  mn,'#1d4ed8', mn/2,'#93c5fd', 0,'#f8fafc', mx/2,'#fca5a5', mx,'#dc2626'];
+      gradCss = `linear-gradient(to right,#1d4ed8 0%,#93c5fd ${z*.5}%,#f8fafc ${z}%,#fca5a5 ${z+(100-z)*.5}%,#dc2626 100%)`;
+    }
+    map.setPaintProperty('dists-fill', 'fill-color', expr);
+    legGrad.style.background = gradCss;
+    document.getElementById('leg-min').textContent = fmtLeg(mn);
+    document.getElementById('leg-mid').textContent = '0 %';
+    document.getElementById('leg-max').textContent = fmtLeg(mx);
+    return;
+  }
+
+  // Absolute scenario value — yellow → red heat map
   const field = getScenarioField();
-  const vals  = geojson.features
-    .map(f => f.properties[field])
-    .filter(v => v != null && isFinite(v) && v >= 0);
+  const vals  = geojson.features.map(f => f.properties[field]).filter(v => v != null && isFinite(v) && v >= 0);
   if (!vals.length) return;
   const mn = Math.min(...vals), mx = Math.max(...vals), r = mx - mn || 1e-12;
   map.setPaintProperty('dists-fill', 'fill-color', [
@@ -817,78 +861,61 @@ function colorHeat() {
     mn+r*.75,  '#f03b20',
     mx,        '#bd0026',
   ]);
-  const cat = categories.find(c => c.impact_category === selCat);
-  const ml  = metricLabel(getActiveMetric());
+  legGrad.style.background = '';   // restore CSS-class default
   document.getElementById('leg-title').textContent = `${selCat}  [${cat?.unit??''}]  —  ${ml}`;
   document.getElementById('leg-min').textContent = fmt(mn);
-  document.getElementById('leg-mid').textContent = fmt((mn+mx)/2);
+  document.getElementById('leg-mid').textContent = fmt((mn + mx) / 2);
   document.getElementById('leg-max').textContent = fmt(mx);
 }
 
 function colorDelta() {
-  const field = getDeltaField();
-  const vals  = geojson.features
-    .map(f => f.properties[field])
-    .filter(v => v != null && isFinite(v));
+  const cat       = categories.find(c => c.impact_category === selCat);
+  const ml        = metricLabel(getActiveMetric(), scalingMode === 'absolute');
+  const isAbsMode = labelMode === 'abs';
+  const propKey   = isAbsMode ? '_absdelta' : getDeltaField();
+
+  const vals = geojson.features.map(f => f.properties[propKey]).filter(v => v != null && isFinite(v));
   if (!vals.length) return;
 
-  const mn = Math.min(...vals);
-  const mx = Math.max(...vals);
-  const r  = mx - mn;
+  const mn = Math.min(...vals), mx = Math.max(...vals), r = mx - mn;
+  const fmtLeg   = isAbsMode
+    ? v => (v >= 0 ? '+' : '') + fmtLabel(v)
+    : v => (v > 0 ? '+' : '') + v.toFixed(1) + '%';
+  const zeroLabel = isAbsMode ? fmtLabel(0) : '0%';
+  const title     = isAbsMode
+    ? `Δ vs. Standard — ${selCat}  [${cat?.unit??''}]  ${ml}`
+    : `Δ vs. Standard — ${selCat}  ${ml}`;
 
-  let expr, gradCss;
-
-  if (r < 0.01) {
-    // No meaningful spread — flat color
+  if (r < (isAbsMode ? 1e-12 : 0.01)) {
     map.setPaintProperty('dists-fill', 'fill-color', '#94a3b8');
     document.getElementById('dleg-grad').style.background = '#94a3b8';
     document.getElementById('dleg-title').textContent = 'Δ vs. Standard — kein Unterschied';
-    document.getElementById('dleg-min').textContent = '≈0%';
+    document.getElementById('dleg-min').textContent = '≈0';
     document.getElementById('dleg-mid').textContent = '';
-    document.getElementById('dleg-max').textContent = '≈0%';
+    document.getElementById('dleg-max').textContent = '≈0';
     return;
   }
 
+  let expr, gradCss;
   if (mn >= 0) {
-    // All worsened: scale from lightest (min) → deepest red (max)
-    expr = ['interpolate',['linear'],['get',field],
-      mn, '#fef2f2',
-      mn + r*.5, '#fca5a5',
-      mx, '#dc2626',
-    ];
+    expr    = ['interpolate',['linear'],['get',propKey], mn,'#fef2f2', mn+r*.5,'#fca5a5', mx,'#dc2626'];
     gradCss = `linear-gradient(to right,#fef2f2,#fca5a5,#dc2626)`;
   } else if (mx <= 0) {
-    // All improved: deepest blue (min) → lightest (max)
-    expr = ['interpolate',['linear'],['get',field],
-      mn, '#1d4ed8',
-      mn + r*.5, '#93c5fd',
-      mx, '#dbeafe',
-    ];
+    expr    = ['interpolate',['linear'],['get',propKey], mn,'#1d4ed8', mn+r*.5,'#93c5fd', mx,'#dbeafe'];
     gradCss = `linear-gradient(to right,#1d4ed8,#93c5fd,#dbeafe)`;
   } else {
-    // Mixed: anchor 0 proportionally
-    const half_neg = mn / 2;
-    const half_pos = mx / 2;
-    expr = ['interpolate',['linear'],['get',field],
-      mn,       '#1d4ed8',
-      half_neg, '#93c5fd',
-      0,        '#f8fafc',
-      half_pos, '#fca5a5',
-      mx,       '#dc2626',
-    ];
-    const z = (-mn / r) * 100;  // % where zero falls
+    const z = (-mn / r) * 100;
+    expr    = ['interpolate',['linear'],['get',propKey],
+                mn,'#1d4ed8', mn/2,'#93c5fd', 0,'#f8fafc', mx/2,'#fca5a5', mx,'#dc2626'];
     gradCss = `linear-gradient(to right,#1d4ed8 0%,#93c5fd ${z*.5}%,#f8fafc ${z}%,#fca5a5 ${z+(100-z)*.5}%,#dc2626 100%)`;
   }
 
   map.setPaintProperty('dists-fill', 'fill-color', expr);
-
-  const cat = categories.find(c => c.impact_category === selCat);
-  const ml  = metricLabel(getActiveMetric());
-  document.getElementById('dleg-title').textContent = `Δ vs. Standard — ${selCat}  ${ml}`;
+  document.getElementById('dleg-title').textContent = title;
   document.getElementById('dleg-grad').style.background = gradCss;
-  document.getElementById('dleg-min').textContent = (mn > 0 ? '+' : '') + mn.toFixed(1) + '%';
-  document.getElementById('dleg-mid').textContent = '0%';
-  document.getElementById('dleg-max').textContent = (mx > 0 ? '+' : '') + mx.toFixed(1) + '%';
+  document.getElementById('dleg-min').textContent = fmtLeg(mn);
+  document.getElementById('dleg-mid').textContent = zeroLabel;
+  document.getElementById('dleg-max').textContent = fmtLeg(mx);
 }
 
 /* ── City overview ───────────────────────────────────────────────────────── */
