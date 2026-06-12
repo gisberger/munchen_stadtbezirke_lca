@@ -770,13 +770,20 @@ function refreshMap() {
   // Compute label text per feature
   const demOpt = DEMO_OPTIONS.find(o => o.value === selDemographic);
   geojson.features.forEach(f => {
-    if (labelMode === 'rel') {
-      const dfield = getDeltaField();
-      const dv = f.properties[dfield];
-      f.properties.label_val = fmtDelta(dv);
+    if (viewMode === 'delta') {
+      if (labelMode === 'rel') {
+        f.properties.label_val = fmtDelta(f.properties[getDeltaField()]);
+      } else {
+        // Absolute Δ in metric unit: scenario − baseline
+        const curr = f.properties[getScenarioField()];
+        const base = baselineById[f.properties.district_id]?.[getScenarioField()];
+        const d    = (curr != null && base != null) ? curr - base : null;
+        f.properties.label_val = d != null ? (d >= 0 ? '+' : '') + fmtLabel(d) : '';
+      }
+    } else if (labelMode === 'rel') {
+      f.properties.label_val = fmtDelta(f.properties[getDeltaField()]);
     } else {
-      const field = getScenarioField();
-      f.properties.label_val = fmtLabel(f.properties[field]);
+      f.properties.label_val = fmtLabel(f.properties[getScenarioField()]);
     }
     const dv = demOpt?.value ? f.properties[demOpt.value] : null;
     f.properties.label_dem = (dv != null && isFinite(dv)) ? demOpt.fmt(dv) : '';
