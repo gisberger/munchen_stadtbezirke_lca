@@ -726,8 +726,13 @@ function getActiveMetric() {
   return (selMetric === 'per_day' || selMetric === 'per_year') ? selMetric : 'per_day';
 }
 
-function getScenarioField() { return `${getActiveMetric()}_${selCat}`; }
-function getDeltaField()    { return `delta_${getActiveMetric()}_${selCat}`; }
+function getScenarioField() {
+  const m = getActiveMetric();
+  if (scalingMode === 'absolute' && (m === 'per_day' || m === 'per_year'))
+    return `${m}_total_${selCat}`;
+  return `${m}_${selCat}`;
+}
+function getDeltaField() { return `delta_${getActiveMetric()}_${selCat}`; }
 
 /* ── Delta computation ───────────────────────────────────────────────────── */
 function computeDeltas() {
@@ -735,6 +740,7 @@ function computeDeltas() {
   geojson.features.forEach(f => {
     const base = baselineById[f.properties.district_id];
     if (!base) return;
+    const pop = f.properties.population;
     for (const cat of categories) {
       const ck = cat.impact_category;
       for (const m of ['per_trip','per_km','per_day','per_year']) {
@@ -744,6 +750,14 @@ function computeDeltas() {
         f.properties[`delta_${field}`] =
           (bv != null && Math.abs(bv) > 1e-15 && curr != null)
             ? (curr - bv) / Math.abs(bv) * 100 : 0;
+      }
+      // Population-scaled totals for "Gesamt" mode
+      for (const m of ['per_day', 'per_year']) {
+        const tf = `${m}_total_${ck}`;
+        const cv = f.properties[`${m}_${ck}`];
+        const bv = base[`${m}_${ck}`];
+        f.properties[tf] = (pop != null && cv != null) ? cv * pop : null;
+        base[tf]         = (pop != null && bv != null) ? bv * pop : null;
       }
     }
   });
@@ -920,7 +934,7 @@ function updateCityView() {
   const unit = cat?.unit ?? '';
   const m    = getActiveMetric();
   const isAbs = scalingMode === 'absolute';
-  const pf   = `${m}_${selCat}`;
+  const pf    = getScenarioField();
 
   const primVal  = isAbs ? citySum(pf) : cityAvg(pf);
   const primBase = isAbs ? baselineSum(pf) : baselineAvg(pf);
@@ -929,14 +943,16 @@ function updateCityView() {
   document.getElementById('city-primary').textContent = primVal != null ? fmt(primVal) : '–';
   document.getElementById('city-unit').textContent    = `${selCat}  [${unit}]  ${ml}`;
 
+  const dayF = isAbs ? `per_day_total_${selCat}`  : `per_day_${selCat}`;
+  const yrF  = isAbs ? `per_year_total_${selCat}` : `per_year_${selCat}`;
   const ct = cityAvg(`per_trip_${selCat}`);
   const ck = cityAvg(`per_km_${selCat}`);
-  const cd = citySum(`per_day_${selCat}`);
-  const cy = citySum(`per_year_${selCat}`);
+  const cd = isAbs ? citySum(dayF) : cityAvg(dayF);
+  const cy = isAbs ? citySum(yrF)  : cityAvg(yrF);
   const bt = baselineAvg(`per_trip_${selCat}`);
   const bk = baselineAvg(`per_km_${selCat}`);
-  const bd = baselineSum(`per_day_${selCat}`);
-  const by = baselineSum(`per_year_${selCat}`);
+  const bd = isAbs ? baselineSum(dayF) : baselineAvg(dayF);
+  const by = isAbs ? baselineSum(yrF)  : baselineAvg(yrF);
 
   document.getElementById('city-trip').textContent  = fmt(ct);
   document.getElementById('city-km').textContent    = fmt(ck);
@@ -1019,7 +1035,7 @@ function refreshCharts() {
 function renderCityChart() {
   const canvas = document.getElementById('city-chart');
   const m      = getActiveMetric();
-  const field  = `${m}_${selCat}`;
+  const field  = getScenarioField();
   const isAbs  = scalingMode === 'absolute';
   const curr   = isAbs ? citySum(field) : cityAvg(field);
   const base   = isAbs ? baselineSum(field) : baselineAvg(field);
@@ -1077,7 +1093,7 @@ function renderCityChart() {
 function renderDistChart() {
   const canvas = document.getElementById('delta-chart');
   const m      = getActiveMetric();
-  const field  = `${m}_${selCat}`;
+  const field  = getScenarioField();
   const useRel = labelMode === 'rel';
   const cat    = categories.find(c=>c.impact_category===selCat);
   const unit   = cat?.unit??'';
@@ -1088,8 +1104,8 @@ function renderDistChart() {
 
   // Build district data
   const allDists = geojson.features.map(f => {
-    const dval  = f.properties[`delta_${field}`] ?? 0;     // Δ% from baseline
-    const absv  = f.properties[field] ?? 0;                 // actual metric value
+    const dval  = f.properties[getDeltaField()] ?? 0;       // Δ% from baseline (scale-invariant)
+    const absv  = f.properties[field] ?? 0;                 // actual metric value (total in abs mode)
     const relv  = (cavg && Math.abs(cavg) > 1e-15) ? (absv/cavg - 1)*100 : 0;  // % vs city avg
     return {
       name:  (f.properties.district_name || f.properties.sb_name || '').slice(0,18),
@@ -1236,24 +1252,28 @@ function renderDistrictPanel(props) {
 
   document.getElementById('dist-name').textContent = props.district_name||props.sb_name;
 
+  const isAbs = scalingMode === 'absolute';
   const ct = catData?.per_trip  ?? props[`per_trip_${selCat}`];
   const ck = catData?.per_km    ?? props[`per_km_${selCat}`];
-  const cd = catData?.per_day   ?? props[`per_day_${selCat}`];
-  const cy = catData?.per_year  ?? props[`per_year_${selCat}`];
+  const cd = isAbs ? props[`per_day_total_${selCat}`]  : (catData?.per_day  ?? props[`per_day_${selCat}`]);
+  const cy = isAbs ? props[`per_year_total_${selCat}`] : (catData?.per_year ?? props[`per_year_${selCat}`]);
   const primVal = m==='per_day'?cd : m==='per_year'?cy : m==='per_km'?ck : ct;
 
   document.getElementById('imp-primary').textContent = fmt(primVal);
-  document.getElementById('imp-unit').textContent    = `${selCat}  [${unit}]  ${metricLabel(m, scalingMode==='absolute')}`;
+  document.getElementById('imp-unit').textContent    = `${selCat}  [${unit}]  ${metricLabel(m, isAbs)}`;
   document.getElementById('imp-trip').textContent    = fmt(ct);
   document.getElementById('imp-km').textContent      = fmt(ck);
   document.getElementById('imp-day').textContent     = fmt(cd);
   document.getElementById('imp-year').textContent    = fmt(cy);
 
-  setDeltaBadge('imp-delta-badge', primVal, base?.[`${m}_${selCat}`]);
+  const bDayF = isAbs ? `per_day_total_${selCat}`  : `per_day_${selCat}`;
+  const bYrF  = isAbs ? `per_year_total_${selCat}` : `per_year_${selCat}`;
+  const primBase = m==='per_day'?base?.[bDayF] : m==='per_year'?base?.[bYrF] : base?.[`${m}_${selCat}`];
+  setDeltaBadge('imp-delta-badge', primVal, primBase);
   setDeltaSub('imp-trip-d',  ct, base?.[`per_trip_${selCat}`]);
   setDeltaSub('imp-km-d',    ck, base?.[`per_km_${selCat}`]);
-  setDeltaSub('imp-day-d',   cd, base?.[`per_day_${selCat}`]);
-  setDeltaSub('imp-year-d',  cy, base?.[`per_year_${selCat}`]);
+  setDeltaSub('imp-day-d',   cd, base?.[bDayF]);
+  setDeltaSub('imp-year-d',  cy, base?.[bYrF]);
 
   const scale = catData?.per_trip ? primVal/catData.per_trip : 1;
   renderModeTable(document.getElementById('mode-tbody'), catData?.modes, primVal, scale);
