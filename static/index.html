@@ -242,7 +242,7 @@
         <button class="seg-btn on"     data-m="per_trip">/ Fahrt</button>
         <button class="seg-btn"        data-m="per_km">/ km</button>
         <button class="seg-btn hidden" data-m="per_day">/ Tag</button>
-        <button class="seg-btn hidden" data-m="per_year">/ Jahr</button>
+        <button class="seg-btn"        data-m="per_year">/ Jahr</button>
       </div>
     </div>
 
@@ -1283,19 +1283,22 @@ document.querySelectorAll('#scale-toggle .seg-btn').forEach(btn => {
     document.querySelectorAll('#scale-toggle .seg-btn').forEach(b=>b.classList.remove('on'));
     btn.classList.add('on');
     scalingMode = btn.dataset.scale;
-    const capM = ['per_trip','per_km'];
-    const absM = ['per_day','per_year'];
+    // per_year is shown in both modes; per_day only in absolute; per_trip/per_km only in capita
     document.querySelectorAll('#metric-toggle .seg-btn').forEach(b => {
-      b.classList.toggle('hidden', scalingMode==='capita' ? absM.includes(b.dataset.m) : capM.includes(b.dataset.m));
+      const m = b.dataset.m;
+      if (m === 'per_year') { b.classList.remove('hidden'); return; }
+      if (m === 'per_day')  { b.classList.toggle('hidden', scalingMode === 'capita'); return; }
+      b.classList.toggle('hidden', scalingMode === 'absolute');
     });
-    if (scalingMode==='capita' && !capM.includes(selMetric)) {
+    // Reset selMetric if it's no longer reachable in the new mode
+    if (scalingMode === 'capita' && selMetric === 'per_day') {
       selMetric = 'per_trip';
+      document.querySelectorAll('#metric-toggle .seg-btn').forEach(b => b.classList.remove('on'));
       document.querySelector('#metric-toggle .seg-btn[data-m="per_trip"]').classList.add('on');
-      document.querySelector('#metric-toggle .seg-btn[data-m="per_km"]').classList.remove('on');
-    } else if (scalingMode==='absolute' && !absM.includes(selMetric)) {
+    } else if (scalingMode === 'absolute' && (selMetric === 'per_trip' || selMetric === 'per_km')) {
       selMetric = 'per_day';
+      document.querySelectorAll('#metric-toggle .seg-btn').forEach(b => b.classList.remove('on'));
       document.querySelector('#metric-toggle .seg-btn[data-m="per_day"]').classList.add('on');
-      document.querySelector('#metric-toggle .seg-btn[data-m="per_year"]').classList.remove('on');
     }
     fullRefresh();
   });
@@ -1422,40 +1425,39 @@ function esc(s) {
 
 /* ── Download table ──────────────────────────────────────────────────────── */
 function downloadTable() {
-  if (!geojson) return;
-  const cats = [...categories].sort((a, b) => {
-    const ai = PRIORITY.indexOf(a.impact_category);
-    const bi = PRIORITY.indexOf(b.impact_category);
-    if (ai >= 0 && bi >= 0) return ai - bi;
-    if (ai >= 0) return -1; if (bi >= 0) return 1;
-    return a.impact_category.localeCompare(b.impact_category);
-  });
+  if (!geojson || !selCat) return;
+  const cat   = categories.find(c => c.impact_category === selCat);
+  const unit  = cat?.unit ?? '';
+  const field = `per_year_${selCat}`;
 
-  const header = ['Bezirk'];
-  for (const c of cats) {
-    header.push(`${c.impact_category} [${c.unit}] / Fahrt`);
-    header.push(`${c.impact_category} [${c.unit}] / Jahr`);
-  }
+  const header = [
+    'Bezirk',
+    `${selCat} [${unit}] / Jahr  (Szenario)`,
+    `${selCat} [${unit}] / Jahr  (Standard)`,
+  ];
 
   const rows = [header];
   const dists = [...geojson.features].sort((a, b) =>
     a.properties.district_id - b.properties.district_id
   );
+
+  let scenSum = 0, baseSum = 0;
   for (const f of dists) {
-    const p = f.properties;
-    const row = [p.district_name || p.sb_name || String(p.district_id)];
-    for (const c of cats) {
-      const ck = c.impact_category;
-      row.push(p[`per_trip_${ck}`] ?? '');
-      row.push(p[`per_year_${ck}`] ?? '');
-    }
-    rows.push(row);
+    const p    = f.properties;
+    const scen = p[field] ?? null;
+    const base = baselineById[p.district_id]?.[field] ?? null;
+    if (scen != null) scenSum += scen;
+    if (base != null) baseSum += base;
+    rows.push([p.district_name || p.sb_name || String(p.district_id), scen ?? '', base ?? '']);
   }
+
+  rows.push(['']);
+  rows.push(['Gesamt (Stadt)', scenSum, baseSum]);
 
   const ws = XLSX.utils.aoa_to_sheet(rows);
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'Bezirke');
-  XLSX.writeFile(wb, 'bezirk_impacts.xlsx');
+  XLSX.writeFile(wb, `bezirk_impacts_${selCat.replace(/[\s/]+/g, '_')}.xlsx`);
 }
 
 document.getElementById('download-btn').addEventListener('click', downloadTable);
