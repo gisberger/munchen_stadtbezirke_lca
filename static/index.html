@@ -539,10 +539,10 @@ let selMetric        = 'per_trip';  // per_trip|per_km (capita)  per_day|per_yea
 
 const DEMO_OPTIONS = [
   { value: '',                  label: '— keine —',         fmt: null },
-  { value: 'split_auto',        label: 'Modal Split Auto',  fmt: v => `${(v*100).toFixed(0)} % Auto` },
-  { value: 'split_opnv',        label: 'Modal Split ÖPNV',  fmt: v => `${(v*100).toFixed(0)} % ÖPNV` },
-  { value: 'split_rad',         label: 'Modal Split Rad',   fmt: v => `${(v*100).toFixed(0)} % Rad` },
-  { value: 'split_fuss',        label: 'Modal Split Fuß',   fmt: v => `${(v*100).toFixed(0)} % Fuß` },
+  { value: 'split_auto',        label: 'Anteil Auto',  fmt: v => `${(v).toFixed(0)} % Auto` },
+  { value: 'split_opnv',        label: 'Anteil ÖPNV',  fmt: v => `${(v).toFixed(0)} % ÖPNV` },
+  { value: 'split_rad',         label: 'Anteil Rad',   fmt: v => `${(v).toFixed(0)} % Rad` },
+  { value: 'split_fuss',        label: 'Anteil Fuß',   fmt: v => `${(v).toFixed(0)} % Fuß` },
   { value: 'population',        label: 'Bevölkerung',       fmt: v => `${Math.round(v/1000)} Tsd. Einw.` },
   { value: 'homeoffice_pct',    label: 'Homeoffice-Anteil', fmt: v => `${(v*100).toFixed(0)} % HO` },
   { value: 'trips_per_day',     label: 'Fahrten / Tag',     fmt: v => `${v.toFixed(1)} Fahr./Tag` },
