@@ -237,6 +237,11 @@
     </div>
 
     <div class="form-row">
+      <label class="lbl"><span>Zusatzinfo Karte</span></label>
+      <select id="dem-sel"></select>
+    </div>
+
+    <div class="form-row">
       <label class="lbl"><span>Bezugsgröße</span></label>
       <div class="seg-toggle" id="metric-toggle">
         <button class="seg-btn on"     data-m="per_trip">/ Fahrt</button>
@@ -529,7 +534,22 @@ let map, mapReady = false;
 let geojson          = null;
 let categories       = [];
 let selCat           = null;
+let selDemographic   = '';
 let selMetric        = 'per_trip';  // per_trip|per_km (capita)  per_day|per_year (absolute)
+
+const DEMO_OPTIONS = [
+  { value: '',                  label: '— keine —',         fmt: null },
+  { value: 'split_auto',        label: 'Modal Split Auto',  fmt: v => `${(v*100).toFixed(0)} % Auto` },
+  { value: 'split_opnv',        label: 'Modal Split ÖPNV',  fmt: v => `${(v*100).toFixed(0)} % ÖPNV` },
+  { value: 'split_rad',         label: 'Modal Split Rad',   fmt: v => `${(v*100).toFixed(0)} % Rad` },
+  { value: 'split_fuss',        label: 'Modal Split Fuß',   fmt: v => `${(v*100).toFixed(0)} % Fuß` },
+  { value: 'population',        label: 'Bevölkerung',       fmt: v => `${Math.round(v/1000)} Tsd. Einw.` },
+  { value: 'homeoffice_pct',    label: 'Homeoffice-Anteil', fmt: v => `${(v*100).toFixed(0)} % HO` },
+  { value: 'trips_per_day',     label: 'Fahrten / Tag',     fmt: v => `${v.toFixed(1)} Fahr./Tag` },
+  { value: 'km_per_trip',       label: 'km / Fahrt',        fmt: v => `${v.toFixed(1)} km/Fahrt` },
+  { value: 'car_per_household', label: 'Pkw / HH',          fmt: v => `${v.toFixed(2)} Pkw/HH` },
+  { value: 'household_size',    label: 'Haushaltsgröße',    fmt: v => `Ø ${v.toFixed(1)} Pers./HH` },
+];
 let debTimer         = null;
 let featuresByDistId = {};
 let baselineById     = {};          // district_id → properties snapshot
@@ -589,6 +609,15 @@ function buildCatSelect() {
     `<option value="${esc(c.impact_category)}">${esc(c.impact_category)}  [${esc(c.unit)}]</option>`
   ).join('');
   selCat = sorted[0]?.impact_category ?? null;
+
+  const demSel = document.getElementById('dem-sel');
+  demSel.innerHTML = DEMO_OPTIONS.map(o =>
+    `<option value="${o.value}">${o.label}</option>`
+  ).join('');
+  demSel.addEventListener('change', () => {
+    selDemographic = demSel.value;
+    refreshMap();
+  });
 }
 
 /* ── MapLibre ────────────────────────────────────────────────────────────── */
@@ -612,7 +641,11 @@ function initMap() {
     map.addLayer({
       id: 'dists-labels', type: 'symbol', source: 'districts',
       layout: {
-        'text-field':            ['get', 'label_val'],
+        'text-field': ['format',
+          ['get', 'label_val'], { 'font-scale': 1.0 },
+          '\n',                 {},
+          ['get', 'label_dem'], { 'font-scale': 0.72 },
+        ],
         'text-size':             13,
         'text-font':             ['Noto Sans Regular'],
         'text-allow-overlap':    true,
@@ -721,17 +754,18 @@ function refreshMap() {
   if (!mapReady || !geojson) return;
 
   // Compute label text per feature
+  const demOpt = DEMO_OPTIONS.find(o => o.value === selDemographic);
   geojson.features.forEach(f => {
     if (labelMode === 'rel') {
-      // Δ% from baseline for the active metric
       const dfield = getDeltaField();
       const dv = f.properties[dfield];
       f.properties.label_val = fmtDelta(dv);
     } else {
-      // Absolute metric value
       const field = getScenarioField();
       f.properties.label_val = fmtLabel(f.properties[field]);
     }
+    const dv = demOpt?.value ? f.properties[demOpt.value] : null;
+    f.properties.label_dem = (dv != null && isFinite(dv)) ? demOpt.fmt(dv) : '';
   });
 
   map.getSource('districts').setData(geojson);
